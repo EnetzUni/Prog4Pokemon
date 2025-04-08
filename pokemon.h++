@@ -151,6 +151,8 @@ class PokemonPlayer : public Pokemon {
         // Setter for the Pokemon's level
         void setLvl(int newLvl) {
             lvl = newLvl;
+
+            updateStats(this);
         }
 
         // Getter for the Pokemon's xp
@@ -161,6 +163,10 @@ class PokemonPlayer : public Pokemon {
         // Setter for the Pokemon's xp
         void setXp(int newXp) {
             xp = (newXp > 1000000) ? 1000000 : newXp;
+
+            if (xpToLvl(xp) > getLvl()) {
+                setLvl(xpToLvl(xp));
+            }
         }
 
         // Getter for the hit points according to the current level
@@ -247,7 +253,14 @@ class PokemonPlayer : public Pokemon {
 /**
  * @brief Calculates level based on experience points.
  * 
- * @param xp The experience points accumulated by the player.
+ * @param int The experience points accumulated by the player.
  * @return The level as an integer.
  */
 int xpToLvl(int);
+
+/**
+ * @brief Updates the stats based on the new level.
+ * 
+ * @param PokemonPlayer* The pokemon whose stats need to be updated;
+ */
+void updateStats(PokemonPlayer*);
