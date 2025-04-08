@@ -21,19 +21,19 @@ class Pokemon {
         /// The base hit points of the Pokemon.
         int hp;
 
-        /// The attack stat of the Pokemon.
+        /// The base attack stat of the Pokemon.
         int attack;
 
-        /// The defense stat of the Pokemon.
+        /// The base defense stat of the Pokemon.
         int defense;
 
-        /// The special attack stat of the Pokemon.
+        /// The base special attack stat of the Pokemon.
         int spattack;
 
-        /// The special defense stat of the Pokemon.
+        /// The base special defense stat of the Pokemon.
         int spdefense;
 
-        /// The speed stat of the Pokemon.
+        /// The base speed stat of the Pokemon.
         int speed;
 
         /// The list of types of the Pokemon (1 or 2 types)
@@ -44,9 +44,37 @@ class PokemonPlayer : public Pokemon {
     public:
         /// The Pokemon's nickname.
         string nickname;
+
+        /// The Pokemon's list of Movements.
         vector<Movement> listMovement;
+
+        /// The Pokemon's level.
         int lvl;
+
+        /// The Pokemon's exact amount of xp to calculate level.
         int xp;
+
+        /// The hit points of the Pokemon according to their current level.
+        int lvlhp;
+        
+        /// The attack stat of the Pokemon according to their current level.
+        int lvlattack;
+
+        /// The defense stat of the Pokemon according to their current level.
+        int lvldefense;
+
+        /// The special attack stat of the Pokemon according to their current level.
+        int lvlspattack;
+
+        /// The special defense stat of the Pokemon according to their current level.
+        int lvlspdefense;
+
+        /// The speed stat of the Pokemon according to their current level.
+        int lvlspeed;
+
+        /// The Pokemon's current hit points.
         int curHp;
+
+        /// The Pokemon's current status
         Status status;
 };    
