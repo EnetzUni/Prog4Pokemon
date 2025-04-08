@@ -77,4 +77,6 @@ class PokemonPlayer : public Pokemon {
 
         /// The Pokemon's current status
         Status status;
-};    
+};
+
+void xptolvl(int);
