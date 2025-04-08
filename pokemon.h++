@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "type.h++"
+#include "movement.h++"
 using namespace std;
 
 /** 
@@ -38,3 +39,14 @@ class Pokemon {
         /// The list of types of the Pokemon (1 or 2 types)
         vector<Type> type;
 };
+
+class PokemonPlayer : public Pokemon {
+    public:
+        /// The Pokemon's nickname.
+        string nickname;
+        vector<Movement> listMovement;
+        int lvl;
+        int xp;
+        int curHp;
+        Status status;
+};    

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "pokemon.h++"
+#include "pc.h++"
 using namespace std;
 
 /**
@@ -20,6 +21,9 @@ class Player {
         /// The player's gender.
         bool gender;
     
-        /// A list of the Pokemon in the Player's team.
-        vector<Pokemon> listPokemon;
+        /// List of the Pokemon in the player's team.
+        vector<PokemonPlayer> listPokemon;
+
+        /// The Pc where the rest of the player's Pokemon are stored.
+        Pc playerpc;
     };
