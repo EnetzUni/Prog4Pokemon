@@ -6,8 +6,8 @@ class Movement {
 public:
     // Attributes (data members)
 	enum class Effect { 
-PHYSICAL, SPECIAL, STATUS 
-};
+        PHYSICAL, SPECIAL, STATUS 
+    };
 	int id;
 	string name;
     Type type;
