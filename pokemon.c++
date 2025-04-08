@@ -6,7 +6,7 @@ void displayInfo() {
     cout << endl;
 }
 
-int xptolvl(int xp) {
+int xpToLvl(int xp) {
     // Cube root-based level calculation
     // Truncates decimal part
     return static_cast<int> (cbrt(xp));

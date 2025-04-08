@@ -38,6 +38,51 @@ class Pokemon {
 
         /// The list of types of the Pokemon (1 or 2 types)
         vector<Type> type;
+
+        // Getter for the Pokedex number
+        int getId() const {
+            return id;
+        }
+
+        // Getter for the name of the Pokemon
+        string getName() const {
+            return name;
+        }
+
+        // Getter for the base hit points of the Pokemon
+        int getHp() const {
+            return hp;
+        }
+
+        // Getter for the base attack stat of the Pokemon
+        int getAttack() const {
+            return attack;
+        }
+
+        // Getter for the base defense stat of the Pokemon
+        int getDefense() const {
+            return defense;
+        }
+
+        // Getter for the base special attack stat of the Pokemon
+        int getSpattack() const {
+            return spattack;
+        }
+
+        // Getter for the base special defense stat of the Pokemon
+        int getSpdefense() const {
+            return spdefense;
+        }
+
+        // Getter for the base speed stat of the Pokemon
+        int getSpeed() const {
+            return speed;
+        }
+
+        // Getter for the list of types of the Pokemon
+        vector<Type> getType() const {
+            return type;
+        }
 };
 
 class PokemonPlayer : public Pokemon {
@@ -77,6 +122,126 @@ class PokemonPlayer : public Pokemon {
 
         /// The Pokemon's current status
         Status status;
+
+        // Getter for the Pokemon's nickname
+        string getNickname() const {
+            return nickname;
+        }
+
+        // Setter for the Pokemon's nickname
+        void setNickname(const string& newNickname) {
+            nickname = newNickname;
+        }
+
+        // Getter for the Pokemon's list of movements
+        vector<Movement> getListMovement() const {
+            return listMovement;
+        }
+
+        // Setter for the Pokemon's list of movements
+        void setListMovement(const vector<Movement>& newListMovement) {
+            listMovement = newListMovement;
+        }
+
+        // Getter for the Pokemon's level
+        int getLvl() const {
+            return lvl;
+        }
+
+        // Setter for the Pokemon's level
+        void setLvl(int newLvl) {
+            lvl = newLvl;
+        }
+
+        // Getter for the Pokemon's xp
+        int getXp() const {
+            return xp;
+        }
+
+        // Setter for the Pokemon's xp
+        void setXp(int newXp) {
+            xp = (newXp > 1000000) ? 1000000 : newXp;
+        }
+
+        // Getter for the hit points according to the current level
+        int getLvlHp() const {
+            return lvlhp;
+        }
+
+        // Setter for the hit points according to the current level
+        void setLvlHp(int newLvlHp) {
+            lvlhp = newLvlHp;
+        }
+
+        // Getter for the attack stat according to the current level
+        int getLvlAttack() const {
+            return lvlattack;
+        }
+
+        // Setter for the attack stat according to the current level
+        void setLvlAttack(int newLvlAttack) {
+            lvlattack = newLvlAttack;
+        }
+
+        // Getter for the defense stat according to the current level
+        int getLvlDefense() const {
+            return lvldefense;
+        }
+
+        // Setter for the defense stat according to the current level
+        void setLvlDefense(int newLvlDefense) {
+            lvldefense = newLvlDefense;
+        }
+
+        // Getter for the special attack stat according to the current level
+        int getLvlSpAttack() const {
+            return lvlspattack;
+        }
+
+        // Setter for the special attack stat according to the current level
+        void setLvlSpAttack(int newLvlSpAttack) {
+            lvlspattack = newLvlSpAttack;
+        }
+
+        // Getter for the special defense stat according to the current level
+        int getLvlSpDefense() const {
+            return lvlspdefense;
+        }
+
+        // Setter for the special defense stat according to the current level
+        void setLvlSpDefense(int newLvlSpDefense) {
+            lvlspdefense = newLvlSpDefense;
+        }
+
+        // Getter for the speed stat according to the current level
+        int getLvlSpeed() const {
+            return lvlspeed;
+        }
+
+        // Setter for the speed stat according to the current level
+        void setLvlSpeed(int newLvlSpeed) {
+            lvlspeed = newLvlSpeed;
+        }
+
+        // Getter for the Pokemon's current hit points
+        int getCurHp() const {
+            return curHp;
+        }
+
+        // Setter for the Pokemon's current hit points
+        void setCurHp(int newCurHp) {
+            curHp = newCurHp;
+        }
+
+        // Getter for the Pokemon's current status
+        Status getStatus() const {
+            return status;
+        }
+
+        // Setter for the Pokemon's current status
+        void setStatus(const Status& newStatus) {
+            status = newStatus;
+        }
 };
 
 /**
@@ -85,4 +250,4 @@ class PokemonPlayer : public Pokemon {
  * @param xp The experience points accumulated by the player.
  * @return The level as an integer.
  */
-int xptolvl(int);
+int xpToLvl(int);
