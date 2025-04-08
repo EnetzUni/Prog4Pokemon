@@ -7,5 +7,7 @@ void displayInfo() {
 }
 
 int xptolvl(int xp) {
+    // Cube root-based level calculation
+    // Truncates decimal part
     return static_cast<int> (cbrt(xp));
 }

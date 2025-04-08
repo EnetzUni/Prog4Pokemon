@@ -79,4 +79,10 @@ class PokemonPlayer : public Pokemon {
         Status status;
 };
 
-void xptolvl(int);
+/**
+ * @brief Calculates level based on experience points.
+ * 
+ * @param xp The experience points accumulated by the player.
+ * @return The level as an integer.
+ */
+int xptolvl(int);
