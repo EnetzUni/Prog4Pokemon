@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "pokemon.h++"
 using namespace std;
 
 // Class definition
@@ -10,10 +11,4 @@ public:
     string password;
     bool gender;
     vector<Pokemon> listPokemon;
-
-
-    // Method (member function)
-    void displayInfo() {
-        cout << "Brand: " << brand << ", Model: " << model << ", Year: " << year << endl;
-    }
 };

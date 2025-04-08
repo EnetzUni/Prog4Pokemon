@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "type.h++"
 using namespace std;
 
 // Class definition
@@ -14,10 +15,5 @@ public:
     int spattack;
     int spdefense;
     int speed;
-    vector<Type>;
-
-    // Method (member function)
-    void displayInfo() {
-        cout << "Brand: " << brand << ", Model: " << model << ", Year: " << year << endl;
-    }
+    vector<Type> type;
 };

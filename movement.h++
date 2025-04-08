@@ -1,4 +1,5 @@
 #include <iostream>
+#include "type.h++"
 using namespace std;
 
 // Class definition
@@ -14,9 +15,4 @@ public:
     Effect effect;
     int power;
     int accuracy;
-
-    // Method (member function)
-    void displayInfo() {
-        cout << "Brand: " << brand << ", Model: " << model << ", Year: " << year << endl;
-    }
 };
