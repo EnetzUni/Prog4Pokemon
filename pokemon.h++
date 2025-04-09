@@ -11,7 +11,7 @@ using namespace std;
  * @brief This is the main Pokemon class, with base stats.
  */
 class Pokemon {
-    public:
+    private:
         /// The Pokedex number for the Pokemon.
         int id;
 
@@ -39,6 +39,7 @@ class Pokemon {
         /// The list of types of the Pokemon (1 or 2 types)
         vector<Type> type;
 
+    public:
         // Getter for the Pokedex number
         int getId() const {
             return id;
@@ -86,7 +87,7 @@ class Pokemon {
 };
 
 class PokemonPlayer : public Pokemon {
-    public:
+    private:
         /// The Pokemon's nickname.
         string nickname;
 
@@ -123,6 +124,7 @@ class PokemonPlayer : public Pokemon {
         /// The Pokemon's current status
         Status status;
 
+    public:
         // Getter for the Pokemon's nickname
         string getNickname() const {
             return nickname;
