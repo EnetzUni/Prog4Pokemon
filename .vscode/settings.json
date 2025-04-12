@@ -41,6 +41,7 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "*.h++": "cpp"
+        "*.h++": "cpp",
+        "stdio.h": "c"
     }
 }
