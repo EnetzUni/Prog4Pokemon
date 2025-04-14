@@ -11,4 +11,6 @@ void menuLogin();
 
 void menuErrorLoginRegistro(int caseMenu);
 
+void menuPrincipal();
+
 #endif

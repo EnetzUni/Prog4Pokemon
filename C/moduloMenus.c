@@ -39,7 +39,7 @@ void menuLoginRegistro()
             else if (str[0] == '2')
             {
                 printf("\n");
-                //menuLogin();
+                menuLogin();
                 return;
             }
     } while (str[0] != 'q');
@@ -48,5 +48,51 @@ void menuLoginRegistro()
 
 void menuRegistro()
 {
-    imprimirTexto("Registrar nuevo usuario:\n");
+    char usuario[20];
+    char contrasenya[20];
+
+    imprimirTexto("\nRegistrar nuevo usuario:");
+
+    printf("\n- Introduzca un nombre de usuario: ");
+    fgets(usuario, sizeof(usuario), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    printf("\n- Introduzca una contrasenya: ");
+    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    // Aqui devemos meter las varibales usuario y contrasenya en la base de datos
+
+    printf("\n");
+    menuLoginRegistro();
+
+}
+
+void menuLogin()
+{
+    char usuario[20];
+    char contrasenya[20];
+
+    imprimirTexto("\nIniciar sesion con una cuenta registrada:");
+
+    printf("\n- Introduzca su nombre de usuario: ");
+    fgets(usuario, sizeof(usuario), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    printf("\n- Introduzca su contrasenya: ");
+    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    // Aqui tenemos que checkear con la base de datos y en caso positivo continuar
+    // y en caso negativo volver a preguntar
+
+    // Por el momento continuaremos
+
+    printf("\n");
+    menuPrincipal();
+}
+
+void menuPrincipal()
+{
+    imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
 }
