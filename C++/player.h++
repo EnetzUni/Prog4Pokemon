@@ -23,7 +23,4 @@ class Player {
     
         /// List of the Pokemon in the player's team.
         vector<PokemonPlayer> listPokemon;
-
-        /// The Pc where the rest of the player's Pokemon are stored.
-        Pc playerpc;
     };
