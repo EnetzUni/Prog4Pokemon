@@ -5,7 +5,7 @@
 #include "funciones.h"
 #include "baseDeDatos.h"
 
-void presentacion(sqlite3 *db)
+void presentacion(sqlite3 *db, Jugador *jugadores)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -15,10 +15,10 @@ void presentacion(sqlite3 *db)
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegistro(db);
+    menuLoginRegistro(db, jugadores);
 }
 
-void menuLoginRegistro(sqlite3 *db)
+void menuLoginRegistro(sqlite3 *db, Jugador *jugadores)
 {
 
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
@@ -34,20 +34,20 @@ void menuLoginRegistro(sqlite3 *db)
             if(str[0] == '1')
             {
                 printf("\n");
-                menuRegistro(db);
+                menuRegistro(db, jugadores);
                 return;
             } 
             else if (str[0] == '2')
             {
                 printf("\n");
-                menuLogin(db);
+                menuLogin(db, jugadores);
                 return;
             }
     } while (str[0] != 'q');
 
 }
 
-void menuRegistro(sqlite3 *db)
+void menuRegistro(sqlite3 *db, Jugador *jugadores)
 {
     char usuario[50];
     char contrasenya[50];
@@ -68,14 +68,14 @@ void menuRegistro(sqlite3 *db)
     fflush(stdin); // Eliminar Buffer
 
     // Introducimos en la base de datos el usuario
-    insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10);
+    insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10, jugadores, 51);
 
     printf("\n");
-    menuLoginRegistro(db);
+    menuLoginRegistro(db, jugadores);
 
 }
 
-void menuLogin(sqlite3 *db)
+void menuLogin(sqlite3 *db, Jugador *jugadores)
 {
     char usuario[20];
     char contrasenya[20];
@@ -96,10 +96,10 @@ void menuLogin(sqlite3 *db)
     // Por el momento continuaremos
 
     printf("\n");
-    menuPrincipal(db);
+    menuPrincipal(db, jugadores);
 }
 
-void menuPrincipal(sqlite3 *db)
+void menuPrincipal(sqlite3 *db, Jugador *jugadores)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
 }

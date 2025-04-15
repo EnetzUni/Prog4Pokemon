@@ -16,7 +16,7 @@ int main(void)
     printf("Base de datos abierta correctamente\n");
 
     Pokemon pokemons[50];
-    Jugador jugadores[50];
+    Jugador jugadores[51];
     Objeto objetos[50];
     Movimiento movimientos[50];
 
@@ -32,7 +32,7 @@ int main(void)
     printf("Objetos cargados: %d\n", num_objetos);
     printf("Movimientos cargados: %d\n", num_movs);
 
-    insertar_jugador(db, 00012, "Ash", "pikachu123", "M", 1000, 5);
+    insertar_jugador(db, 00012, "Ash", "pikachu123", "M", 1000, 5,  jugadores, 51);
 
 
     sqlite3_close(db);

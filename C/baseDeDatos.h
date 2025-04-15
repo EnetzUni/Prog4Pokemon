@@ -50,7 +50,7 @@ int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max);
 int cargar_jugadores(sqlite3 *db, Jugador *jugadores, int max);
 int cargar_objetos(sqlite3 *db, Objeto *objetos, int max);
 int cargar_movimientos(sqlite3 *db, Movimiento *movs, int max);
-int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL);
+int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL, Jugador *jugadores, int max);
 
 
 #endif
