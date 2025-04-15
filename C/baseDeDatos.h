@@ -1,74 +1,56 @@
-#ifndef _BASEDEDATOS_H_ 
-#define _BASEDEDATOS_H_
+#ifndef POKEMON_DB_H
+#define POKEMON_DB_H
 
-    typedef struct {
-        char* nombre;
-        char* tipo;
-        int potencia;
-        char*categoria;
-        char* efecto;
-        char** stats;
-        int cant_stats;
-        int precision;
-        int prioridad;
-    }  Movimiento;
+#include "sqlite3.h"
 
-    typedef struct {
-        char* nombre;
-        int vidaActual;
-        int ps;
-        char** tipos;
-        int cant_tipo;
-        int ataque;
-        int defensa;
-        int ataqueEspecial;
-        int defensaEspecial;
-        int velocidad;
-        int nivel;
-        int experiencia;
-        int activo;
-        Movimiento* movimientos;
-    }  Pokemon;
+typedef struct {
+    int id;
+    char name[50];
+    char type1[50];
+    char type2[50];
+    int PS;
+    int ataque;
+    int defensa;
+    int ataqueESP;
+    int defensaESP;
+    int velocidad;
+} Pokemon;
 
-    typedef struct {
-        char* nombre;
-        int cura;
-        int revivir;
-        int captura;
-        int subur;
-        int precio;
-    }  Objeto;
+typedef struct {
+    int id;
+    char name[50];
+    char password[50];
+    char genero[50];
+    int dinero;
+    int maxLVL;
+} Jugador;
 
-    typedef struct {
-        char* nombre;
-        char* contrasena;
-        int genero;
-        int dinero;
-        int nivelMaximo;
-        int historia;
-        Pokemon* pokemons;
-        int cant_p;
-        Objeto* objetos;
-    }  Jugador;
+typedef struct {
+    int id;
+    char name[50];
+    int cura;
+    int revivir;
+    int captura;
+    int subida;
+} Objeto;
 
-    Jugador obtenerJugadorPorNombre(char* nombre);
-    char* obtenerEfectoPorId(int id);
-    char* obtenerStatPorId(int id);
-    char* obtenerTipoPorId(int id);
-    Pokemon* obtenerPokemons(int *cant_p);
-    Pokemon obtenerPokemonsPorId(int id);
-    Pokemon* obtenerPokemonJugador(int id_jugador, int *cant_p);
-    Movimiento obtenerMovimientoPorId(int id);
-    Movimiento* obtenerMovimientos(int *cant_m);
-    int* obtenerIdStatPorIdMovimiento(int idMovimiento, int* cant_stat);
-    char* obtenerCategoriaMovimientoPorId(int id);
-    void insertar_jugador(Jugador jugador);
-    void modificar_jugador(Jugador jugador);
-    void insertar_pokemon(Pokemon pokemon);
-    void modificar_pokemon(Pokemon pokemon);
-    void insertar_movimiento(Movimiento movimiento);
-    void insertar_objeto(Objeto objeto);
-    void modificar_objeto(Objeto objeto);
-    void modificar_movimiento(Movimiento movimiento);
+typedef struct {
+    int id;
+    int idTipo;
+    int idCategoriaMov;
+    char name[50];
+    int potencia;
+    int precision;
+    int prioridad;
+} Movimiento;
+
+
+// Funciones para obtener datos
+int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max);
+int cargar_jugadores(sqlite3 *db, Jugador *jugadores, int max);
+int cargar_objetos(sqlite3 *db, Objeto *objetos, int max);
+int cargar_movimientos(sqlite3 *db, Movimiento *movs, int max);
+int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL);
+
 
 #endif
