@@ -1,3 +1,6 @@
+#ifndef STATUS_HPP
+#define STATUS_HPP
+
 #pragma once
 
 /**
@@ -7,3 +10,5 @@
 enum class Status{
     BURN, FREEZE, PARALYSIS, POISON, BPOISON, SLEEP, CONFUSION
 };
+
+#endif

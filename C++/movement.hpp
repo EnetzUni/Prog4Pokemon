@@ -1,8 +1,11 @@
+#ifndef MOVEMENT_HPP
+#define MOVEMENT_HPP
+
 #pragma once
 
 #include <iostream>
-#include "type.h++"
-#include "status.h++"
+#include "type.hpp"
+#include "status.hpp"
 using namespace std;
 
 /** 
@@ -47,3 +50,5 @@ public:
     /// The chance (in %) for the move to successfully hit the target.
     int accuracy;
 };
+
+#endif

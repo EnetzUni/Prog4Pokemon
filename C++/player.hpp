@@ -1,9 +1,12 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 #pragma once
 
 #include <iostream>
 #include <vector>
-#include "pokemon.h++"
-#include "pc.h++"
+#include "pokemon.hpp"
+#include "pc.hpp"
 using namespace std;
 
 /**
@@ -24,3 +27,5 @@ class Player {
         /// List of the Pokemon in the player's team.
         vector<PokemonPlayer> listPokemon;
     };
+
+#endif

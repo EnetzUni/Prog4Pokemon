@@ -42,6 +42,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "*.h++": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cinttypes": "cpp"
     }
 }

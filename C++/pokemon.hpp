@@ -1,9 +1,12 @@
+#ifndef POKEMON_HPP
+#define POKEMON_HPP
+
 #pragma once
 
 #include <iostream>
 #include <vector>
-#include "type.h++"
-#include "movement.h++"
+#include "type.hpp"
+#include "movement.hpp"
 using namespace std;
 
 /** 
@@ -142,3 +145,5 @@ int xpToLvl(int);
  * @param PokemonPlayer* The pokemon whose stats need to be updated;
  */
 void updateStats(PokemonPlayer*);
+
+#endif
