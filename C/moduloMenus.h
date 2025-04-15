@@ -1,16 +1,16 @@
 #ifndef MODULOMENUS_H_
 #define MODULOMENUS_H_
 
-void presentacion();
+void presentacion(sqlite3 *db);
 
-void menuLoginRegistro();
+void menuLoginRegistro(sqlite3 *db);
 
-void menuRegistro();
+void menuRegistro(sqlite3 *db);
 
-void menuLogin();
+void menuLogin(sqlite3 *db);
 
 void menuErrorLoginRegistro(int caseMenu);
 
-void menuPrincipal();
+void menuPrincipal(sqlite3 *db);
 
 #endif

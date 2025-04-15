@@ -3,8 +3,9 @@
 // Importamos los modulos
 #include "moduloMenus.h"
 #include "funciones.h"
+#include "baseDeDatos.h"
 
-void presentacion()
+void presentacion(sqlite3 *db)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -14,10 +15,10 @@ void presentacion()
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegistro();
+    menuLoginRegistro(db);
 }
 
-void menuLoginRegistro()
+void menuLoginRegistro(sqlite3 *db)
 {
 
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
@@ -33,23 +34,24 @@ void menuLoginRegistro()
             if(str[0] == '1')
             {
                 printf("\n");
-                menuRegistro();
+                menuRegistro(db);
                 return;
             } 
             else if (str[0] == '2')
             {
                 printf("\n");
-                menuLogin();
+                menuLogin(db);
                 return;
             }
     } while (str[0] != 'q');
 
 }
 
-void menuRegistro()
+void menuRegistro(sqlite3 *db)
 {
-    char usuario[20];
-    char contrasenya[20];
+    char usuario[50];
+    char contrasenya[50];
+    char genero[2];
 
     imprimirTexto("\nRegistrar nuevo usuario:");
 
@@ -61,14 +63,19 @@ void menuRegistro()
     fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
     fflush(stdin); // Eliminar Buffer
 
-    // Aqui devemos meter las varibales usuario y contrasenya en la base de datos
+    printf("\n- Introduzca su genero (M/F): ");
+    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    // Introducimos en la base de datos el usuario
+    insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10);
 
     printf("\n");
-    menuLoginRegistro();
+    menuLoginRegistro(db);
 
 }
 
-void menuLogin()
+void menuLogin(sqlite3 *db)
 {
     char usuario[20];
     char contrasenya[20];
@@ -89,10 +96,10 @@ void menuLogin()
     // Por el momento continuaremos
 
     printf("\n");
-    menuPrincipal();
+    menuPrincipal(db);
 }
 
-void menuPrincipal()
+void menuPrincipal(sqlite3 *db)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
 }
