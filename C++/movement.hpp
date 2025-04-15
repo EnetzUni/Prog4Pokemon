@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include "type.hpp"
+#include "category.hpp"
 #include "status.hpp"
 using namespace std;
 
@@ -14,17 +15,6 @@ using namespace std;
  */
 class Movement {
 public:
-    /** 
-     * @enum Category
-     * @brief Represents the category of the move.
-     *
-     * - PHYSICAL: The category of the attack is Physical, it uses Attack and Defense.
-     * - SPECIAL: The category of the attack is Special, it uses Special Attack and Special Defense.
-     * - STATUS: Non-damaging moves that apply effects.
-     */
-	enum class Category { 
-        PHYSICAL, SPECIAL, STATUS 
-    };
 
     /// Unique identifier for the move.
     int id;
