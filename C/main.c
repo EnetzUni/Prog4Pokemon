@@ -9,7 +9,7 @@ int main(void)
     sqlite3 *db;
     printf("Intentando abrir la base de datos...\n");
 
-    if (sqlite3_open("DB/pokemon.db", &db) != SQLITE_OK) {
+    if (sqlite3_open("../DB/pokemon.db", &db) != SQLITE_OK) {
         printf("Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
         return 1;
     }
