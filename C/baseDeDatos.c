@@ -144,7 +144,7 @@ int cargar_movimientos(sqlite3 *db, Movimiento *movs, int max) {
     return i;
 }
 
-int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL) {
+int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL, Jugador *jugadores, int max) {
     const char *sql = "INSERT INTO Jugador (id, name, password, genero, dinero, maxLVL) VALUES (?, ?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
@@ -154,7 +154,7 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
         return 0;
     }
 
-    // Asociamos valores a los parámetros
+    // Asignamos parámetros
     sqlite3_bind_int(stmt, 1, id);
     sqlite3_bind_text(stmt, 2, name, -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 3, password, -1, SQLITE_TRANSIENT);
@@ -162,7 +162,7 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
     sqlite3_bind_int(stmt, 5, dinero);
     sqlite3_bind_int(stmt, 6, maxLVL);
 
-    // Ejecutamos la consulta
+    // Ejecutamos
     rc = sqlite3_step(stmt);
     if (rc != SQLITE_DONE) {
         printf("Error insertando jugador: %s\n", sqlite3_errmsg(db));
@@ -171,6 +171,11 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
     }
 
     printf("Jugador insertado correctamente.\n");
+
     sqlite3_finalize(stmt);
+
+    // Recargar jugadores
+    cargar_jugadores(db, jugadores, max);
+
     return 1;
 }
