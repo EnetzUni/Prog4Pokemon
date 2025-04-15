@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "pokemon.h++"
+#include "pokemon.hpp"
 using namespace std;
 
 /** 
