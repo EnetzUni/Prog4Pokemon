@@ -20,7 +20,7 @@ typedef struct {
     int id;
     char name[50];
     char password[50];
-    char genero[50];
+    char genero[1];
     int dinero;
     int maxLVL;
 } Jugador;
