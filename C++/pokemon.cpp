@@ -92,6 +92,8 @@ int PokemonPlayer::getLvl() {
 // Setter for the Pokemon's level
 void PokemonPlayer::setLvl(int newLvl) {
     this->lvl = newLvl;
+
+    // Stats are updated because of the level change
     updateStats(this);
 }
 
@@ -102,7 +104,10 @@ int PokemonPlayer::getXp() {
 
 // Setter for the Pokemon's xp
 void PokemonPlayer::setXp(int newXp) {
+    // Update unless higher than 1M, in that case it stays at 1M.
     this->xp = (newXp > 1000000) ? 1000000 : newXp;
+
+    // Update the level if the xp has reached a new level
     if (xpToLvl(xp) > getLvl()) {
         setLvl(xpToLvl(xp));
     }
