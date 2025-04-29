@@ -5,6 +5,8 @@
 #include "funciones.h"
 #include "baseDeDatos.h"
 
+#include "string.h"
+
 void presentation(sqlite3 *db, Jugador *jugadores)
 {
     printf( "  _____      _                                _____ \n");
@@ -51,24 +53,23 @@ void menuRegister(sqlite3 *db, Jugador *jugadores)
 {
     char usuario[50];
     char contrasenya[50];
-    char genero[2];
-
+    char genero[4];
     imprimirTexto("\nRegistrar nuevo usuario:");
 
     printf("\n- Introduzca un nombre de usuario: ");
-    fgets(usuario, sizeof(usuario), stdin);  // Leer entrada completa
-    fflush(stdin); // Eliminar Buffer
+    fgets(usuario, sizeof(usuario), stdin);
+    usuario[strcspn(usuario, "\n")] = '\0';  // Eliminar '\n' final
 
     printf("\n- Introduzca una contrasenya: ");
-    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
-    fflush(stdin); // Eliminar Buffer
+    fgets(contrasenya, sizeof(contrasenya), stdin);
+    contrasenya[strcspn(contrasenya, "\n")] = '\0';
 
     printf("\n- Introduzca su genero (M/F): ");
-    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
-    fflush(stdin); // Eliminar Buffer
+    fgets(genero, sizeof(genero), stdin);
+    genero[strcspn(genero, "\n")] = '\0';
 
     // Introducimos en la tabla Jugador el nuevo usuario                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
-    insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10, jugadores, 51);
+    insertar_jugador(db, 00001, usuario, contrasenya, genero, 1000, 5, jugadores, 51);
 
     printf("\n");
     menuLoginRegister(db, jugadores);
