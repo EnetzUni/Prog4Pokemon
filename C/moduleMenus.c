@@ -68,6 +68,10 @@ void menuRegister(sqlite3 *db, Jugador *jugadores)
     fgets(genero, sizeof(genero), stdin);
     genero[strcspn(genero, "\n")] = '\0';
 
+    printf("usuario = '%s'\n", usuario);
+    printf("contrasenya = '%s'\n", contrasenya);
+    printf("genero = '%s'\n", genero);
+
     // Introducimos en la tabla Jugador el nuevo usuario                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
     insertar_jugador(db, 00001, usuario, contrasenya, genero, 1000, 5, jugadores, 51);
 
