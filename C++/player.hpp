@@ -26,6 +26,9 @@ class Player {
     
         /// List of the Pokemon in the player's team.
         vector<PokemonPlayer> listPokemon;
+
+        /// Maximum level of Pokemon that the player can encounter.
+        int maxLvL;
     };
 
 #endif
