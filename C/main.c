@@ -38,7 +38,7 @@ int main(void)
     sqlite3_close(db);
 
     printf("Finalizando con presentacion...\n");
-    presentacion(db, jugadores);
+    presentation(db, jugadores);
 
     return 0;
 }
