@@ -1,9 +1,7 @@
-#ifndef TYPE_H
-#define TYPE_H
+#ifndef POKEMON_H
+#define POKEMON_H
 
 #include "type.h"
-
-#pragma once
 
 typedef struct {
         /// The Pokedex number for the Pokemon.
