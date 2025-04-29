@@ -92,6 +92,8 @@ int PokemonPlayer::getLvl() {
 // Setter for the Pokemon's level
 void PokemonPlayer::setLvl(int newLvl) {
     this->lvl = newLvl;
+
+    // Stats are updated because of the level change
     updateStats(this);
 }
 
@@ -102,7 +104,10 @@ int PokemonPlayer::getXp() {
 
 // Setter for the Pokemon's xp
 void PokemonPlayer::setXp(int newXp) {
+    // Update unless higher than 1M, in that case it stays at 1M.
     this->xp = (newXp > 1000000) ? 1000000 : newXp;
+
+    // Update the level if the xp has reached a new level
     if (xpToLvl(xp) > getLvl()) {
         setLvl(xpToLvl(xp));
     }
@@ -212,3 +217,20 @@ void updateStats(PokemonPlayer* pokemon) {
     pokemon->setLvlSpDefense(static_cast<int> ((((2 * pokemon->getSpdefense() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
     pokemon->setLvlSpeed(static_cast<int> ((((2 * pokemon->getSpeed() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
 }
+
+/*
+void createStats(Pokemon pokemon, int xp) {
+    // We calculate the new attributes by using the formulas
+    // IV, EV and Nature are set to their default max values for all (IV = 31, EV = 255 & Nature = 1.1 (110%))
+    // Level refers to the new level of the pokemon and Base refers to the value of that stat for the pokemon species
+    // HP = (((2 * BASE + IV (EV / 4)) * LEVEL) / 100) + LEVEL + 10
+    pokemon->setLvlHp(static_cast<int> (((2 * pokemon->getHp() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + pokemon->getLvl() + 10);
+    
+    // Other Stat = ((((2 * BASE + IV (EV / 4)) * LEVEL) / 100) + 5) * NATURE
+    pokemon->setLvlAttack(static_cast<int> ((((2 * pokemon->getAttack() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
+    pokemon->setLvlDefense(static_cast<int> ((((2 * pokemon->getDefense() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
+    pokemon->setLvlSpAttack(static_cast<int> ((((2 * pokemon->getSpattack() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
+    pokemon->setLvlSpDefense(static_cast<int> ((((2 * pokemon->getSpdefense() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
+    pokemon->setLvlSpeed(static_cast<int> ((((2 * pokemon->getSpeed() + 31 + (255 / 4)) * pokemon->getLvl()) / 100) + 5) * 1.1);
+}
+*/

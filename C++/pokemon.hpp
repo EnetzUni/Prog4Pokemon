@@ -134,7 +134,8 @@ class PokemonPlayer : public Pokemon {
 /**
  * @brief Calculates level based on experience points.
  * 
- * @param int The experience points accumulated by the player.
+ * @param xp The experience points accumulated by the player.
+ * 
  * @return The level as an integer.
  */
 int xpToLvl(int);
@@ -142,8 +143,37 @@ int xpToLvl(int);
 /**
  * @brief Updates the stats based on the new level.
  * 
- * @param PokemonPlayer* The pokemon whose stats need to be updated;
+ * @param pokemon The pokemon whose stats need to be updated.
  */
 void updateStats(PokemonPlayer*);
+
+/**
+ * @brief Creates the desired pokemon.
+ * 
+ * @param id The id of the pokemon to be created.
+ * 
+ * @return The created pokemon.
+ */
+void createPokemon(int);
+
+/**
+ * @brief Creates the desired pokemon.
+ * 
+* This function can be called with different types for the Pokémon and movements:
+ * - The first parameter can either be a Pokemon id (int) or a Pokemon object.
+ * - The movements can either be a vector of Movement objects or a vector of movement IDs (int). 
+ *
+ * @param idORpokemon The pokemon or id of such Pokemon of the pokemonPlayer to be created.
+ * @param pokeid The id of the pokemonPlayer to be created.
+ * @param nickname The nickname of the pokemonPlayer to be created.
+ * @param idsORmovements The movements or ids of such movements of the pokemonPlayer to be created.
+ * @param xp The xp of the pokemonPlayer to be created.
+ * 
+ * @return The created pokemonPlayer.
+ */
+void createPokemonPlayer(int, int, string, vector<Movement>, int);
+void createPokemonPlayer(Pokemon, int, string, vector<Movement>, int);
+void createPokemonPlayer(int, int, string, vector<int>, int);
+void createPokemonPlayer(Pokemon, int, string, vector<int>, int);
 
 #endif
