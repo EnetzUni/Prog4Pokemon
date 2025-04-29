@@ -67,7 +67,7 @@ void menuRegistro(sqlite3 *db, Jugador *jugadores)
     fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
     fflush(stdin); // Eliminar Buffer
 
-    // Introducimos en la base de datos el usuario
+    // Introducimos en la tabla Jugador el nuevo usuario                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
     insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10, jugadores, 51);
 
     printf("\n");
