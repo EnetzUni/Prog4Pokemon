@@ -1,11 +1,11 @@
 #include <stdio.h>
 
 // Importamos los modulos
-#include "moduloMenus.h"
+#include "moduleMenus.h"
 #include "funciones.h"
 #include "baseDeDatos.h"
 
-void presentacion(sqlite3 *db, Jugador *jugadores)
+void presentation(sqlite3 *db, Jugador *jugadores)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -15,10 +15,10 @@ void presentacion(sqlite3 *db, Jugador *jugadores)
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegistro(db, jugadores);
+    menuLoginRegister(db, jugadores);
 }
 
-void menuLoginRegistro(sqlite3 *db, Jugador *jugadores)
+void menuLoginRegister(sqlite3 *db, Jugador *jugadores)
 {
 
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
@@ -34,7 +34,7 @@ void menuLoginRegistro(sqlite3 *db, Jugador *jugadores)
             if(str[0] == '1')
             {
                 printf("\n");
-                menuRegistro(db, jugadores);
+                menuRegister(db, jugadores);
                 return;
             } 
             else if (str[0] == '2')
@@ -47,7 +47,7 @@ void menuLoginRegistro(sqlite3 *db, Jugador *jugadores)
 
 }
 
-void menuRegistro(sqlite3 *db, Jugador *jugadores)
+void menuRegister(sqlite3 *db, Jugador *jugadores)
 {
     char usuario[50];
     char contrasenya[50];
@@ -71,7 +71,7 @@ void menuRegistro(sqlite3 *db, Jugador *jugadores)
     insertar_jugador(db, 1, usuario, contrasenya, genero, 100, 10, jugadores, 51);
 
     printf("\n");
-    menuLoginRegistro(db, jugadores);
+    menuLoginRegister(db, jugadores);
 
 }
 
