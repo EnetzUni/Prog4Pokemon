@@ -29,6 +29,9 @@ class Player {
 
         /// Maximum level of Pokemon that the player can encounter.
         int maxLvL;
+
+        /// Current part of the story where the player is.
+        int story;
     };
 
 #endif
