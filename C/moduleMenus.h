@@ -1,7 +1,7 @@
 #ifndef MODULEMENUS_H_
 #define MODULEMENUS_H_
 
-#include "baseDeDatos.h"
+#include "db.h"
 
 void presentation(sqlite3 *db, Jugador *jugadores);
 
@@ -14,5 +14,7 @@ void menuLogin(sqlite3 *db, Jugador *jugadores);
 void menuErrorLoginRegister(int caseMenu);
 
 void menuPrincipal(sqlite3 *db, Jugador *jugadores);
+
+void imprimirTexto(char* texto);
 
 #endif

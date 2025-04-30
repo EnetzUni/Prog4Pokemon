@@ -2,10 +2,21 @@
 
 // Importamos los modulos
 #include "moduleMenus.h"
-#include "funciones.h"
-#include "baseDeDatos.h"
+#include "db.h"
 
 #include "string.h"
+
+void imprimirTexto(char* texto)
+{
+    int i = 0;
+    do
+    {
+        printf("%c",texto[i]);
+        Sleep(30);
+        i++;
+    } while (texto[i] != '\0');
+    printf("\n");
+}
 
 void presentation(sqlite3 *db, Jugador *jugadores)
 {
