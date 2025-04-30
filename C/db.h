@@ -1,5 +1,5 @@
-#ifndef POKEMON_DB_H
-#define POKEMON_DB_H
+#ifndef DB_H
+#define DB_H
 
 #include "sqlite3.h"
 

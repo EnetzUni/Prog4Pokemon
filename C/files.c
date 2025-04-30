@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ficheros.h"
+#include "files.h"
 
 /**
  * Función para obtener un valor del archivo de configuración.
