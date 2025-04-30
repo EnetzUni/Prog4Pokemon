@@ -44,6 +44,7 @@
         "*.h++": "cpp",
         "stdio.h": "c",
         "cinttypes": "cpp",
-        "sqlite3.h": "c"
+        "sqlite3.h": "c",
+        "movement.h": "c"
     }
 }
