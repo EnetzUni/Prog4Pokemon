@@ -2,6 +2,9 @@
 #include <string.h>
 #include "sqlite3.h"
 #include "db.h"
+#include "pokemon.h"
+#include "movement.h"
+#include "player.h"
 
 #define MAX_LEN 50
 #define MAX_ITEMS 100
@@ -48,7 +51,7 @@ int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max) {
     return i;
 }
 
-int cargar_jugadores(sqlite3 *db, Jugador *jugadores, int max) {
+int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
     const char *sql = "SELECT * FROM Jugador";
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
@@ -81,38 +84,7 @@ int cargar_jugadores(sqlite3 *db, Jugador *jugadores, int max) {
     return i;
 }
 
-int cargar_objetos(sqlite3 *db, Objeto *objetos, int max) {
-    const char *sql = "SELECT * FROM Objeto";
-    sqlite3_stmt *stmt;
-    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-    int i = 0;
-
-    if (rc != SQLITE_OK) {
-        printf("Error preparando consulta de Pokemons: %s\n", sqlite3_errmsg(db));
-        return -1;
-    }
-
-    while (sqlite3_step(stmt) == SQLITE_ROW && i < max) {
-        objetos[i].id = sqlite3_column_int(stmt, 0);
-    
-        const unsigned char *name = sqlite3_column_text(stmt, 1);
-        strncpy(objetos[i].name, name ? (const char *)name : "NULL", MAX_LEN);
-    
-        objetos[i].cura = sqlite3_column_int(stmt, 2);
-        objetos[i].revivir = sqlite3_column_int(stmt, 3);
-        objetos[i].captura = sqlite3_column_int(stmt, 4);
-        objetos[i].subida = sqlite3_column_int(stmt, 5);
-    
-        printf("Objeto %d: %s (Cura: %d)\n", i + 1, objetos[i].name, objetos[i].cura);
-        i++;
-    }
-    
-
-    sqlite3_finalize(stmt);
-    return i;
-}
-
-int cargar_movimientos(sqlite3 *db, Movimiento *movs, int max) {
+int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
     const char *sql = "SELECT * FROM Movimiento";
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
