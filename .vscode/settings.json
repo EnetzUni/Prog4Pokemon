@@ -43,6 +43,7 @@
         "typeinfo": "cpp",
         "*.h++": "cpp",
         "stdio.h": "c",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "sqlite3.h": "c"
     }
 }
