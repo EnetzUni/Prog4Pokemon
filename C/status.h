@@ -9,4 +9,14 @@ typedef enum {
     BURN, FREEZE, PARALYSIS, POISON, BPOISON, SLEEP, CONFUSION
 } Status;
 
+static const char* const StatusNames[] = {
+    [BURN]       = "BURN",
+    [FREEZE]     = "FREEZE",
+    [PARALYSIS]  = "PARALYSIS",
+    [POISON]     = "POISON",
+    [BPOISON]    = "BPOISON",
+    [SLEEP]      = "SLEEP",
+    [CONFUSION]  = "CONFUSION"
+};
+
 #endif

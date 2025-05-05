@@ -13,4 +13,10 @@ typedef enum {
     PHYSICAL, SPECIAL, STATUS 
 } Category;
 
+static const char* const CategoryNames[] = {
+    [PHYSICAL] = "PHYSICAL",
+    [SPECIAL]  = "SPECIAL",
+    [STATUS]   = "STATUS"
+};
+
 #endif
