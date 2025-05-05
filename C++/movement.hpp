@@ -4,9 +4,9 @@
 #pragma once
 
 #include <iostream>
-#include "type.hpp"
-#include "category.hpp"
-#include "status.hpp"
+#include "type.h"
+#include "category.h"
+#include "status.h"
 using namespace std;
 
 /** 

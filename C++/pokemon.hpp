@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <vector>
-#include "type.hpp"
+#include "type.h"
 #include "movement.hpp"
 using namespace std;
 
