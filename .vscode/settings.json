@@ -45,6 +45,7 @@
         "stdio.h": "c",
         "cinttypes": "cpp",
         "sqlite3.h": "c",
-        "movement.h": "c"
+        "movement.h": "c",
+        "category.h": "c"
     }
 }

@@ -5,8 +5,8 @@
  * @enum Status
  * @brief Represents the various status conditions a Pokemon can experience in battle.
  */
-enum Status{
+typedef enum {
     BURN, FREEZE, PARALYSIS, POISON, BPOISON, SLEEP, CONFUSION
-};
+} Status;
 
 #endif

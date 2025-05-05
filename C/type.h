@@ -5,8 +5,8 @@
  * @enum Type
  * @brief Represents the elemental type of a Pokemon or its move.
  */
-enum Type {
+typedef enum {
     NORMAL, FIRE, WATER, ELECTRIC, GRASS, ICE, FIGHTING, POISON, GROUND, FLYING, PSYCHIC, BUG, ROCK, GHOST, DRAGON, DARK, STEEL, FAIRY
-};
+} Type;
 
 #endif

@@ -9,8 +9,8 @@
  * - SPECIAL: The category of the attack is Special, it uses Special Attack and Special Defense.
  * - STATUS: Non-damaging moves that apply effects.
  */
-enum Category { 
+typedef enum { 
     PHYSICAL, SPECIAL, STATUS 
-};
+} Category;
 
 #endif
