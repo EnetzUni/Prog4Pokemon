@@ -1,6 +1,6 @@
-#include <stdlib.h>    // for malloc, free
-#include <string.h>    // for strncpy
-#include <stdio.h>     // for NULL
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "Pokemon.h"
 
 Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int spattack, int spdefense, int speed, Type type1, Type type2, int evolvl) {
