@@ -171,7 +171,9 @@ int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
     return i;
 }
 
-int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password, const char *genero, int dinero, int maxLVL, Jugador *jugadores, int max) {
+*/
+
+int insertar_jugador(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story) {
     const char *sql = "INSERT INTO Jugador (id, name, password, genero, dinero, maxLVL) VALUES (?, ?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
@@ -182,12 +184,11 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
     }
 
     // Asignamos parámetros
-    sqlite3_bind_int(stmt, 1, id);
-    sqlite3_bind_text(stmt, 2, name, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 3, password, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 4, genero, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 5, dinero);
-    sqlite3_bind_int(stmt, 6, maxLVL);
+    sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, password, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 3, (int)genero);
+    sqlite3_bind_int(stmt, 4, maxLVL);
+    sqlite3_bind_int(stmt, 5, story);
 
     // Ejecutamos
     rc = sqlite3_step(stmt);
@@ -205,4 +206,4 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
     cargar_jugadores(db, jugadores, max);
 
     return 1;
-}*/
+}
