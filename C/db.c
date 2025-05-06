@@ -206,7 +206,7 @@ int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
 
 */
 
-int insertPlayer(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story) {
+void insertPlayer(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story) {
     const char *sql = "INSERT INTO Player (name, password, gender, maxLVL, story) VALUES (?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
@@ -219,7 +219,7 @@ int insertPlayer(sqlite3 *db, const char *name, const char *password, bool gende
     // Asignamos parámetros
     sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 2, password, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 3, (int)gender);
+    sqlite3_bind_int(stmt, 3, (int) gender);
     sqlite3_bind_int(stmt, 4, maxLVL);
     sqlite3_bind_int(stmt, 5, story);
 
@@ -234,9 +234,4 @@ int insertPlayer(sqlite3 *db, const char *name, const char *password, bool gende
     printf("Player insertado correctamente.\n");
 
     sqlite3_finalize(stmt);
-
-    // Recargar jugadores
-    cargar_jugadores(db, jugadores, max);
-
-    return 1;
 }
