@@ -91,6 +91,9 @@ void menuRegister(sqlite3 *db)
     printf("gender = '%s'\n", genderC);
 
     // Introducimos en la tabla Player el nuevo nickname                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
+    if(checkPlayer(db, nickname) == 1){
+        printf("THIS SHIT WORKS!!");
+    }
     insertPlayer(db, nickname, password, genderB, 10, 1);
 
     printf("\n");
