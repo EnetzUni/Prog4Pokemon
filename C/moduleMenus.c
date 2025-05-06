@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "string.h"
 #include <stdbool.h>
+#include <windows.h>
+#include "string.h"
 
 // Importamos los modulos
 #include "moduleMenus.h"
