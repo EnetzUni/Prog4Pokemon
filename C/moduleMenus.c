@@ -6,7 +6,7 @@
 
 #include "string.h"
 
-void imprimirTexto(char* texto)
+/*void imprimirTexto(char* texto)
 {
     int i = 0;
     do
@@ -18,7 +18,7 @@ void imprimirTexto(char* texto)
     printf("\n");
 }
 
-/*void presentation(sqlite3 *db, Jugador *jugadores)
+void presentation(sqlite3 *db, Jugador *jugadores)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");

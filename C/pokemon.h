@@ -60,4 +60,8 @@ typedef struct {
         Status status;
 } PokemonPlayer;
 
+Pokemon* createPokemon(int, char[], int, int, int, int, int, int, Type, Type, int);
+
+void printPokemon(Pokemon*);
+
 #endif

@@ -16,7 +16,7 @@ int main(void)
     printf("Base de datos abierta correctamente\n");
 
     Pokemon* pokemon;
-    pokemon = loadPokemon(db, 20);
+    pokemon = (Pokemon*) loadPokemon(db, 20);
 
     /*Pokemon pokemons[50];
     Jugador jugadores[51];

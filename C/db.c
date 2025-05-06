@@ -7,29 +7,24 @@
 #include "player.h"
 #include "type.h"
 
-#define MAX_LEN 50
-#define MAX_ITEMS 100
-
 Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_stmt *stmt;
+    const char *sql = "SELECT * FROM Pokemon WHERE id = ?";
 
-	char sql[] = "SELECT * FROM Pokemon WHERE id = ";
-    char ids[] = "";
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        return NULL;
+    }
 
-    sprintf(ids, "%d", id);
-    strcat(sql, ids);
-
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
+    if (sqlite3_bind_int(stmt, 1, id) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind ID: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return NULL;
+    }
 
 	printf("SQL query prepared (SELECT)\n");
 
     Pokemon* pokemon;
-	int id;
 	char name[255];
     int hp;
     int attack;
@@ -42,9 +37,7 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 
 	printf("Showing Pokemon:\n");
 
-	result = sqlite3_step(stmt);
-	if (result == SQLITE_ROW) {
-		id = sqlite3_column_int(stmt, 0);
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
 		strcpy(name, (char *) sqlite3_column_text(stmt, 1));
         hp = sqlite3_column_int(stmt, 2);
         attack = sqlite3_column_int(stmt, 3);
@@ -57,22 +50,18 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
         evolvl = sqlite3_column_int(stmt, 10);
 	}
 
-    pokemon = createPokemon(id, name, hp, attack, defense, spattack, spdefense, speed, type[0], type[1], evolvl);
+    pokemon = (Pokemon*) createPokemon(id, name, hp, attack, defense, spattack, spdefense, speed, type[0], type[1], evolvl);
     printPokemon(pokemon);
 
-	printf("\n");
-	printf("\n");
-
-	result = sqlite3_finalize(stmt);
-	if (result != SQLITE_OK) {
+	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+		return (Pokemon*) NULL;
 	}
 
 	printf("Prepared statement finalized (SELECT)\n");
 
-	return pokemon;
+	return (Pokemon*) pokemon;
 }
 
 /*int cargar_pokemons(sqlite3* db, Pokemon* pokemons, int max) {

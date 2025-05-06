@@ -3,7 +3,7 @@
 
 #include "db.h"
 
-void presentation(sqlite3 *db, Jugador *jugadores);
+/*void presentation(sqlite3 *db, Jugador *jugadores);
 
 void menuLoginRegister(sqlite3 *db, Jugador *jugadores);
 
@@ -15,6 +15,6 @@ void menuErrorLoginRegister(int caseMenu);
 
 void menuPrincipal(sqlite3 *db, Jugador *jugadores);
 
-void imprimirTexto(char* texto);
+void imprimirTexto(char* texto);*/
 
 #endif

@@ -6,15 +6,15 @@
  * @brief Represents the various status conditions a Pokemon can experience in battle.
  */
 typedef enum {
-    BURN, FREEZE, PARALYSIS, POISON, BPOISON, SLEEP, CONFUSION
+    BURN, FREEZE, PARALYSIS, POISOND, BPOISOND, SLEEP, CONFUSION
 } Status;
 
 static const char* const StatusNames[] = {
     [BURN]       = "BURN",
     [FREEZE]     = "FREEZE",
     [PARALYSIS]  = "PARALYSIS",
-    [POISON]     = "POISON",
-    [BPOISON]    = "BPOISON",
+    [POISOND]     = "POISOND",
+    [BPOISOND]    = "BPOISOND",
     [SLEEP]      = "SLEEP",
     [CONFUSION]  = "CONFUSION"
 };
