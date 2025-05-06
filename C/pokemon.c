@@ -30,7 +30,7 @@ Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int
 void printPokemon(Pokemon* pokemon) {
     if (!pokemon) {
         printf("No Pokemon to print.\n");
-        return NULL;
+        return;
     }
 
     printf("----- Pokemon #%d -----\n", pokemon->id);
