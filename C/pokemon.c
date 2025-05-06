@@ -30,7 +30,7 @@ Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int
 void printPokemon(Pokemon* pokemon) {
     if (!pokemon) {
         printf("No Pokemon to print.\n");
-        return;
+        return NULL;
     }
 
     printf("----- Pokemon #%d -----\n", pokemon->id);
@@ -45,4 +45,46 @@ void printPokemon(Pokemon* pokemon) {
     printf("Type 2         : %s\n",    TypeNames[pokemon->type[1]]);
     printf("Evolves at Lvl : %d\n",    pokemon->evolvl);
     printf("-----------------------\n");
+}
+
+PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement listMovement[4], int xp, int curHp, Status status) {
+    PokemonPlayer *pokemonplayer = malloc(sizeof *pokemonplayer);
+    if (!pokemonplayer) {
+        return NULL;
+    }
+
+    pokemonplayer->pokemon = pokemon;
+    pokemonplayer->pokeid  = pokeid;
+    pokemonplayer->xp      = xp;
+    pokemonplayer->curHp   = curHp;
+    pokemonplayer->status  = status;
+
+    strncpy(pokemonplayer->nickname, nickname, sizeof pokemonplayer->nickname - 1);
+    pokemonplayer->nickname[sizeof pokemonplayer->nickname - 1] = '\0';
+
+    for (int i = 0; i < 4; ++i) {
+        pokemonplayer->listMovement[i] = listMovement[i];
+    }
+
+    return pokemonplayer;
+}
+
+void printPokemonPlayer(const PokemonPlayer *pokemonplayer) {
+    if (!pokemonplayer) {
+        printf("No PokemonPlayer to print.\n");
+        return;
+    }
+
+    printf("===== PokemonPlayer #%d =====\n", pokemonplayer->pokeid);
+    printPokemon(pokemonplayer->pokemon);
+    printf("Nickname      : %s\n", pokemonplayer->nickname);
+    printf("XP            : %d\n", pokemonplayer->xp);
+    printf("Current HP    : %d\n", pokemonplayer->curHp);
+    printf("Status        : %s\n", StatusNames[pokemonplayer->status]);
+
+    for (int i = 0; i < 4; ++i) {
+    printf("--- Movement slot %d ---\n", i + 1);
+    printMovement(&pokemonplayer->listMovement[i]);
+    }
+    printf("============================\n");
 }

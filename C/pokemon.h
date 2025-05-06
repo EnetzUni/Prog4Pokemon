@@ -39,7 +39,7 @@ typedef struct {
 
 typedef struct {
         // The Pokemon species.
-        Pokemon pokemon;
+        Pokemon* pokemon;
 
         /// The Pokemon's pokeid.
         int pokeid;
@@ -48,7 +48,7 @@ typedef struct {
         char nickname[255];
 
         /// The Pokemon's list of Movements.
-        Movement listMovement[2];
+        Movement listMovement[4];
 
         /// The Pokemon's exact amount of xp to calculate level.
         int xp;
