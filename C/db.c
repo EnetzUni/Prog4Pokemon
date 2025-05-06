@@ -8,8 +8,8 @@
 #include "type.h"
 
 Pokemon* loadPokemon(sqlite3* db, int id) {
-    sqlite3_stmt *stmt;
-    const char *sql = "SELECT * FROM Pokemon WHERE id = ?";
+    sqlite3_stmt* stmt;
+    const char* sql = "SELECT * FROM Pokemon WHERE id = ?";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
@@ -62,6 +62,40 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 	printf("Prepared statement finalized (SELECT)\n");
 
 	return (Pokemon*) pokemon;
+}
+
+int checkPlayer(sqlite3* db, char* nickname) {
+    sqlite3_stmt* stmt;
+    const char* sql = "SELECT CASE WHEN COUNT(*) FILTER (WHERE nickname = ?) > 0 THEN 1 ELSE 0 END AS exists FROM Player;";
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        return -1;
+    }
+
+    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind nickname: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return -1;
+    }
+
+    int rc = sqlite3_step(stmt);
+    if (rc != SQLITE_ROW && rc != SQLITE_DONE) {
+        fprintf(stderr, "Execution failed: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return -1;
+    }
+
+    int exists = 0;
+    if (rc == SQLITE_ROW) {
+        exists = sqlite3_column_int(stmt, 0);
+    }
+
+    if (sqlite3_finalize(stmt) != SQLITE_OK) {
+        fprintf(stderr, "Failed to finalize statement: %s\n", sqlite3_errmsg(db));
+    }
+
+    return exists;
 }
 
 /*int cargar_pokemons(sqlite3* db, Pokemon* pokemons, int max) {

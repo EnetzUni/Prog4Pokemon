@@ -7,7 +7,8 @@
 #include "player.h"
 
 // Funciones para obtener datos
-Pokemon* loadPokemon(sqlite3* db, int id);
+Pokemon* loadPokemon(sqlite3*, int);
+int checkPlayer(sqlite3*, char[]);
 
 int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max);
 int loadPlayer(sqlite3 *db, Player *jugadores, int max);
