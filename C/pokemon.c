@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "Pokemon.h"
+#include "pokemon.h"
+#include "movement.h"
 
 Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int spattack, int spdefense, int speed, Type type1, Type type2, int evolvl) {
     Pokemon* pokemon = malloc(sizeof* pokemon);
