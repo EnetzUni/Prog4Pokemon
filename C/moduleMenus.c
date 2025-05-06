@@ -3,10 +3,9 @@
 // Importamos los modulos
 #include "moduleMenus.h"
 #include "db.h"
-
 #include "string.h"
 
-/*void imprimirTexto(char* texto)
+void imprimirTexto(char* texto)
 {
     int i = 0;
     do
@@ -18,7 +17,7 @@
     printf("\n");
 }
 
-void presentation(sqlite3 *db, Jugador *jugadores)
+void presentation(sqlite3 *db, Player *players)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -28,10 +27,10 @@ void presentation(sqlite3 *db, Jugador *jugadores)
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegister(db, jugadores);
+    menuLoginRegister(db, players);
 }
 
-void menuLoginRegister(sqlite3 *db, Jugador *jugadores)
+void menuLoginRegister(sqlite3 *db, Player *players)
 {
 
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
@@ -47,63 +46,63 @@ void menuLoginRegister(sqlite3 *db, Jugador *jugadores)
             if(str[0] == '1')
             {
                 printf("\n");
-                menuRegister(db, jugadores);
+                menuRegister(db, players);
                 return;
             } 
             else if (str[0] == '2')
             {
                 printf("\n");
-                menuLogin(db, jugadores);
+                menuLogin(db, players);
                 return;
             }
     } while (str[0] != 'q');
 
 }
 
-void menuRegister(sqlite3 *db, Jugador *jugadores)
+void menuRegister(sqlite3 *db, Player *players)
 {
-    char usuario[50];
-    char contrasenya[50];
-    char genero[4];
+    char nickname[50];
+    char password[50];
+    char gender[4];
     imprimirTexto("\nRegistrar nuevo usuario:");
 
-    printf("\n- Introduzca un nombre de usuario: ");
-    fgets(usuario, sizeof(usuario), stdin);
-    usuario[strcspn(usuario, "\n")] = '\0';  // Eliminar '\n' final
+    printf("\n- Introduzca un nickname: ");
+    fgets(nickname, sizeof(nickname), stdin);
+    nickname[strcspn(nickname, "\n")] = '\0';  // Eliminar '\n' final
 
     printf("\n- Introduzca una contrasenya: ");
-    fgets(contrasenya, sizeof(contrasenya), stdin);
-    contrasenya[strcspn(contrasenya, "\n")] = '\0';
+    fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = '\0';
 
     printf("\n- Introduzca su genero (M/F): ");
-    fgets(genero, sizeof(genero), stdin);
-    genero[strcspn(genero, "\n")] = '\0';
+    fgets(gender, sizeof(gender), stdin);
+    gender[strcspn(gender, "\n")] = '\0';
 
-    printf("usuario = '%s'\n", usuario);
-    printf("contrasenya = '%s'\n", contrasenya);
-    printf("genero = '%s'\n", genero);
+    printf("nickname = '%s'\n", nickname);
+    printf("password = '%s'\n", password);
+    printf("gender = '%s'\n", gender);
 
-    // Introducimos en la tabla Jugador el nuevo usuario                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
-    insertar_jugador(db, 00001, usuario, contrasenya, genero, 1000, 5, jugadores, 51);
+    // Introducimos en la tabla Player el nuevo nickname                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
+    insertar_jugador(db, 00001, nickname, password, gender, 1000, 5, players, 51);
 
     printf("\n");
-    menuLoginRegister(db, jugadores);
+    menuLoginRegister(db, players);
 
 }
 
-void menuLogin(sqlite3 *db, Jugador *jugadores)
+void menuLogin(sqlite3 *db, Player *players)
 {
-    char usuario[20];
-    char contrasenya[20];
+    char nickname[20];
+    char password[20];
 
     imprimirTexto("\nIniciar sesion con una cuenta registrada:");
 
     printf("\n- Introduzca su nombre de usuario: ");
-    fgets(usuario, sizeof(usuario), stdin);  // Leer entrada completa
+    fgets(nickname, sizeof(nickname), stdin);  // Leer entrada completa
     fflush(stdin); // Eliminar Buffer
 
     printf("\n- Introduzca su contrasenya: ");
-    fgets(contrasenya, sizeof(contrasenya), stdin);  // Leer entrada completa
+    fgets(password, sizeof(password), stdin);  // Leer entrada completa
     fflush(stdin); // Eliminar Buffer
 
     // Aqui tenemos que checkear con la base de datos y en caso positivo continuar
@@ -112,10 +111,10 @@ void menuLogin(sqlite3 *db, Jugador *jugadores)
     // Por el momento continuaremos
 
     printf("\n");
-    menuPrincipal(db, jugadores);
+    menuPrincipal(db, players);
 }
 
-void menuPrincipal(sqlite3 *db, Jugador *jugadores)
+void menuPrincipal(sqlite3 *db, Player *players)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
-}*/
+}

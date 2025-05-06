@@ -10,9 +10,9 @@
 Pokemon* loadPokemon(sqlite3* db, int id);
 
 int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max);
-int cargar_jugadores(sqlite3 *db, Player *jugadores, int max);
+int loadPlayer(sqlite3 *db, Player *jugadores, int max);
 int cargar_movimientos(sqlite3 *db, Movement *movs, int max);
-int insert_player(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story);
+int insertPlayer(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story);
 
 
 #endif

@@ -105,15 +105,15 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_finalize(stmt);
     return i;
 }
-
+*/
 int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
-    const char *sql = "SELECT * FROM Jugador";
+    const char *sql = "SELECT * FROM Player";
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     int i = 0;
 
     if (rc != SQLITE_OK) {
-        printf("Error preparando consulta de Pokemons: %s\n", sqlite3_errmsg(db));
+        printf("Error preparando consulta de Player: %s\n", sqlite3_errmsg(db));
         return -1;
     }
 
@@ -121,15 +121,14 @@ int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
         jugadores[i].id = sqlite3_column_int(stmt, 0);
     
         const unsigned char *name = sqlite3_column_text(stmt, 1);
-        const unsigned char *password = sqlite3_column_text(stmt, 2);
-        const unsigned char *genero = sqlite3_column_text(stmt, 3);
+        const unsigned char *password = sqlite3_column_text(stmt, 2);  
     
         strncpy(jugadores[i].name, name ? (const char *)name : "NULL", MAX_LEN);
         strncpy(jugadores[i].password, password ? (const char *)password : "NULL", MAX_LEN);
-        strncpy(jugadores[i].genero, genero ? (const char *)genero : "NULL", MAX_LEN);
     
-        jugadores[i].dinero = sqlite3_column_int(stmt, 4);
-        jugadores[i].maxLVL = sqlite3_column_int(stmt, 5);
+        jugadores[i].genero = sqlite3_column_int(stmt, 3) != 0;
+        jugadores[i].maxLVL = sqlite3_column_int(stmt, 4);
+        jugadores[i].story = sqlite3_column_int(stmt, 5);
     
         printf("Jugador %d: %s (Dinero: %d)\n", i + 1, jugadores[i].name, jugadores[i].dinero);
         i++;
@@ -138,7 +137,7 @@ int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
     sqlite3_finalize(stmt);
     return i;
 }
-
+/*
 int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
     const char *sql = "SELECT * FROM Movimiento";
     sqlite3_stmt *stmt;
@@ -173,32 +172,32 @@ int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
 
 */
 
-int insert_player(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story) {
-    const char *sql = "INSERT INTO Jugador (id, name, password, genero, dinero, maxLVL) VALUES (?, ?, ?, ?, ?, ?)";
+int insertPlayer(sqlite3 *db, const char *name, const char *password, bool gender, int maxLVL, int story) {
+    const char *sql = "INSERT INTO Player (name, password, gender, maxLVL, story) VALUES (?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
-        printf("Error preparando inserción de jugador: %s\n", sqlite3_errmsg(db));
+        printf("Error preparando inserción de Player: %s\n", sqlite3_errmsg(db));
         return 0;
     }
 
     // Asignamos parámetros
     sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 2, password, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 3, (int)genero);
+    sqlite3_bind_int(stmt, 3, (int)gender);
     sqlite3_bind_int(stmt, 4, maxLVL);
     sqlite3_bind_int(stmt, 5, story);
 
     // Ejecutamos
     rc = sqlite3_step(stmt);
     if (rc != SQLITE_DONE) {
-        printf("Error insertando jugador: %s\n", sqlite3_errmsg(db));
+        printf("Error insertando Player: %s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
         return 0;
     }
 
-    printf("Jugador insertado correctamente.\n");
+    printf("Player insertado correctamente.\n");
 
     sqlite3_finalize(stmt);
 

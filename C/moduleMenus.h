@@ -3,18 +3,18 @@
 
 #include "db.h"
 
-/*void presentation(sqlite3 *db, Jugador *jugadores);
+void presentation(sqlite3 *db, Player *players);
 
-void menuLoginRegister(sqlite3 *db, Jugador *jugadores);
+void menuLoginRegister(sqlite3 *db, Player *players);
 
-void menuRegister(sqlite3 *db, Jugador *jugadores);
+void menuRegister(sqlite3 *db, Player *players);
 
-void menuLogin(sqlite3 *db, Jugador *jugadores);
+void menuLogin(sqlite3 *db, Player *players);
 
 void menuErrorLoginRegister(int caseMenu);
 
-void menuPrincipal(sqlite3 *db, Jugador *jugadores);
+void menuPrincipal(sqlite3 *db, Player *players);
 
-void imprimirTexto(char* texto);*/
+void imprimirTexto(char* texto);
 
 #endif
