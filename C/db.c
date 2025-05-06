@@ -66,7 +66,7 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 
 int checkPlayer(sqlite3* db, char* nickname) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT CASE WHEN COUNT(*) FILTER (WHERE nickname = ?) > 0 THEN 1 ELSE 0 END AS exists FROM Player;";
+    const char* sql = "SELECT COUNT(*) FROM Player WHERE nickname = ?;";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
@@ -79,16 +79,13 @@ int checkPlayer(sqlite3* db, char* nickname) {
         return -1;
     }
 
-    int rc = sqlite3_step(stmt);
-    if (rc != SQLITE_ROW && rc != SQLITE_DONE) {
-        fprintf(stderr, "Execution failed: %s\n", sqlite3_errmsg(db));
+    int exists = 0;
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        exists = sqlite3_column_int(stmt, 0) > 0 ? 1 : 0;
+    } else {
+        fprintf(stderr, "No result returned.\n");
         sqlite3_finalize(stmt);
         return -1;
-    }
-
-    int exists = 0;
-    if (rc == SQLITE_ROW) {
-        exists = sqlite3_column_int(stmt, 0);
     }
 
     if (sqlite3_finalize(stmt) != SQLITE_OK) {
