@@ -1,0 +1,1 @@
+DB Diagram: https://dbdiagram.io/d/PokemonDB-67c52ed5263d6cf9a0fc8915
