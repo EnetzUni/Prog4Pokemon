@@ -1,12 +1,12 @@
-#include "moduleMenus.h"
-#include "baseDeDatos.h"
 #include <stdio.h>
+#include "moduleMenus.h"
+#include "db.h"
 
 int main(void)
 {
     printf("Inicio del programa\n");
 
-    sqlite3 *db;
+    sqlite3* db;
     printf("Intentando abrir la base de datos...\n");
 
     if (sqlite3_open("../DB/pokemon.db", &db) != SQLITE_OK) {
@@ -15,7 +15,10 @@ int main(void)
     }
     printf("Base de datos abierta correctamente\n");
 
-    Pokemon pokemons[50];
+    Pokemon* pokemon;
+    pokemon = loadPokemon(db, 20);
+
+    /*Pokemon pokemons[50];
     Jugador jugadores[51];
     Objeto objetos[50];
     Movimiento movimientos[50];
@@ -36,7 +39,7 @@ int main(void)
 
     printf("Finalizando con la inicializacion...\n");
 
-    presentation(db, jugadores);
+    presentation(db, jugadores);*/
     
     sqlite3_close(db);
     return 0;

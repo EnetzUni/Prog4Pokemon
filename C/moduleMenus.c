@@ -18,7 +18,7 @@ void imprimirTexto(char* texto)
     printf("\n");
 }
 
-void presentation(sqlite3 *db, Jugador *jugadores)
+/*void presentation(sqlite3 *db, Jugador *jugadores)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -118,4 +118,4 @@ void menuLogin(sqlite3 *db, Jugador *jugadores)
 void menuPrincipal(sqlite3 *db, Jugador *jugadores)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
-}
+}*/

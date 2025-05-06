@@ -46,6 +46,7 @@
         "cinttypes": "cpp",
         "sqlite3.h": "c",
         "movement.h": "c",
-        "category.h": "c"
+        "category.h": "c",
+        "modulemenus.h": "c"
     }
 }

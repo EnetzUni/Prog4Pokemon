@@ -1,6 +1,33 @@
-#include "pokemon.h"
+#include <stdlib.h>    // for malloc, free
+#include <string.h>    // for strncpy
+#include <stdio.h>     // for NULL
+#include "Pokemon.h"
 
-void printPokemon(const Pokemon* pokemon) {
+Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int spattack, int spdefense, int speed, Type type1, Type type2, int evolvl) {
+    Pokemon* pokemon = malloc(sizeof* pokemon);
+    if (pokemon == NULL) {
+        return NULL;
+    }
+
+    pokemon->id        = id;
+    pokemon->hp        = hp;
+    pokemon->attack    = attack;
+    pokemon->defense   = defense;
+    pokemon->spattack  = spattack;
+    pokemon->spdefense = spdefense;
+    pokemon->speed     = speed;
+    pokemon->evolvl    = evolvl;
+
+    pokemon->type[0] = type1;
+    pokemon->type[1] = type2;
+
+    strncpy(pokemon->name, name, sizeof pokemon->name - 1);
+    pokemon->name[sizeof pokemon->name - 1] = '\0';
+
+    return pokemon;
+}
+
+void printPokemon(Pokemon* pokemon) {
     if (!pokemon) {
         printf("No Pokemon to print.\n");
         return;

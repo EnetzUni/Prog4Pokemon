@@ -5,11 +5,77 @@
 #include "pokemon.h"
 #include "movement.h"
 #include "player.h"
+#include "type.h"
 
 #define MAX_LEN 50
 #define MAX_ITEMS 100
 
-int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max) {
+Pokemon* loadPokemon(sqlite3* db, int id) {
+    sqlite3_stmt *stmt;
+
+	char sql[] = "SELECT * FROM Pokemon WHERE id = ";
+    char ids[] = "";
+
+    sprintf(ids, "%d", id);
+    strcat(sql, ids);
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (SELECT)\n");
+
+    Pokemon* pokemon;
+	int id;
+	char name[255];
+    int hp;
+    int attack;
+    int defense;
+    int spattack;
+    int spdefense;
+    int speed;
+    Type type[2];
+    int evolvl;
+
+	printf("Showing Pokemon:\n");
+
+	result = sqlite3_step(stmt);
+	if (result == SQLITE_ROW) {
+		id = sqlite3_column_int(stmt, 0);
+		strcpy(name, (char *) sqlite3_column_text(stmt, 1));
+        hp = sqlite3_column_int(stmt, 2);
+        attack = sqlite3_column_int(stmt, 3);
+        defense = sqlite3_column_int(stmt, 4);
+        spattack = sqlite3_column_int(stmt, 5);
+        spdefense = sqlite3_column_int(stmt, 6);
+        speed = sqlite3_column_int(stmt, 7);
+		type[0] = (Type) sqlite3_column_int(stmt, 8);
+        type[1] = (Type) sqlite3_column_int(stmt, 9);
+        evolvl = sqlite3_column_int(stmt, 10);
+	}
+
+    pokemon = createPokemon(id, name, hp, attack, defense, spattack, spdefense, speed, type[0], type[1], evolvl);
+    printPokemon(pokemon);
+
+	printf("\n");
+	printf("\n");
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (SELECT)\n");
+
+	return pokemon;
+}
+
+/*int cargar_pokemons(sqlite3* db, Pokemon* pokemons, int max) {
     printf("Preparando consulta de Pokemons...\n");
     const char *sql = "SELECT * FROM Pokemon";
     sqlite3_stmt *stmt;
@@ -150,4 +216,4 @@ int insertar_jugador(sqlite3 *db, int id, const char *name, const char *password
     cargar_jugadores(db, jugadores, max);
 
     return 1;
-}
+}*/
