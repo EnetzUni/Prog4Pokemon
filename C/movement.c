@@ -7,7 +7,7 @@
 #include "status.h"
 
 Movement* createMovement(int id, char name[], Type type, Category category, Status status, int statusaccuracy, int power, int accuracy) {
-    Movement *movement = malloc(sizeof *movement);
+    Movement* movement = malloc(sizeof* movement);
     if (movement == NULL) {
     return NULL;
     }
@@ -27,7 +27,7 @@ Movement* createMovement(int id, char name[], Type type, Category category, Stat
     return movement;
 }
 
-void printMovement(const Movement *movement) {
+void printMovement(const Movement* movement) {
     if (movement == NULL) {
     printf("No Movement to print.\n");
     return;
