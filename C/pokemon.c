@@ -43,7 +43,7 @@ void printPokemon(Pokemon* pokemon) {
     printf("Speed          : %d\n",    pokemon->speed);
     printf("Type 1         : %s\n",    TypeNames[pokemon->type[0]]);
     printf("Type 2         : %s\n",    TypeNames[pokemon->type[1]]);
-    printf("Evolves at Lvl : %d\n",    pokemon->evolvl);
+    printf("Evolves at LvL : %d\n",    pokemon->evolvl);
     printf("-----------------------\n");
 }
 
