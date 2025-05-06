@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include "string.h"
+#include <stdbool.h>
 
 // Importamos los modulos
 #include "moduleMenus.h"
 #include "db.h"
-#include "string.h"
 
 void imprimirTexto(char* texto)
 {
@@ -17,7 +18,7 @@ void imprimirTexto(char* texto)
     printf("\n");
 }
 
-void presentation(sqlite3 *db, Player *players)
+void presentation(sqlite3 *db)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -27,10 +28,10 @@ void presentation(sqlite3 *db, Player *players)
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegister(db, players);
+    menuLoginRegister(db);
 }
 
-void menuLoginRegister(sqlite3 *db, Player *players)
+void menuLoginRegister(sqlite3 *db)
 {
 
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
@@ -46,24 +47,24 @@ void menuLoginRegister(sqlite3 *db, Player *players)
             if(str[0] == '1')
             {
                 printf("\n");
-                menuRegister(db, players);
+                menuRegister(db);
                 return;
             } 
             else if (str[0] == '2')
             {
                 printf("\n");
-                menuLogin(db, players);
+                menuLogin(db);
                 return;
             }
     } while (str[0] != 'q');
 
 }
 
-void menuRegister(sqlite3 *db, Player *players)
+void menuRegister(sqlite3 *db)
 {
     char nickname[50];
     char password[50];
-    char gender[4];
+    char genderC[4];
     imprimirTexto("\nRegistrar nuevo usuario:");
 
     printf("\n- Introduzca un nickname: ");
@@ -75,22 +76,28 @@ void menuRegister(sqlite3 *db, Player *players)
     password[strcspn(password, "\n")] = '\0';
 
     printf("\n- Introduzca su genero (M/F): ");
-    fgets(gender, sizeof(gender), stdin);
-    gender[strcspn(gender, "\n")] = '\0';
+    fgets(genderC, sizeof(genderC), stdin);
+    genderC[strcspn(genderC, "\n")] = '\0';
+
+    bool genderB = 0; // Convertir a boolean
+    if (genderC == "F")
+    {
+        genderB == 1;
+    }
 
     printf("nickname = '%s'\n", nickname);
     printf("password = '%s'\n", password);
-    printf("gender = '%s'\n", gender);
+    printf("gender = '%s'\n", genderC);
 
     // Introducimos en la tabla Player el nuevo nickname                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
-    insertar_jugador(db, 00001, nickname, password, gender, 1000, 5, players, 51);
+    insertPlayer(db, nickname, password, genderB, 10, 1);
 
     printf("\n");
-    menuLoginRegister(db, players);
+    menuLoginRegister(db);
 
 }
 
-void menuLogin(sqlite3 *db, Player *players)
+void menuLogin(sqlite3 *db)
 {
     char nickname[20];
     char password[20];
@@ -111,10 +118,10 @@ void menuLogin(sqlite3 *db, Player *players)
     // Por el momento continuaremos
 
     printf("\n");
-    menuPrincipal(db, players);
+    menuPrincipal(db);
 }
 
-void menuPrincipal(sqlite3 *db, Player *players)
+void menuPrincipal(sqlite3 *db)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
 }

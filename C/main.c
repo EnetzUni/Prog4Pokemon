@@ -38,8 +38,8 @@ int main(void)
     insertar_jugador(db, 00012, "Ash", "pikachu123", "M", 1000, 5,  jugadores, 51);
 
     printf("Finalizando con la inicializacion...\n");
-
-    presentation(db, jugadores);*/
+    */
+    presentation(db);
     
     sqlite3_close(db);
     return 0;
