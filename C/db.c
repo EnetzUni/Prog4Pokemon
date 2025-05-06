@@ -139,7 +139,8 @@ int checkPlayer(sqlite3* db, char* nickname) {
     sqlite3_finalize(stmt);
     return i;
 }
-*/
+
+/*
 int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
     const char *sql = "SELECT * FROM Player";
     sqlite3_stmt *stmt;
@@ -170,7 +171,8 @@ int cargar_jugadores(sqlite3 *db, Player *jugadores, int max) {
 
     sqlite3_finalize(stmt);
     return i;
-}
+}/*
+
 /*
 int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
     const char *sql = "SELECT * FROM Movimiento";
@@ -206,7 +208,7 @@ int cargar_movimientos(sqlite3 *db, Movement *movs, int max) {
 
 */
 
-void insertPlayer(sqlite3 *db, char* name, char* password, bool gender, int maxLVL, int story) {
+int insertPlayer(sqlite3 *db, char* name, char* password, bool gender, int maxLVL, int story) {
     const char *sql = "INSERT INTO Player (nickname, password, gender, maxLvL, story) VALUES (?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
@@ -234,4 +236,6 @@ void insertPlayer(sqlite3 *db, char* name, char* password, bool gender, int maxL
     printf("Player insertado correctamente.\n");
 
     sqlite3_finalize(stmt);
+
+    return 1;
 }
