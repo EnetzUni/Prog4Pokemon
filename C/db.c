@@ -104,8 +104,14 @@ int checkPassword(sqlite3* db, char* nickname, char* password) {
         return -1;
     }
 
-    if (sqlite3_bind_text(stmt, 1, nickname, password, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
         fprintf(stderr, "Failed to bind nickname and password: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return -1;
+    }
+
+    if (sqlite3_bind_text(stmt, 2, password, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind password: %s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
         return -1;
     }
