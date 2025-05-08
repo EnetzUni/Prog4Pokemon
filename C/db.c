@@ -97,7 +97,7 @@ int checkPlayer(sqlite3* db, char* nickname) {
 
 int checkPassword(sqlite3* db, char* nickname, char* password) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT contrasena FROM Jugador WHERE nombre = ?;";
+    const char* sql = "SELECT password FROM Player WHERE nickname = ?;";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Error preparando la consulta: %s\n", sqlite3_errmsg(db));

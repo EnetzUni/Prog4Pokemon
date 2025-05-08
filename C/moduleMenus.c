@@ -129,8 +129,12 @@ void menuLogin(sqlite3 *db)
     fgets(password, sizeof(password), stdin);  // Leer entrada completa
     password[strcspn(password, "\n")] = '\0';
 
-    // Aqui tenemos que checkear con la base de datos y en caso positivo continuar
-    // y en caso negativo volver a preguntar
+
+    // Comprobar si existe una cuenta con ese usuario y contraseña // 
+
+    if(checkPassword(db, nickname, password) == 1){
+        printf("Inigo didnt do it bad!");
+    }
 
     // Por el momento continuaremos
 
