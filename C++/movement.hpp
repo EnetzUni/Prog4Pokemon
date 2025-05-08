@@ -7,7 +7,6 @@
 #include "type.h"
 #include "category.h"
 #include "status.h"
-using namespace std;
 
 /** 
  * @class Movement
