@@ -132,17 +132,26 @@ void menuLogin(sqlite3 *db)
 
     // Comprobar si existe una cuenta con ese usuario y contraseña // 
 
-    if(checkPassword(db, nickname, password) == 1){
-        printf("Inigo didnt do it bad!");
+    if(strlen(nickname) == 0 || strlen(password) == 0) // Excepcion: alguno de los parametros insertados esta vacio
+    { 
+        imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
+        printf("\n");
+        menuLoginRegister(db);
+    }else if (checkPassword(db, nickname, password)) // Existe una cuenta con ese usuario y contraseña
+    {
+        imprimirTexto("\nIniciado Sesion Correctamente!\n");
+        menuPrincipal(db);
+    }else if (checkPassword(db, nickname, password) == 0) // Existe una cuenta con ese usuario y contraseña
+    {
+        imprimirTexto("\nUsuario o contrasenya incorrectos, elige una opcion.");
+        printf("\n");
+        menuLoginRegister(db);
     }
-
-    // Por el momento continuaremos
-
-    printf("\n");
-    menuPrincipal(db);
+    
 }
 
 void menuPrincipal(sqlite3 *db)
 {
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
+    return;
 }
