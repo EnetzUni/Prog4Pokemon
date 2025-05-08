@@ -16,7 +16,7 @@ void showPC(PC* pc) {
     }
     printf("----- PC List -----\n");
     for (int i = 0; i < pc->size; i++) {
-        printPokemonPlayer(&pc->pcList[i]);
+        printf("%d: %s\n", i + 1, pc->pcList[i].nickname);
     }
     printf("--------------------\n");
 }
