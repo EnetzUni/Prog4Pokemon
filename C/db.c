@@ -45,8 +45,8 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
         spattack = sqlite3_column_int(stmt, 5);
         spdefense = sqlite3_column_int(stmt, 6);
         speed = sqlite3_column_int(stmt, 7);
-		type[0] = (Type) sqlite3_column_int(stmt, 8);
-        type[1] = (Type) sqlite3_column_int(stmt, 9);
+		type[0] = (Type) (sqlite3_column_int(stmt, 8) - 1);
+        type[1] = (Type) (sqlite3_column_int(stmt, 9) - 1);
         evolvl = sqlite3_column_int(stmt, 10);
 	}
 
