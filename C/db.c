@@ -9,7 +9,7 @@
 
 Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT * FROM Pokemon WHERE id = ?";
+    const char* sql = "SELECT p.id, p.name, p.hp, p.attack, p.defense, p.spattack, p.spdefense, p.speed, p.type1, p.type2, pe.level FROM Pokemon p JOIN PokemonEvolution pe ON pe.idPokemon = p.id WHERE p.id = ?";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
@@ -45,8 +45,8 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
         spattack = sqlite3_column_int(stmt, 5);
         spdefense = sqlite3_column_int(stmt, 6);
         speed = sqlite3_column_int(stmt, 7);
-		type[0] = (Type) sqlite3_column_int(stmt, 8);
-        type[1] = (Type) sqlite3_column_int(stmt, 9);
+		type[0] = (Type) (sqlite3_column_int(stmt, 8) - 1);
+        type[1] = (Type) (sqlite3_column_int(stmt, 9) - 1);
         evolvl = sqlite3_column_int(stmt, 10);
 	}
 
@@ -97,34 +97,33 @@ int checkPlayer(sqlite3* db, char* nickname) {
 
 int checkPassword(sqlite3* db, char* nickname, char* password) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT password FROM Player WHERE nickname = ?;";
+    const char* sql = "SELECT COUNT(*) FROM Player WHERE nickname = ? AND password = ?;";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
-        fprintf(stderr, "Error preparando la consulta: %s\n", sqlite3_errmsg(db));
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
         return -1;
     }
 
-    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
-        fprintf(stderr, "Error haciendo bind del nombre: %s\n", sqlite3_errmsg(db));
+    if (sqlite3_bind_text(stmt, 1, nickname, password, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind nickname and password: %s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
         return -1;
     }
 
-    int resultado = -1;
+    int exists = 0;
     if (sqlite3_step(stmt) == SQLITE_ROW) {
-        const unsigned char* contrasena_bd = sqlite3_column_text(stmt, 0);
-        if (contrasena_bd && strcmp((const char*)contrasena_bd, password) == 0) {
-            resultado = 1; // Success! :D
-        } else {
-            resultado = 0; // Fail :( 
-        }
+        exists = sqlite3_column_int(stmt, 0) > 0 ? 1 : 0;
     } else {
-        fprintf(stderr, "Usuario no encontrado o error al obtener fila.\n");
-        resultado = 0; 
+        fprintf(stderr, "No result returned.\n");
+        sqlite3_finalize(stmt);
+        return -1;
     }
 
-    sqlite3_finalize(stmt);
-    return resultado;
+    if (sqlite3_finalize(stmt) != SQLITE_OK) {
+        fprintf(stderr, "Failed to finalize statement: %s\n", sqlite3_errmsg(db));
+    }
+
+    return exists;
 }
 
 
