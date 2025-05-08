@@ -31,4 +31,8 @@ typedef struct {
     int accuracy;
 } Movement;
 
+Movement* createMovement(int, char[], Type, Category, Status, int, int, int);
+
+void printMovement(const Movement* movement);
+
 #endif
