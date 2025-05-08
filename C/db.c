@@ -9,7 +9,7 @@
 
 Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT * FROM Pokemon WHERE id = ?";
+    const char* sql = "SELECT p.id, p.name, p.hp, p.attack, p.defense, p.spattack, p.spdefense, p.speed, p.type1, p.type2, pe.level FROM Pokemon p JOIN PokemonEvolution pe ON pe.idPokemon = p.id WHERE p.id = ?";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
