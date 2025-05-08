@@ -70,7 +70,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
     return pokemonplayer;
 }
 
-void printPokemonPlayer(const PokemonPlayer *pokemonplayer) {
+void printPokemonPlayer(const PokemonPlayer* pokemonplayer) {
     if (!pokemonplayer) {
         printf("No PokemonPlayer to print.\n");
         return;
