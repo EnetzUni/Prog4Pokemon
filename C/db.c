@@ -95,6 +95,39 @@ int checkPlayer(sqlite3* db, char* nickname) {
     return exists;
 }
 
+int checkPassword(sqlite3* db, char* nickname, char* password) {
+    sqlite3_stmt* stmt;
+    const char* sql = "SELECT contrasena FROM Jugador WHERE nombre = ?;";
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        fprintf(stderr, "Error preparando la consulta: %s\n", sqlite3_errmsg(db));
+        return -1;
+    }
+
+    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Error haciendo bind del nombre: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return -1;
+    }
+
+    int resultado = -1;
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        const unsigned char* contrasena_bd = sqlite3_column_text(stmt, 0);
+        if (contrasena_bd && strcmp((const char*)contrasena_bd, password) == 0) {
+            resultado = 1; // Success! :D
+        } else {
+            resultado = 0; // Fail :( 
+        }
+    } else {
+        fprintf(stderr, "Usuario no encontrado o error al obtener fila.\n");
+        resultado = 0; 
+    }
+
+    sqlite3_finalize(stmt);
+    return resultado;
+}
+
+
 /*int cargar_pokemons(sqlite3* db, Pokemon* pokemons, int max) {
     printf("Preparando consulta de Pokemons...\n");
     const char *sql = "SELECT * FROM Pokemon";
@@ -125,7 +158,8 @@ int checkPlayer(sqlite3* db, char* nickname) {
         pokemons[i].defensa = sqlite3_column_int(stmt, 6);
         pokemons[i].ataqueESP = sqlite3_column_int(stmt, 7);
         pokemons[i].defensaESP = sqlite3_column_int(stmt, 8);
-        pokemons[i].velocidad = sqlite3_column_int(stmt, 9);
+    
+         pokemons[i].velocidad = sqlite3_column_int(stmt, 9);
     
         printf("Fila %d: %s (%d PS)\n", i + 1, pokemons[i].name, pokemons[i].PS);
         i++;
