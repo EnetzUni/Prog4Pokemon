@@ -66,6 +66,7 @@ void menuRegister(sqlite3 *db)
     char nickname[50];
     char password[50];
     char genderC[4];
+    
     imprimirTexto("\nRegistrar nuevo usuario:");
 
     printf("\n- Introduzca un nickname: ");
@@ -76,7 +77,7 @@ void menuRegister(sqlite3 *db)
     fgets(password, sizeof(password), stdin);
     password[strcspn(password, "\n")] = '\0';
 
-    printf("\n- Introduzca su genero (M/F): ");
+    printf("\n- Introduzca su genero (M/F): "); // Por defecto el genero asignado sera Male
     fgets(genderC, sizeof(genderC), stdin);
     genderC[strcspn(genderC, "\n")] = '\0';
 
@@ -86,15 +87,19 @@ void menuRegister(sqlite3 *db)
         genderB == 1;
     }
 
-    printf("nickname = '%s'\n", nickname);
-    printf("password = '%s'\n", password);
-    printf("gender = '%s'\n", genderC);
 
-    // Introducimos en la tabla Player el nuevo nickname                                (!) COMPROBAR SI YA EXISTE EL JUGADOR
-    if(checkPlayer(db, nickname) == 1){
-        printf("THIS SHIT WORKS!!");
+    // Introducimos en la tabla Player el nuevo nickname // 
+
+    if(checkPlayer(db, nickname) == 1) // Excepcion: ya existe una cuenta registrada con el mismo nickname
+    { 
+        imprimirTexto("\nYa existe un cuenta registrada con ese nickname, elige una opcion.");
+    }else if (strlen(nickname) == 0 || strlen(password) == 0) // Excepcion: alguno de los parametros insertados esta vacio
+    {
+        imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
+    } else 
+    {
+        insertPlayer(db, nickname, password, genderB, 10, 1); // Insertar judador
     }
-    insertPlayer(db, nickname, password, genderB, 10, 1);
 
     printf("\n");
     menuLoginRegister(db);
