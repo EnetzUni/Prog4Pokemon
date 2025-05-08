@@ -34,30 +34,38 @@ void presentation(sqlite3 *db)
 
 void menuLoginRegister(sqlite3 *db)
 {
-
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
 
     char str[2];
 
-    do
-    {
-            printf("\n- Opcion: ");
-            fgets(str, sizeof(str), stdin);  // Leer entrada completa
-            fflush(stdin); // Eliminar Buffer
+    printf("\n- Opcion: ");
+    fgets(str, sizeof(str), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
 
-            if(str[0] == '1')
-            {
-                printf("\n");
-                menuRegister(db);
-                return;
-            } 
-            else if (str[0] == '2')
-            {
-                printf("\n");
-                menuLogin(db);
-                return;
-            }
-    } while (str[0] != 'q');
+    if (str[0] == 'q') // Salir de aplicacion
+    {
+        return;
+    }
+
+    if(str[0] == '1') // Opcion: Registrar nuevo usuario
+    {
+        printf("\n");
+        menuRegister(db);
+        return;
+    } 
+    else if (str[0] == '2') // Opcion: Inciar Sesion
+    {
+        printf("\n");
+        menuLogin(db);
+        return;
+    }
+
+    if (str[0] != 'q') // Excepcion: campo no valido ingresado
+    {
+        imprimirTexto("\nPor favor ingrese una opcion valida.\n");
+        menuLoginRegister(db);
+    }
+    
 
 }
 
@@ -66,7 +74,7 @@ void menuRegister(sqlite3 *db)
     char nickname[50];
     char password[50];
     char genderC[4];
-    
+
     imprimirTexto("\nRegistrar nuevo usuario:");
 
     printf("\n- Introduzca un nickname: ");
@@ -115,11 +123,11 @@ void menuLogin(sqlite3 *db)
 
     printf("\n- Introduzca su nombre de usuario: ");
     fgets(nickname, sizeof(nickname), stdin);  // Leer entrada completa
-    fflush(stdin); // Eliminar Buffer
+    nickname[strcspn(nickname, "\n")] = '\0';  // Eliminar '\n' final
 
     printf("\n- Introduzca su contrasenya: ");
     fgets(password, sizeof(password), stdin);  // Leer entrada completa
-    fflush(stdin); // Eliminar Buffer
+    password[strcspn(password, "\n")] = '\0';
 
     // Aqui tenemos que checkear con la base de datos y en caso positivo continuar
     // y en caso negativo volver a preguntar
