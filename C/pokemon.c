@@ -48,7 +48,7 @@ void printPokemon(Pokemon* pokemon) {
     printf("-----------------------\n");
 }
 
-PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement listMovement[4], int xp, int curHp, Status status) {
+PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement* listMovement[4], int xp, int curHp, Status status) {
     PokemonPlayer *pokemonplayer = malloc(sizeof *pokemonplayer);
     if (!pokemonplayer) {
         return NULL;

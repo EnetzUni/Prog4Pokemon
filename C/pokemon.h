@@ -48,7 +48,7 @@ typedef struct {
         char nickname[255];
 
         /// The Pokemon's list of Movements.
-        Movement listMovement[4];
+        Movement* listMovement[4];
 
         /// The Pokemon's exact amount of xp to calculate level.
         int xp;
@@ -64,7 +64,7 @@ Pokemon* createPokemon(int, char[], int, int, int, int, int, int, Type, Type, in
 
 void printPokemon(Pokemon*);
 
-PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement[4], int, int, Status);
+PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int, Status);
 
 void printPokemonPlayer(const PokemonPlayer*);
 
