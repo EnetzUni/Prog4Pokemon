@@ -76,3 +76,63 @@ void addPokemonToTeam(PokemonPlayer listPokemon[6], PC* pc) {
         }
     }
 }
+
+// Function to manage the PC menu interactively
+void managePC(PokemonPlayer listPokemon[6], PC* pc) {
+    int choice;
+    do {
+        printf("=== Welcome to the Pokemon Management ===\n");
+        printf("1. View team Pokemon list\n");
+        printf("2. View PC Pokemon list\n");
+        printf("3. Remove a Pokemon from the team\n");
+        printf("4. Add a Pokemon to the team\n");
+        printf("5. Exit PC management\n");
+        printf("Please select an option: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("=== Team Pokemon ===\n");
+                for (int i = 0; i < 6; i++) {
+                    if (listPokemon[i].pokeid != 0) {
+                        printf("%d: %s\n", i + 1, listPokemon[i].nickname);
+                    }
+                }
+                printf("Select a Pokemon to see details (0 to return): ");
+                int indexTeam;
+                scanf("%d", &indexTeam);
+                if (indexTeam > 0 && indexTeam <= 6 && listPokemon[indexTeam - 1].pokeid != 0) {
+                    printPokemonPlayer(&listPokemon[indexTeam - 1]);
+                }
+                break;
+
+            case 2:
+                showPC(pc);
+                printf("Select a Pokemon to see details (0 to return): ");
+                int indexPC;
+                scanf("%d", &indexPC);
+                if (indexPC > 0 && indexPC <= pc->size) {
+                    printPokemonPlayer(&pc->pcList[indexPC - 1]);
+                }
+                break;
+
+            case 3:
+                removePokemonFromTeam(listPokemon, pc);
+                break;
+
+            case 4:
+                addPokemonToTeam(listPokemon, pc);
+                break;
+
+            case 5:
+                printf("Exiting PC management...\n");
+                break;
+
+            default:
+                printf("Invalid option. Please try again.\n");
+                break;
+        }
+        printf("\n");
+    } while (choice != 5);
+}
+
