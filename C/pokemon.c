@@ -48,7 +48,7 @@ void printPokemon(Pokemon* pokemon) {
     printf("-----------------------\n");
 }
 
-PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement* listMovement[4], int xp, int curHp, Status status) {
+PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement* listMovement[4], int listMovementSize, int xp, int curHp, Status status) {
     PokemonPlayer *pokemonplayer = malloc(sizeof *pokemonplayer);
     if (!pokemonplayer) {
         return NULL;
@@ -83,7 +83,7 @@ void printPokemonPlayer(const PokemonPlayer* pokemonplayer) {
     printf("Current HP    : %d\n", pokemonplayer->curHp);
     printf("Status        : %s\n", StatusNames[pokemonplayer->status]);
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
     printf("--- Movement slot %d ---\n", i + 1);
     printMovement(&pokemonplayer->listMovement[i]);
     }
