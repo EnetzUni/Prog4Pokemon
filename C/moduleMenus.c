@@ -175,7 +175,7 @@ void menuPrincipal(sqlite3 *db)
     else if (str[0] == '2') // Opcion: Iniciar Combate
     {
         printf("\n");
-        //menuLogin(db);
+        combate(db);
         return;
     }
 
@@ -196,6 +196,7 @@ void menuPC(sqlite3 *db)
 
 void combate(sqlite3 *db)
 {
+    imprimirTexto("Te adentras a una zona de hierva alta . . .\nUn pokemon salvaje ha aparecido!\n");
 
     return;
 }
