@@ -27,4 +27,7 @@ typedef struct {
         int story;
 } Player;
 
+createPlayer(char[], char[], bool, PokemonPlayer*[6], int, int, int);
+printPlayer(Player*);
+
 #endif
