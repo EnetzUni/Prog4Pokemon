@@ -8,12 +8,12 @@
 
 // Funciones para obtener datos
 Pokemon* loadPokemon(sqlite3*, int);
-int checkPlayer(sqlite3*, char[]);
-
-int cargar_pokemons(sqlite3 *db, Pokemon *pokemons, int max);
-int loadPlayer(sqlite3 *db, Player *jugadores, int max);
-int checkPassword(sqlite3* db, char* nickname, char* password);
-int cargar_movimientos(sqlite3 *db, Movement *movs, int max);
-int insertPlayer(sqlite3 *db, char *name, char *password, bool gender, int maxLVL, int story);
+PokemonPlayer* loadPokemonPlayer(sqlite3*, int);
+Movement** loadPokemonPlayerMovement(sqlite3*, int, int*);
+int checkPlayer(sqlite3*, char*);
+int checkPassword(sqlite3*, char*, char*);
+Movement* loadMovement(sqlite3*, int);
+Player* loadPlayer(sqlite3*, char*);
+int insertPlayer(sqlite3* db, char* nickname, char* password, bool gender, int maxLVL, int story);
 
 #endif
