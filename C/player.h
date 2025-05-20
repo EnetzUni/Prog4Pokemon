@@ -17,6 +17,9 @@ typedef struct {
         /// List of the Pokemon in the player's team.
         PokemonPlayer listPokemon[6];
 
+        /// List of the size of Pokemon in the player's team.
+        int listPokemonSize;
+
         /// Maximum level of Pokemon that the player can encounter.
         int maxLvL;
 
