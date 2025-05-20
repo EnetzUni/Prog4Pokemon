@@ -34,7 +34,7 @@ void presentation(sqlite3 *db)
 
 void menuLoginRegister(sqlite3 *db)
 {
-    imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-q: Salir");
+    imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-3: Iniciar Sesion como Administrador\n-q: Salir");
 
     char str[2];
 
@@ -57,6 +57,12 @@ void menuLoginRegister(sqlite3 *db)
     {
         printf("\n");
         menuLogin(db);
+        return;
+    }
+    else if (str[0] == '3') // Opcion: Inciar Sesion como Administrador
+    {
+        printf("\n");
+        
         return;
     }
 
