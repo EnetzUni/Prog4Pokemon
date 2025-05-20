@@ -193,3 +193,9 @@ void menuPC(sqlite3 *db)
 
     return;
 }
+
+void combate(sqlite3 *db)
+{
+
+    return;
+}

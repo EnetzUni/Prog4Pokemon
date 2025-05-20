@@ -13,8 +13,10 @@ void menuRegister(sqlite3 *db);
 
 void menuLogin(sqlite3 *db);
 
-void menuPrincipal(sqlite3 *db, Player *player);
+void menuPrincipal(sqlite3 *db);
 
 void menuPC(sqlite3 *db);
+
+void combate(sqlite3 *db);
 
 #endif
