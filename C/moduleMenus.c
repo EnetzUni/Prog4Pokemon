@@ -106,7 +106,7 @@ void menuRegister(sqlite3 *db)
         imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
     } else 
     {
-        insertPlayer(db, nickname, password, genderB, 10, 1); // Insertar judador
+        insertPlayer(db, nickname, password, genderB, 0, 0); // Insertar judador
     }
 
     printf("\n");
@@ -139,8 +139,9 @@ void menuLogin(sqlite3 *db)
         menuLoginRegister(db);
     }else if (checkPassword(db, nickname, password)) // Existe una cuenta con ese usuario y contraseña
     {
+        // getPlayer
         imprimirTexto("\nIniciado Sesion Correctamente!\n");
-        menuPrincipal(db);
+        //menuPrincipal(db, );
     }else if (checkPassword(db, nickname, password) == 0) // Existe una cuenta con ese usuario y contraseña
     {
         imprimirTexto("\nUsuario o contrasenya incorrectos, elige una opcion.");
@@ -152,6 +153,50 @@ void menuLogin(sqlite3 *db)
 
 void menuPrincipal(sqlite3 *db)
 {
+    char str[2];
+
     imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
+
+    printf("\n- Opcion: ");
+    fgets(str, sizeof(str), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    if (str[0] == 'q') // Salir de aplicacion
+    {
+        return;
+    }
+
+    if(str[0] == '1') // Opcion: Ingresar a PC
+    {
+        printf("\n");
+        menuPC(db);
+        return;
+    } 
+    else if (str[0] == '2') // Opcion: Iniciar Combate
+    {
+        printf("\n");
+        combate(db);
+        return;
+    }
+
+    if (str[0] != 'q') // Excepcion: campo no valido ingresado
+    {
+        imprimirTexto("\nPor favor ingrese una opcion valida.\n");
+        menuLoginRegister(db);
+    }
+
+    return;
+}
+
+void menuPC(sqlite3 *db)
+{
+
+    return;
+}
+
+void combate(sqlite3 *db)
+{
+    imprimirTexto("Te adentras a una zona de hierva alta . . .\nUn pokemon salvaje ha aparecido!\n");
+
     return;
 }
