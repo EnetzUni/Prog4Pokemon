@@ -63,7 +63,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
     strncpy(pokemonplayer->nickname, nickname, sizeof pokemonplayer->nickname - 1);
     pokemonplayer->nickname[sizeof pokemonplayer->nickname - 1] = '\0';
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
         pokemonplayer->listMovement[i] = listMovement[i];
     }
 
