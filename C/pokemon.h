@@ -50,6 +50,9 @@ typedef struct {
         /// The Pokemon's list of Movements.
         Movement* listMovement[4];
 
+        /// The Pokemon's list of Movements.
+        int listMovementSize;
+
         /// The Pokemon's exact amount of xp to calculate level.
         int xp;
 
