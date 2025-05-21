@@ -3,10 +3,7 @@
 #include "pc.h"
 
 PC* createPC() {
-    PC* pc = malloc(sizeof(PC));
-    pc->pcList = NULL;
-    pc->size = 0;
-    return pc;
+    malloc()
 }
 
 void showPC(PC* pc) {

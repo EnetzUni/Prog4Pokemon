@@ -4,8 +4,8 @@
 #include "pokemon.h"
 
 typedef struct {
-    PokemonPlayer* pcList; // Dynamic array to store PokemonPlayer
-    int size;              // Current size of the PC list
+    PokemonPlayer** pcList; // Dynamic array to store PokemonPlayer
+    int pcListSize;              // Current size of the PC list
 } PC;
 
 PC* createPC();
