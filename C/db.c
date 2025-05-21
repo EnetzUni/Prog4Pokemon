@@ -130,7 +130,7 @@ Movement** loadPokemonPlayerMovement(sqlite3* db, int id, int* size) {
 
 	printf("SQL query prepared (SELECT)\n");
 
-    Movement** movement = malloc(sizeof* movement * 4);
+    Movement** movement = malloc(sizeof(*movement) * 4);
     int id;
     char name[255];
     Type type;
@@ -140,7 +140,7 @@ Movement** loadPokemonPlayerMovement(sqlite3* db, int id, int* size) {
     int power;
     int accuracy;
 
-	printf("Showing Pokemon:\n");
+	printf("Showing Movement:\n");
 
     int i = 0;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
@@ -310,9 +310,63 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
     char nickname[255];
     char password[255];
     bool gender;
-    PokemonPlayer listPokemon[6];
+    PokemonPlayer* listPokemon[6];
     int maxLvL;
     int story;
+}
+
+PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, int id, int* size) {
+    sqlite3_stmt* stmt;
+    const char* sql = "SELECT * FROM Team";
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        return NULL;
+    }
+
+    if (sqlite3_bind_int(stmt, 1, id) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind ID: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return NULL;
+    }
+
+	printf("SQL query prepared (SELECT)\n");
+
+    PokemonPlayer** pokemonPlayer = malloc(sizeof(*pokemonPlayer) * 6);
+    int pokemonlist[6];
+
+
+	printf("Showing Pokemon:\n");
+
+    int sizeCount = 0;
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        pokemonlist[0] = sqlite3_column_int(stmt, 1);
+        pokemonlist[1] = sqlite3_column_int(stmt, 2);
+        pokemonlist[2] = sqlite3_column_int(stmt, 3);
+        pokemonlist[3] = sqlite3_column_int(stmt, 4);
+        pokemonlist[4] = sqlite3_column_int(stmt, 5);
+        pokemonlist[5] = sqlite3_column_int(stmt, 6);
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (pokemonlist[i] != NULL)
+        {
+            pokemonPlayer[sizeCount] = loadPokemonPlayer(db, pokemonlist[i]);
+            sizeCount++;
+        }
+        
+    }
+
+	if (sqlite3_finalize(stmt) != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return (Pokemon*) NULL;
+	}
+
+	printf("Prepared statement finalized (SELECT)\n");
+
+	return (PokemonPlayer**) pokemonPlayer;
 }
 
 int insertPlayer(sqlite3* db, Player* player) {
