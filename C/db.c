@@ -299,10 +299,10 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
         return NULL;
     }
 
-    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_STATIC) != SQLITE_OK) {
-    fprintf(stderr, "Failed to bind string: %s\n", sqlite3_errmsg(db));
-    sqlite3_finalize(stmt);
-    return NULL;
+    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind nickname: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return NULL;
     }
 
     printf("SQL query prepared (SELECT)\n");
@@ -310,22 +310,44 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
     char nickname[255];
     char password[255];
     bool gender;
-    PokemonPlayer* listPokemon[6];
+    int* listPokemonPlayersize;
+    PokemonPlayer* listPokemon[6] = loadPlayerPokemonPlayer(db, nickname, listPokemonPlayersize);
     int maxLvL;
     int story;
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+		strcpy(nickname, (char*) sqlite3_column_text(stmt, 1));
+        strcpy(password, (char*) sqlite3_column_text(stmt, 2));
+        gender = (bool) sqlite3_column_int(stmt, 3);
+        maxLvL = sqlite3_column_int(stmt, 4);
+        story = sqlite3_column_int(stmt, 5);
+    }
+
+    Player* player = (Player*) createPlayer(nickname, password, gender, listPokemon, *listPokemonPlayersize, maxLvL, story);
+    printPlayer(player);
+
+	if (sqlite3_finalize(stmt) != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return (PokemonPlayer*) NULL;
+	}
+
+	printf("Prepared statement finalized (SELECT)\n");
+
+	return (Player*) player;
 }
 
-PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, int id, int* size) {
+PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, char* nickname, int* size) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT * FROM Team";
+    const char* sql = "SELECT * FROM Team WHERE idOwner = ?";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
         return NULL;
     }
 
-    if (sqlite3_bind_int(stmt, 1, id) != SQLITE_OK) {
-        fprintf(stderr, "Failed to bind ID: %s\n", sqlite3_errmsg(db));
+    if (sqlite3_bind_text(stmt, 1, nickname, -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+        fprintf(stderr, "Failed to bind nickname: %s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
         return NULL;
     }
@@ -357,6 +379,8 @@ PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, int id, int* size) {
         }
         
     }
+
+    *size = sizeCount;
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
