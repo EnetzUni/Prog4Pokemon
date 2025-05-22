@@ -30,9 +30,15 @@ Movement* loadMovement(sqlite3*, int);
 Player* loadPlayer(sqlite3*, char*);
 
 // Load the PokemonPlayer in the team for a Player, with the id of the Player and an int* to return the count of PokemonPlayer
-PokemonPlayer** loadPlayerPokemonPlayer(sqlite3*, int, int*);
+PokemonPlayer** loadPlayerPokemonPlayer(sqlite3*, char*, int*);
 
 // Insert a Player into the database
 int insertPlayer(sqlite3*, Player*);
+
+// Load the Pc with the PokemonPlayer
+PokemonPlayer** loadPc(sqlite3*, char*, int*);
+
+// Load the count of PokemonPlayer in the Pc
+void loadPcCount(sqlite3*, char*, int*);
 
 #endif
