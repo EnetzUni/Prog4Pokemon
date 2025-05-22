@@ -26,7 +26,7 @@ int checkPassword(sqlite3*, char*, char*);
 // Load a Movement using it's id
 Movement* loadMovement(sqlite3*, int);
 
-// Load a Movement using it's nickname
+// Load a Player using it's nickname
 Player* loadPlayer(sqlite3*, char*);
 
 // Load the PokemonPlayer in the team for a Player, with the id of the Player and an int* to return the count of PokemonPlayer
