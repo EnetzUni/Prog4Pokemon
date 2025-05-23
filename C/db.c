@@ -450,7 +450,7 @@ PC* loadPc(sqlite3* db, char* nickname) {
         i++;
     }
 
-    PC* pc = createPc(pokemonPlayer, *size);
+    PC* pc = createPc(nickname, pokemonPlayer, *size);
 
 	printf("Prepared statement finalized (SELECT)\n");
 
@@ -489,34 +489,40 @@ int insertPc(sqlite3* db, PC* pc) {
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
-        printf("Error preparando inserción de Player: %s\n", sqlite3_errmsg(db));
+        printf("Error preparando inserción: %s\n", sqlite3_errmsg(db));
         return 0;
     }
 
-    // Asignamos parámetros
-    sqlite3_bind_text(stmt, 1, player->nickname, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 2, player->password, -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 3, (int) player->gender);
-    sqlite3_bind_int(stmt, 4, player->maxLvL);
-    sqlite3_bind_int(stmt, 5, player->story);
+    // Begin transaction (optional but recommended for speed)
+    sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, NULL);
 
-    // Ejecutamos
-    rc = sqlite3_step(stmt);
-    if (rc != SQLITE_DONE) {
-        printf("Error insertando Player: %s\n", sqlite3_errmsg(db));
-        sqlite3_finalize(stmt);
-        return 0;
+    for (int i = 0; i < pc->pcListSize; i++) {
+
+        sqlite3_bind_text(stmt, 0, pc->nickname, -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(stmt, 1, pc->pcList[i]->pokeid);
+        insertPokemonPlayer(db, pc->pcList[i]);
+
+        rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+            printf("Error insertando PC #%d: %s\n", i, sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            return 0;
+        }
+
+        sqlite3_reset(stmt); // Reset the statement for reuse
+        sqlite3_clear_bindings(stmt); // Optional: clear previous bindings
     }
 
-    printf("Player insertado correctamente.\n");
+    // Commit transaction
+    sqlite3_exec(db, "COMMIT;", NULL, NULL, NULL);
 
     sqlite3_finalize(stmt);
-
+    printf("PC insertados correctamente.\n");
     return 1;
 }
 
 int insertPokemonPlayer(sqlite3* db, PokemonPlayer* pokemon) {
-    const char *sql = "INSERT INTO PokemonPlayer (idPokemon, pokeid, nickname, xp, curHp, status, move1, move2, mov3, move4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const char *sql = "INSERT OR IGNORE INTO PokemonPlayer (idPokemon, pokeid, nickname, xp, curHp, status, move1, move2, mov3, move4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     sqlite3_stmt *stmt;
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
