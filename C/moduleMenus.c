@@ -229,15 +229,15 @@ void menuPC(sqlite3 *db, Player* player)
     {
         printf("\n");
         printTeam(player);
-        char str2[2];
+        char str2[3];
         int opcion = 1;  
 
         printf("\n- Opcion: ");
-        fgets(str, sizeof(str), stdin);
+        fgets(str2, sizeof(str2), stdin);
         fflush(stdin);
 
-        if (isdigit(str[0])) {
-            int temp = atoi(str);
+        if (isdigit(str2[0])) {
+            int temp = atoi(str2);
             if (temp >= 1 && temp <= player->listPokemonSize) {
                 opcion = temp;
             } else {
