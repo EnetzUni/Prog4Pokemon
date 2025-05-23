@@ -10,6 +10,10 @@
 #include "type.h"
 #include "pc.h"
 
+void initializeDb() {
+    ;
+}
+
 Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_stmt* stmt;
     const char* sql = "SELECT p.id, p.name, p.hp, p.attack, p.defense, p.spattack, p.spdefense, p.speed, p.type1, p.type2, pe.level FROM Pokemon p JOIN PokemonEvolution pe ON pe.idPokemon = p.id WHERE p.id = ?";
