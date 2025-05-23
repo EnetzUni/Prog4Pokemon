@@ -5,6 +5,7 @@
 #include "type.h"
 #include "category.h"
 #include "status.h"
+#include "sqlite3.h"
 
 Movement* createMovement(int id, char name[], Type type, Category category, Status status, int statusaccuracy, int power, int accuracy) {
     Movement* movement = malloc(sizeof* movement);
