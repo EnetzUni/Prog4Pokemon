@@ -30,4 +30,7 @@ static const char* const TypeNames[] = {
     [VOLADOR]   = "VOLADOR"
 };
 
+int calculatedamage(Pokemon, Pokemon, Movimiento)
+double efectividad(int, int, int)
+
 #endif
