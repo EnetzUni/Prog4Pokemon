@@ -36,9 +36,9 @@ PokemonPlayer** loadPlayerPokemonPlayer(sqlite3*, char*, int*);
 int insertPlayer(sqlite3*, Player*);
 
 // Load the Pc with the PokemonPlayer
-PokemonPlayer** loadPc(sqlite3*, char*, int*);
+PokemonPlayer** loadPc(sqlite3*, char*);
 
 // Load the count of PokemonPlayer in the Pc
-void loadPcCount(sqlite3*, char*, int*);
+int* loadPcCount(sqlite3*, char*);
 
 #endif

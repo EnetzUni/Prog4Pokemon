@@ -201,7 +201,7 @@ void menuPrincipal(sqlite3 *db, Player* player)
 
 void menuPC(sqlite3 *db, Player* player)
 {
-    PC* pc = loadPc();
+    PC* pc = loadPc(db, player->nickname);
     char str[2];
 
     imprimirTexto("Has ingresado a PC:\n-1: Sacar Pokemon a Equipo\n-2: Dejar Pokemon en PC\n-3: Ver PC\n-4: Ver Equipo\n-q: Salir");
