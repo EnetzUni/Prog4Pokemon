@@ -97,7 +97,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int
 
 void printPokemonPlayer(PokemonPlayer*);
 
-PokemonPlayerBattle* createPlayerBattle(PokemonPlayer*, int, int, int, int, int, int, int);
+PokemonPlayerBattle* createPokemonPlayerBattle(PokemonPlayer*, int, int, int, int, int, int, int);
 
 void printPokemonPlayerBattle(PokemonPlayerBattle*);
 
