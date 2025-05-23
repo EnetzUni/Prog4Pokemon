@@ -222,13 +222,30 @@ void menuPC(sqlite3 *db, Player* player)
     if(str[0] == '1') // Opcion: Sacar Pokemon a Equipo
     {
         printf("\n");
-        //
+        
         return;
     } 
     else if (str[0] == '2') // Opcion: Dejar pokemon en PC
     {
         printf("\n");
-        //
+        printTeam(player);
+        char str2[3];
+        int opcion = 1;  
+
+        printf("\n- Opcion: ");
+        fgets(str, sizeof(str), stdin);
+        fflush(stdin);
+
+        if (isdigit(str[0])) {
+            int temp = atoi(str);
+            if (temp >= 1 && temp <= player->listPokemonSize) {
+                opcion = temp;
+            }
+        }
+        // Player Pokemon
+        PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
+        removePlayerPokemonPlayer(db, player, opcion);
+        addPcPokemonPlayer(db, pc, pokemonPlayer);
         return;
     }
     else if (str[0] == '3') // Opcion: Ver PC
@@ -269,7 +286,7 @@ void combate(sqlite3 *db, Player* player)
 
     if (isdigit(str[0])) {
         int temp = atoi(str);
-        if (temp >= 1 && temp <= 6) {
+        if (temp >= 1 && temp <= player->listPokemonSize) {
             opcion = temp;
         }
     }

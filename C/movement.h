@@ -4,6 +4,7 @@
 #include "type.h"
 #include "category.h"
 #include "status.h"
+#include "sqlite3.h"
 
 typedef struct {
     /// Unique identifier for the move.
@@ -35,4 +36,5 @@ Movement* createMovement(int, char[], Type, Category, Status, int, int, int);
 
 void printMovement(Movement* movement);
 
+Movement** createRandomMovementList(sqlite3* db);
 #endif

@@ -43,3 +43,30 @@ void printMovement(Movement* movement) {
     printf("Accuracy        : %d%%\n", movement->accuracy);
     printf("-------------------------\n");
 }
+
+Movement** createRandomMovementList(sqlite3* db)
+{
+    Movement** randomMovemets = malloc(sizeof(Movement*) * 4);
+    int usedIds[4];
+    int count = 0;
+
+    while (count < 4) {
+        int id = (rand() % 934) + 1;
+
+        // Verificar si el ID ya fue usado
+        int duplicate = 0;
+        for (int j = 0; j < count; j++) {
+            if (usedIds[j] == id) {
+                duplicate = 1;
+                break;
+            }
+        }
+
+        if (!duplicate) {
+            randomMovemets[count] = loadMovement(db, id);
+            usedIds[count] = id;
+            count++;
+        }
+    }
+    return randomMovemets;
+}
