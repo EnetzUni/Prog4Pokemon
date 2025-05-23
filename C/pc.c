@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "sqlite3.h"
 #include "pc.h"
+#include "player.h"
 #include "db.h"
 
 PC* createPc(char nickname[], PokemonPlayer** pcList, int pcListSize) {
@@ -41,4 +42,28 @@ void addPcPokemonPlayer(sqlite3* db, PC* pc, PokemonPlayer* pokemon) {
     pc->pcListSize++;
 
     insertPc(db, pc);
+}
+
+void removePcPokemonPlayer(sqlite3* db, PC* pc, int pcIndex) {
+    pc->pcList[pcIndex] = NULL;
+
+    for (int i = pcIndex; i < pc->pcListSize - 1; ++i) {
+        pc->pcList[i] = pc->pcList[i + 1];
+    }
+
+    pc->pcList[pc->pcListSize - 1] = NULL;
+    pc->pcListSize--;
+
+    insertPc(db, pc);
+}
+
+void switchPcTeamPokemonPlayer(sqlite3* db, PC* pc, int pcIndex, Player* player, int playerIndex) {
+    PokemonPlayer* pokemonplayerpc = pc->pcList[pcIndex];
+    PokemonPlayer* pokemonplayerteam = player->listPokemon[playerIndex];
+
+    removePcPokemonPlayer(db, pc, pcIndex);
+    addPcPokemonPlayer(db, pc, pokemonplayerteam);
+
+    removePlayerPokemonPlayer(db, player, playerIndex);
+    addPlayerPokemonPlayer(db, player, pokemonplayerpc);
 }

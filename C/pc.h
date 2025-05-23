@@ -17,5 +17,6 @@ typedef struct {
 PC* createPc(char[], PokemonPlayer**, int);
 void printPc(PC* pc);
 void addPcPokemonPlayer(sqlite3*, PC*, PokemonPlayer*);
+void removePcPokemonPlayer(sqlite3*, PC*, int);
 
 #endif

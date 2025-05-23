@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "sqlite3.h"
 #include "pokemon.h"
 #include "movement.h"
 #include "player.h"
+#include "db.h"
 
 Player* createPlayer(char nickname[], char password[], bool gender, PokemonPlayer* listPokemon[6], int listPokemonSize, int maxLvL, int story) {
     Player* player = malloc(sizeof *player);
@@ -62,4 +64,27 @@ void printTeam(Player* player) {
     {
         printPokemonPlayer(player->listPokemon[i]);
     }
+}
+
+void removePlayerPokemonPlayer(sqlite3* db, Player* player, int playerIndex) {
+    player->listPokemon[playerIndex] = NULL;
+
+    for (int i = playerIndex; i < player->listPokemonSize - 1; ++i) {
+        player->listPokemon[i] = player->listPokemon[i + 1];
+    }
+
+    player->listPokemon[player->listPokemonSize - 1] = NULL;
+    player->listPokemonSize--;
+
+    insertPlayerTeam(db, player);
+}
+
+void addPlayerPokemonPlayer(sqlite3* db, Player* player, PokemonPlayer* pokemon) {
+    if (player->listPokemonSize != 6)
+    {
+        player->listPokemon[player->listPokemonSize] = pokemon;
+        player->listPokemonSize++;
+    }
+    
+    insertPlayerTeam(db, player);
 }

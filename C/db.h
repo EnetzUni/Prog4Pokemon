@@ -42,4 +42,16 @@ PC* loadPc(sqlite3*, char*);
 // Load the count of PokemonPlayer in the Pc
 int* loadPcCount(sqlite3*, char*);
 
+// Delete the PokemonPlayer in the Player from the Team Table
+int deletePlayerTeam(sqlite3* db, Player* player);
+
+// Insert the PokemonPlayer in the Player into the Team Table
+int insertPlayerTeam(sqlite3* db, Player* player);
+
+// Insert PokemonPlayer into the DataBase
+int insertPokemonPlayer(sqlite3* db, PokemonPlayer* pokemon);
+
+// Insert the PC into the DataBase
+int insertPc(sqlite3* db, PC* pc);
+
 #endif

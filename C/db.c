@@ -389,8 +389,68 @@ PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, char* nickname, int* size) 
 	return (PokemonPlayer**) pokemonPlayer;
 }
 
+int deletePlayerTeam(sqlite3* db, Player* player) {
+    const char *sql = "DELETE FROM Team WHERE idOwner = ?";
+    sqlite3_stmt *stmt;
+
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        printf("Error preparando DELETE: %s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    // Asignamos parámetros
+    sqlite3_bind_text(stmt, 0, player->nickname, -1, SQLITE_TRANSIENT);
+
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        printf("Error ejecutando DELETE: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 0;
+    }
+
+    sqlite3_finalize(stmt);
+    printf("PlayerTeam eliminado correctamente.\n");
+    return 1;
+}
+
+int insertPlayerTeam(sqlite3* db, Player* player) {
+    deletePlayerTeam(db, player);
+
+    const char *sql = "INSERT INTO Team (idOwner, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    sqlite3_stmt *stmt;
+
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        printf("Error preparando inserción de Player: %s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    // Asignamos parámetros
+    sqlite3_bind_text(stmt, 0, player->nickname, -1, SQLITE_TRANSIENT);
+
+    for (int i = 0; i < player->listPokemonSize; i++)
+    {
+        sqlite3_bind_int(stmt, i + 1, player->listPokemon[i]->pokeid);
+    }
+
+    // Ejecutamos
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        printf("Error insertando Player: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 0;
+    }
+
+    printf("PlayerTeam insertado correctamente.\n");
+
+    sqlite3_finalize(stmt);
+
+    return 1;
+}
+
 int insertPlayer(sqlite3* db, Player* player) {
-    const char *sql = "INSERT INTO Player (nickname, password, gender, maxLvL, story) VALUES (?, ?, ?, ?, ?)";
+    const char *sql = "INSERT OR IGNORE INTO Player (nickname, password, gender, maxLvL, story) VALUES (?, ?, ?, ?, ?)";
     sqlite3_stmt *stmt;
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
@@ -413,6 +473,8 @@ int insertPlayer(sqlite3* db, Player* player) {
         sqlite3_finalize(stmt);
         return 0;
     }
+
+    insertPlayerTeam(db, player);
 
     printf("Player insertado correctamente.\n");
 
@@ -523,8 +585,35 @@ int insertPokemonPlayer(sqlite3* db, PokemonPlayer* pokemon) {
     return 1;
 }
 
+int deletePc(sqlite3* db, PC* pc) {
+    const char *sql = "DELETE FROM Pc WHERE idPlayer = ?";
+    sqlite3_stmt *stmt;
+
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        printf("Error preparando DELETE: %s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    // Asignamos parámetros
+    sqlite3_bind_text(stmt, 0, pc->nickname, -1, SQLITE_TRANSIENT);
+
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        printf("Error ejecutando DELETE: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 0;
+    }
+
+    sqlite3_finalize(stmt);
+    printf("PlayerTeam eliminado correctamente.\n");
+    return 1;
+}
+
 int insertPc(sqlite3* db, PC* pc) {
-    const char *sql = "INSERT INTO Pc (nickname, password, gender, maxLvL, story) VALUES (?, ?, ?, ?, ?)";
+    deletePc(db, pc);
+
+    const char *sql = "INSERT INTO Pc (idPlayer, idPokemonPlayer) VALUES (?, ?)";
     sqlite3_stmt *stmt;
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);

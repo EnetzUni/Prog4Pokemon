@@ -30,5 +30,7 @@ typedef struct {
 Player* createPlayer(char[], char[], bool, PokemonPlayer*[6], int, int, int);
 void printPlayer(Player*);
 void printTeam(Player*);
+void removePlayerPokemonPlayer(sqlite3*, Player*, int);
+void addPlayerPokemonPlayer(sqlite3*, Player*, PokemonPlayer*);
 
 #endif
