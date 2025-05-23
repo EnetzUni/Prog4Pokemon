@@ -85,7 +85,7 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
 
     for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
     printf("--- Movement slot %d ---\n", i + 1);
-    printMovement(&pokemonplayer->listMovement[i]);
+    printMovement(pokemonplayer->listMovement[i]);
     }
     printf("============================\n");
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "pc.h"
 
@@ -26,11 +27,11 @@ void printPc(PC* pc) {
     printf("Nickname  : %s\n", pc->nickname);
     for (int i = 0; i < pc->pcListSize; ++i) {
     printf("--- PokemonPlayer slot %d ---\n", i + 1);
-    printPokemonPlayer(&pc->pcList[i]);
+    printPokemonPlayer(pc->pcList[i]);
     }
     printf("============================\n");
 }
 
-addPcPokemonPlayer(PC* pc, PokemonPlayer pokemon) {
+/*addPcPokemonPlayer(PC* pc, PokemonPlayer pokemon) {
 
-}
+}*/

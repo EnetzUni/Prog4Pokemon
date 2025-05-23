@@ -27,7 +27,7 @@ Movement* createMovement(int id, char name[], Type type, Category category, Stat
     return movement;
 }
 
-void printMovement(const Movement* movement) {
+void printMovement(Movement* movement) {
     if (movement == NULL) {
     printf("No Movement to print.\n");
     return;

@@ -33,6 +33,6 @@ typedef struct {
 
 Movement* createMovement(int, char[], Type, Category, Status, int, int, int);
 
-void printMovement(const Movement* movement);
+void printMovement(Movement* movement);
 
 #endif
