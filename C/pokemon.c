@@ -89,3 +89,37 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
     }
     printf("============================\n");
 }
+
+PokemonPlayerBattle* createPokemonPlayerBattle(PokemonPlayer* pokemonPlayer, int battleHp, int battleAttack, int battleDefense, int battleSpattack, int battleSpdefense, int battleSpeed) {
+    PokemonPlayerBattle* pokemonPlayerBattle = malloc(sizeof* pokemonPlayerBattle);
+    if (!pokemonPlayerBattle) {
+        return NULL;
+    }
+
+    pokemonPlayerBattle->pokemonPlayer   = pokemonPlayer;
+    pokemonPlayerBattle->battleHp        = battleHp;
+    pokemonPlayerBattle->battleAttack    = battleAttack;
+    pokemonPlayerBattle->battleDefense   = battleDefense;
+    pokemonPlayerBattle->battleSpattack  = battleSpattack;
+    pokemonPlayerBattle->battleSpdefense = battleSpdefense;
+    pokemonPlayerBattle->battleSpeed     = battleSpeed;
+
+    return pokemonPlayerBattle;
+}
+
+void printPokemonPlayerBattle(PokemonPlayerBattle* pokemonPlayerBattle) {
+    if (!pokemonPlayerBattle || !pokemonPlayerBattle->pokemonPlayer) {
+        printf("No PokemonPlayerBattle to print.\n");
+        return;
+    }
+
+    printf("===== PokemonPlayerBattle =====\n");
+    printPokemonPlayer(pokemonPlayerBattle->pokemonPlayer);
+    printf("Battle HP        : %d\n", pokemonPlayerBattle->battleHp);
+    printf("Battle Attack    : %d\n", pokemonPlayerBattle->battleAttack);
+    printf("Battle Defense   : %d\n", pokemonPlayerBattle->battleDefense);
+    printf("Battle Sp. Attack: %d\n", pokemonPlayerBattle->battleSpattack);
+    printf("Battle Sp. Def.  : %d\n", pokemonPlayerBattle->battleSpdefense);
+    printf("Battle Speed     : %d\n", pokemonPlayerBattle->battleSpeed);
+    printf("===============================\n");
+}
