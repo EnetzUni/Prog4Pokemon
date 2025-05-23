@@ -63,6 +63,32 @@ typedef struct {
         Status status;
 } PokemonPlayer;
 
+typedef struct {
+        /// The PokemonPlayer.
+        PokemonPlayer* pokemonPlayer;
+
+        /// The level of the PokemonPlayer.
+        int lvl;
+
+        /// The battle hit points of the Pokemon.
+        int battleHp;
+
+        /// The battle attack stat of the Pokemon.
+        int battleAttack;
+
+        /// The battle defense stat of the Pokemon.
+        int battleDefense;
+
+        /// The battle special attack stat of the Pokemon.
+        int battleSpattack;
+
+        /// The battle special defense stat of the Pokemon.
+        int battleSpdefense;
+
+        /// The battle speed stat of the Pokemon.
+        int battleSpeed;
+} PokemonPlayerBattle;
+
 Pokemon* createPokemon(int, char[], int, int, int, int, int, int, Type, Type, int);
 
 void printPokemon(Pokemon*);
@@ -70,5 +96,9 @@ void printPokemon(Pokemon*);
 PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int, int, Status);
 
 void printPokemonPlayer(PokemonPlayer*);
+
+PokemonPlayerBattle* createPlayerBattle(PokemonPlayer*, int, int, int, int, int, int, int);
+
+void printPokemonPlayerBattle(PokemonPlayerBattle*);
 
 #endif

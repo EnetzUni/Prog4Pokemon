@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 #include "pokemon.h"
 #include "movement.h"
 
@@ -88,4 +89,52 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
     printMovement(pokemonplayer->listMovement[i]);
     }
     printf("============================\n");
+}
+
+int calculateLvl(int xp) {
+    return (int) cbrt(xp);
+}
+
+int calculateBattleHp(int hp, int lvl) {
+    return (int) ((((2 * hp + 94.75) * lvl) / 100) + lvl + 10);
+}
+
+int calculateBattleStats(int stat, int lvl) {
+    return (int) (((((2 * stat + 94.75) * lvl) / 100) + 5) * 1.1);
+}
+
+PokemonPlayerBattle* createPokemonPlayerBattle(PokemonPlayer* pokemonPlayer) {
+    PokemonPlayerBattle* pokemonPlayerBattle = malloc(sizeof* pokemonPlayerBattle);
+    if (!pokemonPlayerBattle) {
+        return NULL;
+    }
+
+    pokemonPlayerBattle->pokemonPlayer   = pokemonPlayer;
+    pokemonPlayerBattle->lvl             = calculateLvl(pokemonPlayer->xp);
+    pokemonPlayerBattle->battleHp        = calculateBattleHp(pokemonPlayer->pokemon->hp, pokemonPlayerBattle->lvl);
+    pokemonPlayerBattle->battleAttack    = calculateBattleStats(pokemonPlayer->pokemon->attack, pokemonPlayerBattle->lvl);
+    pokemonPlayerBattle->battleDefense   = calculateBattleStats(pokemonPlayer->pokemon->defense, pokemonPlayerBattle->lvl);
+    pokemonPlayerBattle->battleSpattack  = calculateBattleStats(pokemonPlayer->pokemon->spattack, pokemonPlayerBattle->lvl);
+    pokemonPlayerBattle->battleSpdefense = calculateBattleStats(pokemonPlayer->pokemon->spdefense, pokemonPlayerBattle->lvl);
+    pokemonPlayerBattle->battleSpeed     = calculateBattleStats(pokemonPlayer->pokemon->speed, pokemonPlayerBattle->lvl);
+
+    return pokemonPlayerBattle;
+}
+
+void printPokemonPlayerBattle(PokemonPlayerBattle* pokemonPlayerBattle) {
+    if (!pokemonPlayerBattle || !pokemonPlayerBattle->pokemonPlayer) {
+        printf("No PokemonPlayerBattle to print.\n");
+        return;
+    }
+
+    printf("===== PokemonPlayerBattle =====\n");
+    printPokemonPlayer(pokemonPlayerBattle->pokemonPlayer);
+    printf("Level            : %d\n", pokemonPlayerBattle->lvl);
+    printf("Battle HP        : %d\n", pokemonPlayerBattle->battleHp);
+    printf("Battle Attack    : %d\n", pokemonPlayerBattle->battleAttack);
+    printf("Battle Defense   : %d\n", pokemonPlayerBattle->battleDefense);
+    printf("Battle Sp. Attack: %d\n", pokemonPlayerBattle->battleSpattack);
+    printf("Battle Sp. Def.  : %d\n", pokemonPlayerBattle->battleSpdefense);
+    printf("Battle Speed     : %d\n", pokemonPlayerBattle->battleSpeed);
+    printf("===============================\n");
 }
