@@ -64,8 +64,11 @@ typedef struct {
 } PokemonPlayer;
 
 typedef struct {
-        // The PokemonPlayer.
+        /// The PokemonPlayer.
         PokemonPlayer* pokemonPlayer;
+
+        /// The level of the PokemonPlayer.
+        int lvl;
 
         /// The battle hit points of the Pokemon.
         int battleHp;
@@ -94,7 +97,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int
 
 void printPokemonPlayer(PokemonPlayer*);
 
-PokemonPlayerBattle* createPlayerBattle(PokemonPlayer*, int, int, int, int, int, int);
+PokemonPlayerBattle* createPlayerBattle(PokemonPlayer*, int, int, int, int, int, int, int);
 
 void printPokemonPlayerBattle(PokemonPlayerBattle*);
 
