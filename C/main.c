@@ -75,7 +75,7 @@ int main(void)
 
     printf("Finalizando con la inicializacion...\n");
     */
-    presentation(db);
+    presentation(db, nicknameAdmin);
     
     sqlite3_close(db);
     return 0;
