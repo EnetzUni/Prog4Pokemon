@@ -6,6 +6,7 @@
 // Importamos los modulos
 #include "moduleMenus.h"
 #include "db.h"
+#include "player.h"
 
 void imprimirTexto(char* texto)
 {
@@ -19,7 +20,7 @@ void imprimirTexto(char* texto)
     printf("\n");
 }
 
-void presentation(sqlite3 *db)
+void presentation(sqlite3 *db, char* nicknameAdmin)
 {
     printf( "  _____      _                                _____ \n");
     printf( " |  __ )    | |                              / ____|\n");
@@ -29,10 +30,10 @@ void presentation(sqlite3 *db)
     printf( " |_|   (___/|_|)_)___|_| |_| |_|(___/|_| |_(_)_____|\n");
     printf( "\n\n");
 
-    menuLoginRegister(db);
+    menuLoginRegister(db, nicknameAdmin);
 }
 
-void menuLoginRegister(sqlite3 *db)
+void menuLoginRegister(sqlite3 *db, char* nicknameAdmin)
 {
     imprimirTexto("Menu de Registro/Log in\n-1: Registrarse\n-2: Iniciar Sesion\n-3: Iniciar Sesion como Administrador\n-q: Salir");
 
@@ -50,13 +51,13 @@ void menuLoginRegister(sqlite3 *db)
     if(str[0] == '1') // Opcion: Registrar nuevo usuario
     {
         printf("\n");
-        menuRegister(db);
+        menuRegister(db, nicknameAdmin);
         return;
     } 
     else if (str[0] == '2') // Opcion: Inciar Sesion
     {
         printf("\n");
-        menuLogin(db);
+        menuLogin(db, nicknameAdmin);
         return;
     }
     else if (str[0] == '3') // Opcion: Inciar Sesion como Administrador
@@ -69,13 +70,13 @@ void menuLoginRegister(sqlite3 *db)
     if (str[0] != 'q') // Excepcion: campo no valido ingresado
     {
         imprimirTexto("\nPor favor ingrese una opcion valida.\n");
-        menuLoginRegister(db);
+        menuLoginRegister(db, nicknameAdmin);
     }
     
 
 }
 
-void menuRegister(sqlite3 *db)
+void menuRegister(sqlite3 *db, char* nicknameAdmin)
 {
     char nickname[50];
     char password[50];
@@ -112,15 +113,18 @@ void menuRegister(sqlite3 *db)
         imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
     } else 
     {
-        insertPlayer(db, nickname, password, genderB, 0, 0); // Insertar judador
+        PokemonPlayer* listPokemon[6];
+        Player* newPlayer = createPlayer(nickname, password, genderB, listPokemon, 0, 0, 0);
+        
+        insertPlayer(db, newPlayer); // Insertar judador
     }
 
     printf("\n");
-    menuLoginRegister(db);
+    menuLoginRegister(db, nicknameAdmin);
 
 }
 
-void menuLogin(sqlite3 *db)
+void menuLogin(sqlite3 *db, char* nicknameAdmin)
 {
     char nickname[20];
     char password[20];
@@ -142,22 +146,22 @@ void menuLogin(sqlite3 *db)
     { 
         imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
         printf("\n");
-        menuLoginRegister(db);
+        menuLoginRegister(db, nickname);
     }else if (checkPassword(db, nickname, password)) // Existe una cuenta con ese usuario y contraseña
     {
-        // getPlayer
         imprimirTexto("\nIniciado Sesion Correctamente!\n");
-        //menuPrincipal(db, );
+        Player* player = loadPlayer(db, nickname);
+        menuPrincipal(db, player); // Accede al Menu Principal
     }else if (checkPassword(db, nickname, password) == 0) // Existe una cuenta con ese usuario y contraseña
     {
         imprimirTexto("\nUsuario o contrasenya incorrectos, elige una opcion.");
         printf("\n");
-        menuLoginRegister(db);
+        menuLoginRegister(db, nickname);
     }
     
 }
 
-void menuPrincipal(sqlite3 *db)
+void menuPrincipal(sqlite3 *db, Player* player)
 {
     char str[2];
 
@@ -188,7 +192,7 @@ void menuPrincipal(sqlite3 *db)
     if (str[0] != 'q') // Excepcion: campo no valido ingresado
     {
         imprimirTexto("\nPor favor ingrese una opcion valida.\n");
-        menuLoginRegister(db);
+        menuPrincipal(db, player);
     }
 
     return;

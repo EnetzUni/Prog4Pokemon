@@ -48,6 +48,7 @@
         "movement.h": "c",
         "category.h": "c",
         "modulemenus.h": "c",
-        "pokemon.h": "c"
+        "pokemon.h": "c",
+        "string.h": "c"
     }
 }
