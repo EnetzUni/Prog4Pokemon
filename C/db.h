@@ -54,4 +54,7 @@ int insertPokemonPlayer(sqlite3* db, PokemonPlayer* pokemon);
 // Insert the PC into the DataBase
 int insertPc(sqlite3* db, PC* pc);
 
+// Create admin for DataBase.
+void initializeDb(sqlite3* db);
+
 #endif

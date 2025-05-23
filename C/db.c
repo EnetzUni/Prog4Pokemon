@@ -10,35 +10,6 @@
 #include "type.h"
 #include "pc.h"
 
-void initializeDb(sqlite3* db) {
-    Pokemon* pokemon1 = loadPokemon(db, 34);
-    Pokemon* pokemon2 = loadPokemon(db, 392);
-    Pokemon* pokemon3 = loadPokemon(db, 282);
-    Pokemon* pokemon4 = loadPokemon(db, 487);
-    Pokemon* pokemon5 = loadPokemon(db, 493);
-
-    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-
-    Player* player = createPlayer("admin", "1234", (bool) 0, NULL, 0, 50, 0);
-    insertPlayer(db, player);
-    player = loadPlayer(db, "admin");
-    addPlayerPokemonPlayer(db, player, pokemonplayer1);
-    addPlayerPokemonPlayer(db, player, pokemonplayer2);
-    insertPlayer(db, player);
-
-    PC* pc = createPc("admin", NULL, 0);
-    insertPc(db, pc);
-    pc = loadPc(db, "admin");
-    addPcPokemonPlayer(db, pc, pokemonplayer3);
-    addPcPokemonPlayer(db, pc, pokemonplayer4);
-    addPcPokemonPlayer(db, pc, pokemonplayer5);
-    insertPc(db, pc);
-}
-
 Pokemon* loadPokemon(sqlite3* db, int id) {
     sqlite3_stmt* stmt;
     const char* sql = "SELECT p.id, p.name, p.hp, p.attack, p.defense, p.spattack, p.spdefense, p.speed, p.type1, p.type2, pe.level FROM Pokemon p JOIN PokemonEvolution pe ON pe.idPokemon = p.id WHERE p.id = ?";
@@ -677,4 +648,33 @@ int insertPc(sqlite3* db, PC* pc) {
     sqlite3_finalize(stmt);
     printf("PC insertados correctamente.\n");
     return 1;
+}
+
+void initializeDb(sqlite3* db) {
+    Pokemon* pokemon1 = loadPokemon(db, 34);
+    Pokemon* pokemon2 = loadPokemon(db, 392);
+    Pokemon* pokemon3 = loadPokemon(db, 282);
+    Pokemon* pokemon4 = loadPokemon(db, 487);
+    Pokemon* pokemon5 = loadPokemon(db, 493);
+
+    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+
+    Player* player = createPlayer("admin", "1234", (bool) 0, NULL, 0, 50, 0);
+    insertPlayer(db, player);
+    player = loadPlayer(db, "admin");
+    addPlayerPokemonPlayer(db, player, pokemonplayer1);
+    addPlayerPokemonPlayer(db, player, pokemonplayer2);
+    insertPlayer(db, player);
+
+    PC* pc = createPc("admin", NULL, 0);
+    insertPc(db, pc);
+    pc = loadPc(db, "admin");
+    addPcPokemonPlayer(db, pc, pokemonplayer3);
+    addPcPokemonPlayer(db, pc, pokemonplayer4);
+    addPcPokemonPlayer(db, pc, pokemonplayer5);
+    insertPc(db, pc);
 }
