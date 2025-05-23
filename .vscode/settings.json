@@ -52,6 +52,7 @@
         "string.h": "c",
         "db.h": "c",
         "pc.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "ctype.h": "c"
     }
 }

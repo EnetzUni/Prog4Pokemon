@@ -2,12 +2,15 @@
 #include <stdbool.h>
 #include <windows.h>
 #include "string.h"
+#include "stdlib.h"
+#include <ctype.h>
 
 // Importamos los modulos
 #include "moduleMenus.h"
 #include "db.h"
 #include "player.h"
 #include "pc.h"
+#include "type.h"
 
 void imprimirTexto(char* texto)
 {
@@ -252,7 +255,30 @@ void menuPC(sqlite3 *db, Player* player)
 
 void combate(sqlite3 *db, Player* player)
 {
-    imprimirTexto("Te adentras a una zona de hierva alta . . .\nUn pokemon salvaje ha aparecido!\n");
+    imprimirTexto("Te adentras a una zona de hierva alta . . . Un pokemon salvaje ha aparecido!\n");
+    imprimirTexto("Que pokemon quieres sacar de tu equipo?");
+    
+    printTeam(player);
+
+    char str[3];
+    int opcion = 1;  
+
+    printf("\n- Opcion: ");
+    fgets(str, sizeof(str), stdin);
+    fflush(stdin);
+
+    if (isdigit(str[0])) {
+        int temp = atoi(str);
+        if (temp >= 1 && temp <= 6) {
+            opcion = temp;
+        }
+    }
+
+    PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
+
+    Pokemon* randomPokemon = loadPokemon(db, ((rand() % 649) + 1));
+    //PokemonPlayer* pokemonWild = create;
+    //pokemonWild->pokemon = randomPokemon; strcpy(pokemonWild->nickname, randomPokemon->name); pokemonWild->xp = player->maxLvL;
 
     return;
 }
