@@ -69,6 +69,6 @@ void printPokemon(Pokemon*);
 
 PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int, int, Status);
 
-void printPokemonPlayer(const PokemonPlayer*);
+void printPokemonPlayer(PokemonPlayer*);
 
 #endif

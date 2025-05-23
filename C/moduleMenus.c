@@ -230,13 +230,13 @@ void menuPC(sqlite3 *db, Player* player)
     else if (str[0] == '3') // Opcion: Ver PC
     {
         printf("\n");
-        //
+        printPc(pc);
         return;
     }
     else if (str[0] == '4') // Opcion: Ver Equipo
     {
         printf("\n");
-        //
+        printTeam(player);        
         return;
     }
 

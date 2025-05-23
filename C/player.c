@@ -48,3 +48,18 @@ void printPlayer(Player* player) {
     }
     printf("========================\n");
 }
+
+void printTeam(Player* player) {
+    if (!player) {
+        printf("No Player to get Team.\n");
+        return;
+    } else if (player->listPokemonSize == 0)
+    {
+        printf("There are no Pokemon in your team.\n");
+    }
+    
+    for (int i = 0; i < player->listPokemonSize; i++)
+    {
+        printPokemonPlayer(player->listPokemon[i]);
+    }
+}
