@@ -4,11 +4,17 @@
 #include "pokemon.h"
 
 typedef struct {
+    /// The player's nickname.
+    char nickname[255];
+
+    /// List of PokemonPlayer inside the PC.
     PokemonPlayer** pcList;
+
+    /// Size of PokemonPlayer list inside the PC.
     int pcListSize;
 } PC;
 
-PC* createPc(PokemonPlayer**, int);
+PC* createPc(char[], PokemonPlayer**, int);
 void printPc(PC* pc);
 
 #endif

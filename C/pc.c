@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include "pc.h"
 
-PC* createPc(PokemonPlayer** pcList, int pcListSize) {
+PC* createPc(char nickname[], PokemonPlayer** pcList, int pcListSize) {
     PC* pc = malloc(sizeof* pc);
     if (pc == NULL) {
         return NULL;
     }
 
+    strncpy(pc->nickname, nickname, sizeof pc->nickname - 1);
+    pc->nickname[sizeof pc->nickname - 1] = '\0';
     pc->pcList     = pcList;
     pc->pcListSize = pcListSize;
 
@@ -21,6 +23,7 @@ void printPc(PC* pc) {
     }
 
     printf("===== PC =====\n");
+    printf("Nickname  : %s\n", pc->nickname);
     for (int i = 0; i < pc->pcListSize; ++i) {
     printf("--- PokemonPlayer slot %d ---\n", i + 1);
     printPokemonPlayer(&pc->pcList[i]);
