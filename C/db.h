@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "movement.h"
 #include "player.h"
+#include "pc.h"
 
 // Functions of the Database
 
@@ -36,7 +37,7 @@ PokemonPlayer** loadPlayerPokemonPlayer(sqlite3*, char*, int*);
 int insertPlayer(sqlite3*, Player*);
 
 // Load the Pc with the PokemonPlayer
-PokemonPlayer** loadPc(sqlite3*, char*);
+PC* loadPc(sqlite3*, char*);
 
 // Load the count of PokemonPlayer in the Pc
 int* loadPcCount(sqlite3*, char*);

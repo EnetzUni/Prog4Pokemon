@@ -50,6 +50,8 @@
         "modulemenus.h": "c",
         "pokemon.h": "c",
         "string.h": "c",
-        "db.h": "c"
+        "db.h": "c",
+        "pc.h": "c",
+        "stdlib.h": "c"
     }
 }
