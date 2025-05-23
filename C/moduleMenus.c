@@ -7,6 +7,7 @@
 #include "moduleMenus.h"
 #include "db.h"
 #include "player.h"
+#include "pc.h"
 
 void imprimirTexto(char* texto)
 {
@@ -200,6 +201,7 @@ void menuPrincipal(sqlite3 *db, Player* player)
 
 void menuPC(sqlite3 *db, Player* player)
 {
+    PC* pc = loadPc();
     char str[2];
 
     imprimirTexto("Has ingresado a PC:\n-1: Sacar Pokemon a Equipo\n-2: Dejar Pokemon en PC\n-3: Ver PC\n-4: Ver Equipo\n-q: Salir");
