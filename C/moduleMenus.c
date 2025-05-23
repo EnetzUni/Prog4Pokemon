@@ -179,13 +179,13 @@ void menuPrincipal(sqlite3 *db, Player* player)
     if(str[0] == '1') // Opcion: Ingresar a PC
     {
         printf("\n");
-        menuPC(db);
+        menuPC(db, player);
         return;
     } 
     else if (str[0] == '2') // Opcion: Iniciar Combate
     {
         printf("\n");
-        combate(db);
+        combate(db, player);
         return;
     }
 
@@ -198,13 +198,56 @@ void menuPrincipal(sqlite3 *db, Player* player)
     return;
 }
 
-void menuPC(sqlite3 *db)
+void menuPC(sqlite3 *db, Player* player)
 {
+    char str[2];
+
+    imprimirTexto("Has ingresado a PC:\n-1: Sacar Pokemon a Equipo\n-2: Dejar Pokemon en PC\n-3: Ver PC\n-4: Ver Equipo\n-q: Salir");
+
+    printf("\n- Opcion: ");
+    fgets(str, sizeof(str), stdin);  // Leer entrada completa
+    fflush(stdin); // Eliminar Buffer
+
+    if (str[0] == 'q') // Salir de aplicacion
+    {
+        return;
+    }
+
+    if(str[0] == '1') // Opcion: Sacar Pokemon a Equipo
+    {
+        printf("\n");
+        //
+        return;
+    } 
+    else if (str[0] == '2') // Opcion: Dejar pokemon en PC
+    {
+        printf("\n");
+        //
+        return;
+    }
+    else if (str[0] == '3') // Opcion: Ver PC
+    {
+        printf("\n");
+        //
+        return;
+    }
+    else if (str[0] == '4') // Opcion: Ver Equipo
+    {
+        printf("\n");
+        //
+        return;
+    }
+
+    if (str[0] != 'q') // Excepcion: campo no valido ingresado
+    {
+        imprimirTexto("\nPor favor ingrese una opcion valida.\n");
+        menuPC(db, player);
+    }
 
     return;
 }
 
-void combate(sqlite3 *db)
+void combate(sqlite3 *db, Player* player)
 {
     imprimirTexto("Te adentras a una zona de hierva alta . . .\nUn pokemon salvaje ha aparecido!\n");
 

@@ -15,8 +15,8 @@ void menuLogin(sqlite3 *db, char* nicknameAdmin);
 
 void menuPrincipal(sqlite3 *db, Player* player);
 
-void menuPC(sqlite3 *db);
+void menuPC(sqlite3 *db, Player* player);
 
-void combate(sqlite3 *db);
+void combate(sqlite3 *db, Player* player);
 
 #endif

@@ -49,6 +49,7 @@
         "category.h": "c",
         "modulemenus.h": "c",
         "pokemon.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "db.h": "c"
     }
 }
