@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "sqlite3.h"
 #include "pc.h"
+#include "db.h"
 
 PC* createPc(char nickname[], PokemonPlayer** pcList, int pcListSize) {
     PC* pc = malloc(sizeof* pc);
@@ -32,6 +34,11 @@ void printPc(PC* pc) {
     printf("============================\n");
 }
 
-/*addPcPokemonPlayer(PC* pc, PokemonPlayer pokemon) {
+void addPcPokemonPlayer(sqlite3* db, PC* pc, PokemonPlayer* pokemon) {
+    PokemonPlayer** updatedPcList = realloc(pc->pcList, (pc->pcListSize + 1) * sizeof(PokemonPlayer*));
+    pc->pcList = updatedPcList;
+    pc->pcList[pc->pcListSize] = pokemon;
+    pc->pcListSize++;
 
-}*/
+    insertPc(db, pc);
+}
