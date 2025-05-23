@@ -216,7 +216,7 @@ void menuPC(sqlite3 *db, Player* player)
 
     if (str[0] == 'q') // Salir de aplicacion
     {
-        return;
+        menuPrincipal(db, player);
     }
 
     if(str[0] == '1') // Opcion: Sacar Pokemon a Equipo
@@ -229,7 +229,7 @@ void menuPC(sqlite3 *db, Player* player)
     {
         printf("\n");
         printTeam(player);
-        char str2[3];
+        char str2[2];
         int opcion = 1;  
 
         printf("\n- Opcion: ");
@@ -240,12 +240,22 @@ void menuPC(sqlite3 *db, Player* player)
             int temp = atoi(str);
             if (temp >= 1 && temp <= player->listPokemonSize) {
                 opcion = temp;
+            } else {
+                imprimirTexto("Campo ingresado no valido, repita la operacion.\n");
+                menuPC(db, player);
+                return;
             }
+                // Player Pokemon
+                PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
+                removePlayerPokemonPlayer(db, player, opcion);
+                addPcPokemonPlayer(db, pc, pokemonPlayer);
+                imprimirTexto("Pokemon añadido al PC correctamente.\n");
+                menuPC(db, player);
+        } else {
+            imprimirTexto("Campo ingresado no valido, repita la operacion.\n");
+            menuPC(db, player);
         }
-        // Player Pokemon
-        PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
-        removePlayerPokemonPlayer(db, player, opcion);
-        addPcPokemonPlayer(db, pc, pokemonPlayer);
+
         return;
     }
     else if (str[0] == '3') // Opcion: Ver PC
