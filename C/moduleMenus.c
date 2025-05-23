@@ -64,7 +64,8 @@ void menuLoginRegister(sqlite3 *db, char* nicknameAdmin)
     else if (str[0] == '3') // Opcion: Inciar Sesion como Administrador
     {
         printf("\n");
-        
+        Player* player = loadPlayer(db, nicknameAdmin);
+        menuPrincipal(db, player); // Accede al Menu Principal
         return;
     }
 
