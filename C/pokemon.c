@@ -172,3 +172,33 @@ void printPokemonPlayerBattle(PokemonPlayerBattle* pokemonPlayerBattle) {
     printf("Battle Speed     : %d\n", pokemonPlayerBattle->battleSpeed);
     printf("===============================\n");
 }
+
+void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement) {
+    // 1. Verificar si el movimiento acierta
+    int hitChance = rand() % 100;
+    if (hitChance >= movement->accuracy) {
+        printf("¡El movimiento falló!\n");
+        return;
+    }
+    
+    // 2. Determinar el tipo de estadística a usar
+    int attackStat = (movement->category == PHYSICAL) ? attackPokemon->battleAttack : attackPokemon->battleSpattack;
+    int defenseStat = (movement->category == PHYSICAL) ? defensePokemon->battleDefense : defensePokemon->battleSpdefense;
+
+    // 3. Calcular efectividad
+    double typeEffectiveness = effectiveness(movement->type, defensePokemon->pokemonPlayer->pokemon->type[0], defensePokemon->pokemonPlayer->pokemon->type[1]);
+
+    // 4. Calcular un factor aleatorio entre 0.85 y 1.0
+    double randomFactor = (85 + rand() % 16) / 100.0;
+
+    // 5. Fórmula de daño
+    double baseDamage = (((2.0 * attackPokemon->lvl / 5 + 2) * movement->power * attackStat / defenseStat) / 50 + 2);
+    int totalDamage = (int)(baseDamage * typeEffectiveness * randomFactor);
+
+    // 6. Aplicar daño
+    defensePokemon->pokemonPlayer->curHp -= totalDamage;
+    if (defensePokemon->pokemonPlayer->curHp < 0) defensePokemon->pokemonPlayer->curHp = 0;
+
+    printf("¡%s hizo %d de daño! (Efectividad: %.2fx)\n", movement->name, totalDamage, typeEffectiveness);
+
+}

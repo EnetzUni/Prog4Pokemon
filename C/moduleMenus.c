@@ -340,8 +340,14 @@ void combate(sqlite3 *db, Player* player)
     PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, calculateBattleHp(randomPokemon->hp, calculateLvl(player->maxLvL)), (Status) NULL);
     PokemonPlayerBattle* pokemonWildBattle = createPokemonPlayerBattle(pokemonWild);
 
-    printPokemonPlayerBattle(pokemonPlayerBattle);
-    printPokemonPlayerBattle(pokemonWildBattle);
+    if(pokemonWildBattle->battleSpeed > pokemonPlayerBattle->battleSpeed)
+    {
+        
+
+        
+    } else {
+        
+    }
 
     return;
 }
