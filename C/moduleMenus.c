@@ -327,7 +327,7 @@ void combate(sqlite3 *db, Player* player)
         }
     }
     // Wild Pokemon
-    PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, 0, NULL);
+    PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, 0, (Status) NULL);
 
     return;
 }
