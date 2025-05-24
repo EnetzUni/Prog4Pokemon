@@ -6,7 +6,7 @@
  * @brief Represents the elemental type of a Pokemon or its move.
  */
 typedef enum {
-    ACERO, AGUA, BICHO, DRAGON, ELECTRICO, FANTASMA, FUEGO, HADA, HIELO, LUCHA, NORMAL, PLANTA, PSIQUICO, ROCA, SINIESTRO, TIERRA, VENENO, VOLADOR
+    ACERO, AGUA, BICHO, DRAGON, ELECTRICO, FANTASMA, FUEGO, HADA, HIELO, LUCHA, NORMAL, PLANTA, PSIQUICO, ROCA, SINIESTRO, TIERRA, VENENO, VOLADOR, TYPE_COUNT
 } Type;
 
 static const char* const TypeNames[] = {
@@ -29,6 +29,8 @@ static const char* const TypeNames[] = {
     [VENENO]    = "VENENO",
     [VOLADOR]   = "VOLADOR"
 };
+
+const char* GetTypeName(Type type);
 
 double effectiveness(Type attackType, Type defenseType1, Type defenseType2);
 
