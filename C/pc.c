@@ -35,13 +35,39 @@ void printPc(PC* pc) {
     printf("============================\n");
 }
 
-void addPcPokemonPlayer(sqlite3* db, PC* pc, PokemonPlayer* pokemon) {
-    PokemonPlayer** updatedPcList = realloc(pc->pcList, (pc->pcListSize + 1) * sizeof(PokemonPlayer*));
-    pc->pcList = updatedPcList;
+int addPcPokemonPlayer(sqlite3* db, PC* pc, PokemonPlayer* pokemon) {
+    PokemonPlayer** updatedPcList;
+
+    if (pc->pcList == NULL) {
+        // Allocate initial array with size 1
+        updatedPcList = (PokemonPlayer**) malloc(sizeof(PokemonPlayer*));
+        if (updatedPcList == NULL) {
+            printf("Error allocating memory for PC list.\n");
+            return 0; // failure
+        }
+        pc->pcList = updatedPcList;
+        pc->pcListSize = 0; // initialize size
+    } else {
+        // Resize existing array to hold one more PokemonPlayer*
+        updatedPcList = (PokemonPlayer**) realloc(pc->pcList, (pc->pcListSize + 1) * sizeof(PokemonPlayer*));
+        if (updatedPcList == NULL) {
+            printf("Error reallocating memory for PC list.\n");
+            return 0; // failure
+        }
+        pc->pcList = updatedPcList;
+    }
+
+    // Add the new PokemonPlayer pointer and increment size
     pc->pcList[pc->pcListSize] = pokemon;
     pc->pcListSize++;
 
-    insertPc(db, pc);
+    // Update the database
+    if (!insertPc(db, pc)) {
+        printf("Failed to update PC in DB.\n");
+        return 0; // failure
+    }
+
+    return 1; // success
 }
 
 void removePcPokemonPlayer(sqlite3* db, PC* pc, int pcIndex) {
