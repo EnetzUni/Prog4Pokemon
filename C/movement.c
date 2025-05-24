@@ -15,9 +15,9 @@ Movement* createMovement(int id, char name[], Type type, Category category, Stat
     }
 
     movement->id             = id;
-    movement->type           = type;
-    movement->category       = category;
-    movement->status         = status;
+    movement->type           = (Type) type;
+    movement->category       = (Category) category;
+    movement->status         = (Status) status;
     movement->statusaccuracy = statusaccuracy;
     movement->power          = power;
     movement->accuracy       = accuracy;
@@ -37,9 +37,9 @@ void printMovement(Movement* movement) {
 
     printf("----- Movement #%d -----\n", movement->id);
     printf("Name            : %s\n", movement->name);
-    printf("Type            : %s\n", TypeNames[movement->type]);
-    printf("Category        : %s\n", CategoryNames[movement->category]);
-    printf("Status          : %s\n", StatusNames[movement->status]);
+    printf("Type            : %s\n", getTypeName((Type) movement->type));
+    printf("Category        : %s\n", getCategoryName((Category) movement->category));
+    printf("Status          : %s\n", getStatusName((Status) movement->status));
     printf("Status Chance   : %d%%\n", movement->statusaccuracy);
     printf("Power           : %d\n", movement->power);
     printf("Accuracy        : %d%%\n", movement->accuracy);

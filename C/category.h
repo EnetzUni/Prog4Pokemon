@@ -10,7 +10,7 @@
  * - STATUS: Non-damaging moves that apply effects.
  */
 typedef enum { 
-    PHYSICAL, SPECIAL, STATUS 
+    PHYSICAL, SPECIAL, STATUS, CATEGORY_COUNT
 } Category;
 
 static const char* const CategoryNames[] = {
@@ -18,5 +18,7 @@ static const char* const CategoryNames[] = {
     [SPECIAL]  = "SPECIAL",
     [STATUS]   = "STATUS"
 };
+
+const char* getCategoryName(Category);
 
 #endif

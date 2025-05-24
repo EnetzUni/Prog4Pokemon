@@ -1,9 +1,13 @@
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include "type.h"
 
-#include <stdio.h>
-#include "type.h"
+const char* getTypeName(Type type) {
+    if (type >= 0 && type < TYPE_COUNT) {
+        return TypeNames[type];
+    }
+    return (const char*) NULL;
+}
 
 double effectiveness(Type attackType, Type defenseType1, Type defenseType2) {
     double damageMultiplier = 1.0;

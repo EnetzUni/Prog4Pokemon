@@ -44,13 +44,16 @@ int main(void)
 
     sqlite3* db;
     printf("Intentando abrir la base de datos...\n");
-
+    
     if (sqlite3_open(pathDB, &db) != SQLITE_OK) {
         printf("Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
         return 1;
     }
     printf("Base de datos abierta correctamente\n");
 
+    sqlite3_soft_heap_limit64(0);
+    initializeDb(db);
+    
     Pokemon* pokemon;
     pokemon = (Pokemon*) loadPokemon(db, 6);
 
