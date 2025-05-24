@@ -240,7 +240,7 @@ void menuPC(sqlite3 *db, Player* player)
                 return;
             }
                 // Player Pokemon
-                PokemonPlayer* pokemonPlayer = pc->pcList[opcion];
+                PokemonPlayer* pokemonPlayer = pc->pcList[opcion - 1];
                 removePcPokemonPlayer(db, pc, opcion);
                 addPlayerPokemonPlayer(db, player, pokemonPlayer);
                 imprimirTexto("Pokemon añadido al Equipo correctamente.\n");
@@ -273,7 +273,7 @@ void menuPC(sqlite3 *db, Player* player)
                 return;
             }
                 // Player Pokemon
-                PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
+                PokemonPlayer* pokemonPlayer = player->listPokemon[opcion - 1];
                 removePlayerPokemonPlayer(db, player, opcion);
                 addPcPokemonPlayer(db, pc, pokemonPlayer);
                 imprimirTexto("Pokemon añadido al PC correctamente.\n");
@@ -330,7 +330,7 @@ void combate(sqlite3 *db, Player* player)
         }
     }
     // Player Pokemon
-    PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
+    PokemonPlayer* pokemonPlayer = player->listPokemon[opcion - 1];
 
     PokemonPlayerBattle* pokemonPlayerBattle = createPokemonPlayerBattle(pokemonPlayer);
 
@@ -342,6 +342,6 @@ void combate(sqlite3 *db, Player* player)
 
     printPokemonPlayerBattle(pokemonPlayerBattle);
     printPokemonPlayerBattle(pokemonWildBattle);
-    
+
     return;
 }
