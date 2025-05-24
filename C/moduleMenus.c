@@ -332,10 +332,13 @@ void combate(sqlite3 *db, Player* player)
     // Player Pokemon
     PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
 
+    PokemonPlayerBattle* pokemonPlayerBattle = createPokemonPlayerBattle(pokemonPlayer);
+
+    // Wild Pokemon
     Pokemon* randomPokemon = loadPokemon(db, ((rand() % 649) + 1));
     Movement** movementWild = createRandomMovementList(db);
-    // Wild Pokemon
     PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, 0, (Status) NULL);
+    
 
     return;
 }
