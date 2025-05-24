@@ -48,7 +48,7 @@ typedef struct {
         char nickname[255];
 
         /// The Pokemon's list of Movements.
-        Movement* listMovement[4];
+        Movement** listMovement;
 
         /// The Pokemon's list of Movements.
         int listMovementSize;

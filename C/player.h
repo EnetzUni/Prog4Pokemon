@@ -15,7 +15,7 @@ typedef struct {
         bool gender;
     
         /// List of the Pokemon in the player's team.
-        PokemonPlayer* listPokemon[6];
+        PokemonPlayer** listPokemon;
 
         /// List of the size of Pokemon in the player's team.
         int listPokemonSize;
@@ -27,10 +27,10 @@ typedef struct {
         int story;
 } Player;
 
-Player* createPlayer(char[], char[], bool, PokemonPlayer*[6], int, int, int);
+Player* createPlayer(char[], char[], bool, PokemonPlayer**, int, int, int);
 void printPlayer(Player*);
 void printTeam(Player*);
 void removePlayerPokemonPlayer(sqlite3*, Player*, int);
-void addPlayerPokemonPlayer(sqlite3*, Player*, PokemonPlayer*);
+int addPlayerPokemonPlayer(sqlite3*, Player*, PokemonPlayer*);
 
 #endif

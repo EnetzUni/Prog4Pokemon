@@ -49,7 +49,7 @@ void printPokemon(Pokemon* pokemon) {
     printf("-----------------------\n");
 }
 
-PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement* listMovement[4], int listMovementSize, int xp, int curHp, Status status) {
+PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement** listMovement, int listMovementSize, int xp, int curHp, Status status) {
     PokemonPlayer *pokemonplayer = malloc(sizeof *pokemonplayer);
     if (!pokemonplayer) {
         return NULL;
@@ -59,13 +59,22 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
     pokemonplayer->pokeid           = pokeid;
     pokemonplayer->xp               = xp;
     pokemonplayer->curHp            = curHp;
-    pokemonplayer->status           = (Status) status;
+    pokemonplayer->status           = status;
     pokemonplayer->listMovementSize = listMovementSize;
 
+    // Copy nickname safely
     strncpy(pokemonplayer->nickname, nickname, sizeof pokemonplayer->nickname - 1);
     pokemonplayer->nickname[sizeof pokemonplayer->nickname - 1] = '\0';
 
-    for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
+    // Allocate memory for listMovement
+    pokemonplayer->listMovement = malloc(sizeof(Movement*) * listMovementSize);
+    if (!pokemonplayer->listMovement) {
+        free(pokemonplayer);
+        return NULL;
+    }
+
+    // Copy movement pointers
+    for (int i = 0; i < listMovementSize; ++i) {
         pokemonplayer->listMovement[i] = listMovement[i];
     }
 
@@ -73,7 +82,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
 }
 
 void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
-    if (!pokemonplayer) {
+    if (!pokemonplayer || pokemonplayer == NULL || pokemonplayer == 0) {
         printf("No PokemonPlayer to print.\n");
         return;
     }
