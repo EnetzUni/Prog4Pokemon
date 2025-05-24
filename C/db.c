@@ -262,7 +262,7 @@ Movement* loadMovement(sqlite3* db, int id) {
     int power;
     int accuracy;
 
-	printf("Showing Pokemon:\n");
+	printf("Showing Movement:\n");
 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
 		strcpy(name, (char *) sqlite3_column_text(stmt, 1));
