@@ -52,7 +52,6 @@ int main(void)
     printf("Base de datos abierta correctamente\n");
 
     sqlite3_soft_heap_limit64(0);
-    initializeDb(db);
     
     Pokemon* pokemon;
     pokemon = (Pokemon*) loadPokemon(db, 6);

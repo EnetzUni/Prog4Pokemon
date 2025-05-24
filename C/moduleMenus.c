@@ -330,30 +330,10 @@ void combate(sqlite3 *db, Player* player)
     // Player Pokemon
     PokemonPlayer* pokemonPlayer = player->listPokemon[opcion];
 
-    Pokemon* randomPokemon = loadPokemon(db, ((rand() % 649) + 1));
-    Movement** movementWild = malloc(sizeof(Movement*) * 4);
-    int usedIds[4];
-    int count = 0;
-
-    while (count < 4) {
-        int id = (rand() % 934) + 1;
-
-        // Verificar si el ID ya fue usado
-        int duplicate = 0;
-        for (int j = 0; j < count; j++) {
-            if (usedIds[j] == id) {
-                duplicate = 1;
-                break;
-            }
-        }
-
-        if (!duplicate) {
-            movementWild[count] = loadMovement(db, id);
-            usedIds[count] = id;
-            count++;
-        }
-    }
     // Wild Pokemon
+    Pokemon* randomPokemon = loadPokemon(db, ((rand() % 649) + 1));
+    Movement** movementWild = createRandomMovementList(db);
+
     PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, 0, (Status) NULL);
 
     return;
