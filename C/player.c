@@ -110,7 +110,8 @@ void printTeam(Player* player) {
     {
         for (int i = 0; i < player->listPokemonSize; i++)
         {
-            printPokemonPlayer(player->listPokemon[i]);
+            printf("----- Pokemon #%d -----\n", i + 1);
+            printPokemonPlayerSmall(player->listPokemon[i]);
         }
     }
 }
