@@ -657,11 +657,11 @@ void initializeDb(sqlite3* db) {
     Pokemon* pokemon4 = loadPokemon(db, 487);
     Pokemon* pokemon5 = loadPokemon(db, 493);
 
-    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
-    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), NULL);
+    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
 
     Player* player = createPlayer("admin", "1234", (bool) 0, NULL, 0, 50, 0);
     insertPlayer(db, player);

@@ -97,6 +97,12 @@ PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int
 
 void printPokemonPlayer(PokemonPlayer*);
 
+int calculateLvl(int);
+
+int calculateBattleHp(int, int);
+
+int calculateBattleStats(int, int);
+
 PokemonPlayerBattle* createPokemonPlayerBattle(PokemonPlayer*);
 
 void printPokemonPlayerBattle(PokemonPlayerBattle*);
