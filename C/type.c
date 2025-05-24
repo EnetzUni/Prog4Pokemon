@@ -6,7 +6,7 @@ const char* getTypeName(Type type) {
     if (type >= 0 && type < TYPE_COUNT) {
         return TypeNames[type];
     }
-    return (Type) NULL;
+    return (const char*) NULL;
 }
 
 double effectiveness(Type attackType, Type defenseType1, Type defenseType2) {
