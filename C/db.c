@@ -54,7 +54,7 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 	}
 
     pokemon = (Pokemon*) createPokemon(id, name, hp, attack, defense, spattack, spdefense, speed, type[0], type[1], evolvl);
-    printPokemon(pokemon);
+    printPokemonSmall(pokemon);
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
@@ -115,7 +115,7 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
     }
 
     pokemonplayer = (PokemonPlayer*) createPokemonPlayer(pokemon, id, nickname, listMovement, sizeCount, xp, curHp, status);
-    printPokemonPlayer(pokemonplayer);
+    printPokemonPlayerSmall(pokemonplayer);
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
@@ -233,7 +233,7 @@ Movement* loadMovement(sqlite3* db, int id) {
     if (movement->power != 0)
     {
         printf("Showing Movement:\n");
-        printMovement(movement);
+        printMovementSmall(movement);
     }
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
@@ -277,7 +277,7 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
     }
 
     Player* player = (Player*) createPlayer(nickname, password, gender, listPokemon, *listPokemonPlayersize, maxLvL, story);
-    printPlayer(player);
+    printPlayerSmall(player);
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
