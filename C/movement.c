@@ -65,9 +65,13 @@ Movement** createRandomMovementList(sqlite3* db)
         }
 
         if (!duplicate) {
-            randomMovemets[count] = loadMovement(db, id);
-            usedIds[count] = id;
-            count++;
+            Movement* movement = loadMovement(db, id);
+            if (movement->power != 0)
+            {
+                randomMovemets[count] = movement;
+                usedIds[count] = id;
+                count++;
+            }
         }
     }
     return randomMovemets;
