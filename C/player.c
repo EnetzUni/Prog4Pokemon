@@ -106,7 +106,7 @@ void printTeam(Player* player) {
         printf("There are no Pokemon in your team.\n");
     }
     
-    if (player->listPokemon == NULL)
+    if (player->listPokemon != NULL)
     {
         for (int i = 0; i < player->listPokemonSize; i++)
         {

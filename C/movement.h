@@ -36,5 +36,7 @@ Movement* createMovement(int, char[], Type, Category, Status, int, int, int);
 
 void printMovement(Movement* movement);
 
+void printMovementSmall(Movement* movement);
+
 Movement** createRandomMovementList(sqlite3* db);
 #endif

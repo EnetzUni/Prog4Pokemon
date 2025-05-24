@@ -46,6 +46,16 @@ void printMovement(Movement* movement) {
     printf("-------------------------\n");
 }
 
+void printMovementSmall(Movement* movement) {
+    if (movement == NULL) {
+    printf("No Movement to print.\n");
+    return;
+    }
+
+    printf("----- Movement #%d -----\n", movement->id);
+    printf("Name            : %s\n", movement->name);
+}
+
 Movement** createRandomMovementList(sqlite3* db)
 {
     Movement** randomMovemets = malloc(sizeof(Movement*) * 4);

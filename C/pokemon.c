@@ -49,6 +49,15 @@ void printPokemon(Pokemon* pokemon) {
     printf("-----------------------\n");
 }
 
+void printPokemonSmall(Pokemon* pokemon) {
+    if (!pokemon) {
+        printf("No Pokemon to print.\n");
+        return;
+    }
+
+    printf("Name           : %s\n",    pokemon->name);
+}
+
 PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[], Movement** listMovement, int listMovementSize, int xp, int curHp, Status status) {
     PokemonPlayer *pokemonplayer = malloc(sizeof *pokemonplayer);
     if (!pokemonplayer) {
@@ -99,6 +108,16 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
     printMovement(pokemonplayer->listMovement[i]);
     }
     printf("============================\n");
+}
+
+void printPokemonPlayerSmall(PokemonPlayer* pokemonplayer) {
+    if (!pokemonplayer || pokemonplayer == NULL || pokemonplayer == 0) {
+        printf("No PokemonPlayer to print.\n");
+        return;
+    }
+
+    printf("===== PokemonPlayer #%d =====\n", pokemonplayer->pokeid);
+    printPokemonSmall(pokemonplayer->pokemon);
 }
 
 int calculateLvl(int xp) {
