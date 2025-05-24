@@ -93,9 +93,13 @@ Pokemon* createPokemon(int, char[], int, int, int, int, int, int, Type, Type, in
 
 void printPokemon(Pokemon*);
 
+void printPokemonSmall(Pokemon*);
+
 PokemonPlayer* createPokemonPlayer(Pokemon*, int, char[], Movement*[4], int, int, int, Status);
 
 void printPokemonPlayer(PokemonPlayer*);
+
+void printPokemonPlayerSmall(PokemonPlayer*);
 
 int calculateLvl(int);
 
