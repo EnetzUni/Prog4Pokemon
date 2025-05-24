@@ -19,6 +19,6 @@ static const char* const StatusNames[] = {
     [CONFUSION]  = "CONFUSION"
 };
 
-const char* GetStatusName(Status);
+const char* getStatusName(Status);
 
 #endif

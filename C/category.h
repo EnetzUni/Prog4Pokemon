@@ -19,6 +19,6 @@ static const char* const CategoryNames[] = {
     [STATUS]   = "STATUS"
 };
 
-const char* GetCategoryName(Category);
+const char* getCategoryName(Category);
 
 #endif

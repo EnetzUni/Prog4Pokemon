@@ -20,8 +20,8 @@ Pokemon* createPokemon(int id, char name[], int hp, int attack, int defense, int
     pokemon->speed     = speed;
     pokemon->evolvl    = evolvl;
 
-    pokemon->type[0] = type1;
-    pokemon->type[1] = type2;
+    pokemon->type[0] = (Type) type1;
+    pokemon->type[1] = (Type) type2;
 
     strncpy(pokemon->name, name, sizeof pokemon->name - 1);
     pokemon->name[sizeof pokemon->name - 1] = '\0';
@@ -43,8 +43,8 @@ void printPokemon(Pokemon* pokemon) {
     printf("Sp. Attack     : %d\n",    pokemon->spattack);
     printf("Sp. Defense    : %d\n",    pokemon->spdefense);
     printf("Speed          : %d\n",    pokemon->speed);
-    printf("Type 1         : %s\n",    TypeNames[pokemon->type[0]]);
-    printf("Type 2         : %s\n",    TypeNames[pokemon->type[1]]);
+    printf("Type 1         : %s\n",    getTypeName((Type) pokemon->type[0]));
+    printf("Type 2         : %s\n",    getTypeName((Type) pokemon->type[1]));
     printf("Evolves at LvL : %d\n",    pokemon->evolvl);
     printf("-----------------------\n");
 }
@@ -59,7 +59,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
     pokemonplayer->pokeid  = pokeid;
     pokemonplayer->xp      = xp;
     pokemonplayer->curHp   = curHp;
-    pokemonplayer->status  = status;
+    pokemonplayer->status  = (Status) status;
 
     strncpy(pokemonplayer->nickname, nickname, sizeof pokemonplayer->nickname - 1);
     pokemonplayer->nickname[sizeof pokemonplayer->nickname - 1] = '\0';
@@ -82,7 +82,7 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
     printf("Nickname      : %s\n", pokemonplayer->nickname);
     printf("XP            : %d\n", pokemonplayer->xp);
     printf("Current HP    : %d\n", pokemonplayer->curHp);
-    printf("Status        : %s\n", StatusNames[pokemonplayer->status]);
+    printf("Status        : %s\n", getStatusName((Status) pokemonplayer->status));
 
     for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
     printf("--- Movement slot %d ---\n", i + 1);

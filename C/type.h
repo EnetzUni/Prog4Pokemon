@@ -30,7 +30,7 @@ static const char* const TypeNames[] = {
     [VOLADOR]   = "VOLADOR"
 };
 
-const char* GetTypeName(Type type);
+const char* getTypeName(Type type);
 
 double effectiveness(Type attackType, Type defenseType1, Type defenseType2);
 

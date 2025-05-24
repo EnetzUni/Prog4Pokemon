@@ -19,7 +19,7 @@ Player* createPlayer(char nickname[], char password[], bool gender, PokemonPlaye
     strncpy(player->password, password, sizeof player->password - 1);
     player->password[sizeof player->password - 1] = '\0';
 
-    player->gender = gender;
+    player->gender = (bool) gender;
     player->listPokemonSize = listPokemonSize;
     player->maxLvL = maxLvL;
     player->story = story;

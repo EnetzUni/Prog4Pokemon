@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "type.h"
 
-const char* GetTypeName(Type type) {
+const char* getTypeName(Type type) {
     if (type >= 0 && type < TYPE_COUNT) {
         return TypeNames[type];
     }
