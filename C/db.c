@@ -268,13 +268,11 @@ Movement* loadMovement(sqlite3* db, int id) {
 		strcpy(name, (char *) sqlite3_column_text(stmt, 1));
         type = (Type) (sqlite3_column_int(stmt, 2) - 1);
         category = (Category) (sqlite3_column_int(stmt, 3) - 1);
-        status = (Status) (sqlite3_column_int(stmt, 4) - 1);
-        statusaccuracy = sqlite3_column_int(stmt, 5);
-        power = sqlite3_column_int(stmt, 6);
-        accuracy = sqlite3_column_int(stmt, 7);
+        power = sqlite3_column_int(stmt, 4);
+        accuracy = sqlite3_column_int(stmt, 5);
 	}
 
-    movement = (Movement*) createMovement(id, name, type, category, status, statusaccuracy, power, accuracy);
+    movement = (Movement*) createMovement(id, name, type, category, (Status) NULL, NULL, power, accuracy);
     printMovement(movement);
 
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
