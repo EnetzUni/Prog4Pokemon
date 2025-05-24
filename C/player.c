@@ -28,7 +28,7 @@ Player* createPlayer(char nickname[], char password[], bool gender, PokemonPlaye
         player->listPokemon[i] = listPokemon[i];
     }
 
-    return player;
+    return (Player*) player;
 }
 
 void printPlayer(Player* player) {

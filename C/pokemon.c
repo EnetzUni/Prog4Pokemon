@@ -69,7 +69,7 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
         pokemonplayer->listMovement[i] = listMovement[i];
     }
 
-    return pokemonplayer;
+    return (PokemonPlayer*) pokemonplayer;
 }
 
 void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
