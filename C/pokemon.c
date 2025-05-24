@@ -55,11 +55,12 @@ PokemonPlayer* createPokemonPlayer(Pokemon* pokemon, int pokeid, char nickname[]
         return NULL;
     }
 
-    pokemonplayer->pokemon = pokemon;
-    pokemonplayer->pokeid  = pokeid;
-    pokemonplayer->xp      = xp;
-    pokemonplayer->curHp   = curHp;
-    pokemonplayer->status  = (Status) status;
+    pokemonplayer->pokemon          = pokemon;
+    pokemonplayer->pokeid           = pokeid;
+    pokemonplayer->xp               = xp;
+    pokemonplayer->curHp            = curHp;
+    pokemonplayer->status           = (Status) status;
+    pokemonplayer->listMovementSize = listMovementSize;
 
     strncpy(pokemonplayer->nickname, nickname, sizeof pokemonplayer->nickname - 1);
     pokemonplayer->nickname[sizeof pokemonplayer->nickname - 1] = '\0';

@@ -657,11 +657,16 @@ void initializeDb(sqlite3* db) {
     Pokemon* pokemon4 = loadPokemon(db, 487);
     Pokemon* pokemon5 = loadPokemon(db, 493);
 
-    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
-    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
-    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
-    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
-    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, createRandomMovementList(db), 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    Movement** movementpokemonplayer1 = createRandomMovementList(db);
+    PokemonPlayer* pokemonplayer1 = createPokemonPlayer(pokemon1, -1, NULL, movementpokemonplayer1, 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    Movement** movementpokemonplayer2 = createRandomMovementList(db);
+    PokemonPlayer* pokemonplayer2 = createPokemonPlayer(pokemon1, -1, NULL, movementpokemonplayer2, 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    Movement** movementpokemonplayer3 = createRandomMovementList(db);
+    PokemonPlayer* pokemonplayer3 = createPokemonPlayer(pokemon1, -1, NULL, movementpokemonplayer3, 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    Movement** movementpokemonplayer4 = createRandomMovementList(db);
+    PokemonPlayer* pokemonplayer4 = createPokemonPlayer(pokemon1, -1, NULL, movementpokemonplayer4, 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
+    Movement** movementpokemonplayer5 = createRandomMovementList(db);
+    PokemonPlayer* pokemonplayer5 = createPokemonPlayer(pokemon1, -1, NULL, movementpokemonplayer5, 4, 125000, calculateBattleHp(pokemon1->hp, calculateLvl(125000)), (Type) NULL);
 
     Player* player = createPlayer("admin", "1234", (bool) 0, NULL, 0, 50, 0);
     insertPlayer(db, player);
