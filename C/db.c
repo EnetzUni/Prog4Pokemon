@@ -251,8 +251,6 @@ Movement* loadMovement(sqlite3* db, int id) {
         return NULL;
     }
 
-	printf("SQL query prepared (SELECT)\n");
-
     Movement* movement;
     char name[255];
     Type type;
@@ -261,8 +259,6 @@ Movement* loadMovement(sqlite3* db, int id) {
     int statusaccuracy;
     int power;
     int accuracy;
-
-	printf("Showing Movement:\n");
 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
 		strcpy(name, (char *) sqlite3_column_text(stmt, 1));
@@ -276,6 +272,7 @@ Movement* loadMovement(sqlite3* db, int id) {
 
     if (movement->power != 0)
     {
+        printf("Showing Movement:\n");
         printMovement(movement);
     }
 
@@ -284,8 +281,6 @@ Movement* loadMovement(sqlite3* db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 		return NULL;
 	}
-
-	printf("Prepared statement finalized (SELECT)\n");
 
 	return (Movement*) movement;
 }
