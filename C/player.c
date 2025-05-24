@@ -97,6 +97,52 @@ void printPlayer(Player* player) {
     printf("========================\n");
 }
 
+void printPlayerSmall(Player* player) {
+    if (!player) {
+        printf("No Player to print.\n");
+        return;
+    }
+    
+    printf("===== Player Info =====\n");
+    printf("Nickname  : %s\n", player->nickname);
+    printf("Password  : %s\n", player->password);
+    printf("Gender    : %s\n", player->gender ? "Male" : "Female");
+    printf("Max LvL   : %d\n", player->maxLvL);
+    printf("Story Part: %d\n", player->story);
+
+    if (player->listPokemon == NULL || player->listPokemonSize <= 0) {
+        printf("No PokEmon available.\n");
+        printf("========================\n");
+        return;
+    }
+
+    // Print pointers debug info:
+    printf("Pokemon list pointer: %p\n", (void*)player->listPokemon);
+    printf("Pokemon list size: %d\n", player->listPokemonSize);
+    for (int i = 0; i < player->listPokemonSize; ++i) {
+        printf("Slot %d pointer: %p\n", i, (void*)player->listPokemon[i]);
+    }
+
+    for (int i = 0; i < player->listPokemonSize; ++i) {
+        PokemonPlayer* poke = player->listPokemon[i];
+
+        if (poke == NULL) {
+            printf("\n--- Pokemon Slot %d is empty ---\n", i + 1);
+            continue;
+        }
+
+        if ((uintptr_t)poke < 0x1000) {
+            printf("\n--- Pokemon Slot %d has invalid pointer: %p ---\n", i + 1, (void*)poke);
+            continue;
+        }
+
+        printf("\n--- Pokemon Slot %d ---\n", i + 1);
+        printPokemonPlayerSmall(poke);
+    }
+
+    printf("========================\n");
+}
+
 void printTeam(Player* player) {
     if (!player) {
         printf("No Player to get Team.\n");
