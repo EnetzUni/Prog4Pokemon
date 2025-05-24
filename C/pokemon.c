@@ -104,8 +104,8 @@ void printPokemonPlayer(PokemonPlayer* pokemonplayer) {
     printf("Status        : %s\n", getStatusName((Status) pokemonplayer->status));
 
     for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
-    printf("--- Movement slot %d ---\n", i + 1);
-    printMovement(pokemonplayer->listMovement[i]);
+        printf("--- Movement slot %d ---\n", i + 1);
+        printMovement(pokemonplayer->listMovement[i]);
     }
     printf("============================\n");
 }
@@ -114,6 +114,11 @@ void printPokemonPlayerSmall(PokemonPlayer* pokemonplayer) {
     if (!pokemonplayer || pokemonplayer == NULL || pokemonplayer == 0) {
         printf("No PokemonPlayer to print.\n");
         return;
+    }
+
+    for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
+        printf("--- Movement slot %d ---\n", i + 1);
+        printMovementSmall(pokemonplayer->listMovement[i]);
     }
 
     printf("===== PokemonPlayer #%d =====\n", pokemonplayer->pokeid);
