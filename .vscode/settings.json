@@ -53,7 +53,8 @@
         "db.h": "c",
         "pc.h": "c",
         "stdlib.h": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "winsock2.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/**"
 }
