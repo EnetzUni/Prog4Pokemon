@@ -151,7 +151,7 @@ void menuLogin(sqlite3 *db, char* nicknameAdmin)
     { 
         imprimirTexto("\nNinguno de los parametros puede estar vacio, elige una opcion.");
         printf("\n");
-        menuLoginRegister(db, nickname);
+        menuLoginRegister(db, nicknameAdmin);
     }else if (checkPassword(db, nickname, password)) // Existe una cuenta con ese usuario y contraseña
     {
         imprimirTexto("\nIniciado Sesion Correctamente!\n");
@@ -161,7 +161,7 @@ void menuLogin(sqlite3 *db, char* nicknameAdmin)
     {
         imprimirTexto("\nUsuario o contrasenya incorrectos, elige una opcion.");
         printf("\n");
-        menuLoginRegister(db, nickname);
+        menuLoginRegister(db, nicknameAdmin);
     }
     
 }
