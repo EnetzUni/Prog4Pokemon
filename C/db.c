@@ -25,8 +25,6 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
         return NULL;
     }
 
-	printf("SQL query prepared (SELECT)\n");
-
     Pokemon* pokemon;
 	char name[255];
     int hp;
@@ -61,8 +59,6 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 		return (Pokemon*) NULL;
 	}
-
-	printf("Prepared statement finalized (SELECT)\n");
 
 	return (Pokemon*) pokemon;
 }
@@ -122,8 +118,6 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 		return NULL;
 	}
-
-	printf("Prepared statement finalized (SELECT)\n");
 
 	return (PokemonPlayer*) pokemonplayer;
 }
@@ -254,8 +248,6 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
         return NULL;
     }
 
-    printf("SQL query prepared (SELECT)\n");
-
     char password[255];
     bool gender;
     int* listPokemonPlayersize = malloc(sizeof* listPokemonPlayersize);
@@ -279,8 +271,6 @@ Player* loadPlayer(sqlite3* db, char* nickname) {
 		return NULL;
 	}
 
-	printf("Prepared statement finalized (SELECT)\n");
-
 	return (Player*) player;
 }
 
@@ -298,8 +288,6 @@ PokemonPlayer** loadPlayerPokemonPlayer(sqlite3* db, char* nickname, int* size) 
         sqlite3_finalize(stmt);
         return NULL;
     }
-
-    printf("SQL query prepared (SELECT)\n");
 
     PokemonPlayer** pokemonPlayer = malloc(sizeof(*pokemonPlayer) * 6);
     if (!pokemonPlayer) {
@@ -473,8 +461,6 @@ PC* loadPc(sqlite3* db, char* nickname) {
         return NULL;
     }
 
-	printf("SQL query prepared (SELECT)\n");
-
     PokemonPlayer** pokemonPlayer = malloc(sizeof(*pokemonPlayer) * *size);
 
 	printf("Showing Pokemon:\n");
@@ -486,8 +472,6 @@ PC* loadPc(sqlite3* db, char* nickname) {
     }
 
     PC* pc = createPc(nickname, pokemonPlayer, *size);
-
-	printf("Prepared statement finalized (SELECT)\n");
 
 	return (PC*) pc;
 }
@@ -506,8 +490,6 @@ int* loadPcCount(sqlite3* db, char* nickname) {
         sqlite3_finalize(stmt);
         return NULL;
     }
-
-    printf("SQL query prepared (SELECT)\n");
 
     int* size = malloc(sizeof* size);
 

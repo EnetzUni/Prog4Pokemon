@@ -171,7 +171,7 @@ void menuPrincipal(sqlite3 *db, Player* player)
 {
     char str[2];
 
-    imprimirTexto("Menu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
+    imprimirTexto("\n\nMenu Principal de Pokemon.c:\n-1: PC\n-2: Combate\n-q: Salir");
 
     printf("\n- Opcion: ");
     fgets(str, sizeof(str), stdin);  // Leer entrada completa
