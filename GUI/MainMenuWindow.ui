@@ -96,38 +96,6 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="PULSTASTART">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>60</y>
-      <width>441</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffff00;&quot;&gt;Pulsa la pantalla para empezar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::TextFormat::RichText</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BOTONSTART">
-    <property name="geometry">
-     <rect>
-      <x>142</x>
-      <y>308</y>
-      <width>311</width>
-      <height>231</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QPushButton" name="BotonHistoria">
     <property name="geometry">
      <rect>
@@ -207,8 +175,6 @@
    <zorder>PantallaTitulo</zorder>
    <zorder>DScARCASA</zorder>
    <zorder>TituloPokemon</zorder>
-   <zorder>PULSTASTART</zorder>
-   <zorder>BOTONSTART</zorder>
    <zorder>BotonHistoria</zorder>
    <zorder>BotonHistoria_2</zorder>
    <zorder>BotonHistoria_3</zorder>
