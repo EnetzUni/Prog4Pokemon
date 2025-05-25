@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>LoginWindow</class>
+ <widget class="QMainWindow" name="LoginWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>LoginWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="DScARCASA">
@@ -96,90 +96,88 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="BotonHistoria">
+   <widget class="QLabel" name="UserLabel">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>340</y>
+      <width>63</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffee01;&quot;&gt;Usuario: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ContrasenyaLabel">
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>400</y>
-      <width>131</width>
-      <height>51</height>
+      <y>370</y>
+      <width>111</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Historia</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#f1f500;&quot;&gt;Contraseña:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#f1f500;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BotonHistoria_2">
+   <widget class="QTextEdit" name="UserTextEdit">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>400</y>
-      <width>131</width>
-      <height>51</height>
+      <x>260</x>
+      <y>340</y>
+      <width>111</width>
+      <height>21</height>
      </rect>
-    </property>
-    <property name="text">
-     <string>Naturaleza</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BotonHistoria_3">
+   <widget class="QTextEdit" name="ContrasenyaTextEdit">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>460</y>
-      <width>131</width>
-      <height>51</height>
+      <x>260</x>
+      <y>370</y>
+      <width>111</width>
+      <height>21</height>
      </rect>
-    </property>
-    <property name="text">
-     <string>Centro Pokemon</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BotonHistoria_4">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>460</y>
-      <width>61</width>
-      <height>51</height>
+      <x>250</x>
+      <y>410</y>
+      <width>111</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>PC</string>
+     <string>Iniciar Sesion</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BotonHistoria_5">
+   <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>460</y>
-      <width>61</width>
-      <height>51</height>
+      <x>250</x>
+      <y>470</y>
+      <width>111</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../PokemonC/Apagasion.png</normaloff>../PokemonC/Apagasion.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
+     <string>Registrarte</string>
     </property>
    </widget>
    <zorder>PatnallaInferior</zorder>
    <zorder>PantallaTitulo</zorder>
    <zorder>DScARCASA</zorder>
    <zorder>TituloPokemon</zorder>
-   <zorder>BotonHistoria</zorder>
-   <zorder>BotonHistoria_2</zorder>
-   <zorder>BotonHistoria_3</zorder>
-   <zorder>BotonHistoria_4</zorder>
-   <zorder>BotonHistoria_5</zorder>
+   <zorder>UserLabel</zorder>
+   <zorder>ContrasenyaLabel</zorder>
+   <zorder>UserTextEdit</zorder>
+   <zorder>ContrasenyaTextEdit</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
