@@ -14,9 +14,17 @@ typedef struct {
     int pcListSize;
 } PC;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 PC* createPc(char[], PokemonPlayer**, int);
 void printPc(PC* pc);
 int addPcPokemonPlayer(sqlite3*, PC*, PokemonPlayer*);
 void removePcPokemonPlayer(sqlite3*, PC*, int);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -7,27 +7,31 @@
 #include "player.h"
 #include "pc.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Functions of the Database
 
-// Load a Pokemon using it's id
+// Load a Pokemon using its id
 Pokemon* loadPokemon(sqlite3*, int);
 
-// Load a PokemonPlayer using it's id
+// Load a PokemonPlayer using its id
 PokemonPlayer* loadPokemonPlayer(sqlite3*, int);
 
 // Load the movements for a PokemonPlayer, with the id of the PokemonPlayer and an int* to return the count of movements
 Movement** loadPokemonPlayerMovement(sqlite3*, int, int*);
 
-// Check if a Player exists using it's nickname
+// Check if a Player exists using its nickname
 int checkPlayer(sqlite3*, char*);
 
-// Check if a Player's exists using it's nickname and password are correct to log in
+// Check if a Player's nickname and password are correct to log in
 int checkPassword(sqlite3*, char*, char*);
 
-// Load a Movement using it's id
+// Load a Movement using its id
 Movement* loadMovement(sqlite3*, int);
 
-// Load a Player using it's nickname
+// Load a Player using its nickname
 Player* loadPlayer(sqlite3*, char*);
 
 // Load the PokemonPlayer in the team for a Player, with the id of the Player and an int* to return the count of PokemonPlayer
@@ -57,4 +61,8 @@ int insertPc(sqlite3* db, PC* pc);
 // Create admin for DataBase.
 void initializeDb(sqlite3* db);
 
+#ifdef __cplusplus
+}
 #endif
+
+#endif // DB_H
