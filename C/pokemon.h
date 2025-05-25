@@ -113,4 +113,6 @@ void printPokemonPlayerBattle(PokemonPlayerBattle*);
 
 void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement);
 
+int calculateAttackDamage(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement);
+
 #endif

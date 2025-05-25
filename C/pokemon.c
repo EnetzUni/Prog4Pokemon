@@ -168,32 +168,50 @@ void printPokemonPlayerBattle(PokemonPlayerBattle* pokemonPlayerBattle) {
     printf("===============================\n");
 }
 
+int calculateAttackDamage(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement) {
+    int damage = 0;
+    damage = (((2 * attackPokemon->lvl) / 5) + 2);
+    damage = damage * movement->power;
+
+    if (movement->status == PHYSICAL)
+    {
+        damage = damage * (attackPokemon->battleAttack / defensePokemon->battleDefense);
+    }
+    else
+    {
+        damage = damage * (attackPokemon->battleSpattack / defensePokemon->battleSpdefense);
+    }
+
+    damage = (damage / 50) + 2;
+
+    if (movement->type == attackPokemon->pokemonPlayer->pokemon->type[0] || movement->type == attackPokemon->pokemonPlayer->pokemon->type[1])
+    {
+        damage = damage * 1.5;
+    }
+
+    damage = damage * ((85 + rand() % 16) / 100);
+
+    if ((rand() % 24) + 1 == 24)
+    {
+        damage = damage * 2;
+        printf("Critical Hit\n");
+    }
+
+    return damage;
+}
+
 void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement) {
-    // 1. Verificar si el movimiento acierta
     int hitChance = rand() % 100;
     if (hitChance >= movement->accuracy) {
         printf("El movimiento fallo!\n");
         return;
     }
     
-    // 2. Determinar el tipo de estadística a usar
-    int attackStat = (movement->category == PHYSICAL) ? attackPokemon->battleAttack : attackPokemon->battleSpattack;
-    int defenseStat = (movement->category == PHYSICAL) ? defensePokemon->battleDefense : defensePokemon->battleSpdefense;
-
-    // 3. Calcular efectividad
+    int totalDamage = calculateAttackDamage(attackPokemon, defensePokemon, movement);
     double typeEffectiveness = effectiveness(movement->type, defensePokemon->pokemonPlayer->pokemon->type[0], defensePokemon->pokemonPlayer->pokemon->type[1]);
 
-    // 4. Calcular un factor aleatorio entre 0.85 y 1.0
-    double randomFactor = (85 + rand() % 16) / 100.0;
-
-    // 5. Fórmula de daño
-    double baseDamage = (((2.0 * attackPokemon->lvl / 5 + 2) * movement->power * attackStat / defenseStat) / 50 + 2);
-    int totalDamage = (int)(baseDamage * typeEffectiveness * randomFactor);
-
-    // 6. Aplicar daño
-    defensePokemon->pokemonPlayer->curHp -= totalDamage;
+    defensePokemon->pokemonPlayer->curHp -= (totalDamage * typeEffectiveness);
     if (defensePokemon->pokemonPlayer->curHp < 0) defensePokemon->pokemonPlayer->curHp = 0;
 
     printf("%s hizo %d de danyo! (Efectividad: %.2fx)\n", attackPokemon->pokemonPlayer->nickname, totalDamage, typeEffectiveness);
-
 }
