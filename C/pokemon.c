@@ -172,7 +172,6 @@ int calculateAttackDamage(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattl
     int damage = 0;
     damage = (((2 * attackPokemon->lvl) / 5) + 2);
     damage = damage * movement->power;
-
     if (movement->status == PHYSICAL)
     {
         damage = damage * (attackPokemon->battleAttack / defensePokemon->battleDefense);
@@ -181,22 +180,17 @@ int calculateAttackDamage(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattl
     {
         damage = damage * (attackPokemon->battleSpattack / defensePokemon->battleSpdefense);
     }
-
     damage = (damage / 50) + 2;
-
     if (movement->type == attackPokemon->pokemonPlayer->pokemon->type[0] || movement->type == attackPokemon->pokemonPlayer->pokemon->type[1])
     {
         damage = damage * 1.5;
     }
-
-    damage = damage * ((85 + rand() % 16) / 100);
-
+    damage = (damage * (85 + rand() % 16)) / 100;
     if ((rand() % 24) + 1 == 24)
     {
         damage = damage * 2;
         printf("Critical Hit\n");
     }
-
     return damage;
 }
 
@@ -209,9 +203,8 @@ void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defen
     
     int totalDamage = calculateAttackDamage(attackPokemon, defensePokemon, movement);
     double typeEffectiveness = effectiveness(movement->type, defensePokemon->pokemonPlayer->pokemon->type[0], defensePokemon->pokemonPlayer->pokemon->type[1]);
-
     defensePokemon->pokemonPlayer->curHp -= (totalDamage * typeEffectiveness);
     if (defensePokemon->pokemonPlayer->curHp < 0) defensePokemon->pokemonPlayer->curHp = 0;
 
-    printf("%s hizo %d de danyo! (Efectividad: %.2fx)\n", attackPokemon->pokemonPlayer->nickname, totalDamage, typeEffectiveness);
+    printf("%s hizo %d de danyo! (Efectividad: %.2fx)\n", attackPokemon->pokemonPlayer->nickname, (int) (totalDamage * typeEffectiveness), typeEffectiveness);
 }

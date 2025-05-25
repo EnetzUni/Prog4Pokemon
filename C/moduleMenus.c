@@ -4,6 +4,7 @@
 #include "string.h"
 #include "stdlib.h"
 #include <ctype.h>
+#include <math.h>
 
 // Importamos los modulos
 #include "moduleMenus.h"
@@ -337,9 +338,17 @@ void combate(sqlite3 *db, Player* player)
     // Wild Pokemon
     Pokemon* randomPokemon = loadPokemon(db, ((rand() % 649) + 1));
     Movement** movementWild = createRandomMovementList(db);
-    PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, player->maxLvL, calculateBattleHp(randomPokemon->hp, calculateLvl(player->maxLvL)), (Status) NULL);
+    PokemonPlayer* pokemonWild = createPokemonPlayer(randomPokemon, 0, randomPokemon->name, movementWild, 4, (int) pow(player->maxLvL, 3), calculateBattleHp(randomPokemon->hp, calculateLvl((int) pow(player->maxLvL, 3))), (Status) NULL);
     PokemonPlayerBattle* pokemonWildBattle = createPokemonPlayerBattle(pokemonWild);
 
+    // Barras de vida
+    int maxWildHp = pokemonWildBattle->battleHp;
+    int maxPlayerHp = pokemonPlayerBattle->battleHp;
+    printf("\n%s / PS: %i/%i\n", pokemonWild->nickname, pokemonWild->curHp, maxWildHp);
+    printf("\n%s / PS: %i/%i\n", pokemonPlayer->nickname, pokemonPlayer->curHp, maxPlayerHp);
+
+
+    // COMBATE //
     if(pokemonWildBattle->battleSpeed > pokemonPlayerBattle->battleSpeed)
     {
         while (pokemonWildBattle->pokemonPlayer->curHp != 0 || pokemonPlayerBattle->pokemonPlayer->curHp != 0)
@@ -371,6 +380,9 @@ void combate(sqlite3 *db, Player* player)
                 combatAttack(pokemonPlayerBattle, pokemonWildBattle, playerMovementSelection);
 
             }
+
+            printf("\n%s / PS: %i/%i\n", pokemonWild->nickname, pokemonWild->curHp, maxWildHp);
+            printf("\n%s / PS: %i/%i\n", pokemonPlayer->nickname, pokemonPlayer->curHp, maxPlayerHp);
         }
     } else {
         while (pokemonWildBattle->pokemonPlayer->curHp != 0 || pokemonPlayerBattle->pokemonPlayer->curHp != 0)
@@ -402,6 +414,9 @@ void combate(sqlite3 *db, Player* player)
                 Movement* wildMovementSelection = pokemonWildBattle->pokemonPlayer->listMovement[((rand() % pokemonWildBattle->pokemonPlayer->listMovementSize) + 1)];
                 combatAttack(pokemonWildBattle, pokemonPlayerBattle, wildMovementSelection);
             }
+
+            printf("\n%s / PS: %i/%i\n", pokemonWild->nickname, pokemonWild->curHp, maxWildHp);
+            printf("\n%s / PS: %i/%i\n", pokemonPlayer->nickname, pokemonPlayer->curHp, maxPlayerHp);
         }
 
     }
