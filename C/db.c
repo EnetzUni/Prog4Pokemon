@@ -230,12 +230,6 @@ Movement* loadMovement(sqlite3* db, int id) {
 
     movement = (Movement*) createMovement(id, name, type, category, (Status) -1, (int) NULL, power, accuracy);
 
-    if (movement->power != 0)
-    {
-        printf("Showing Movement:\n");
-        printMovementSmall(movement);
-    }
-
 	if (sqlite3_finalize(stmt) != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));

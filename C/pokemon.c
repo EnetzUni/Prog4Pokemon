@@ -116,11 +116,6 @@ void printPokemonPlayerSmall(PokemonPlayer* pokemonplayer) {
         return;
     }
 
-    for (int i = 0; i < pokemonplayer->listMovementSize; ++i) {
-        printf("--- Movement slot %d ---\n", i + 1);
-        printMovementSmall(pokemonplayer->listMovement[i]);
-    }
-
     printf("===== PokemonPlayer #%d =====\n", pokemonplayer->pokeid);
     printPokemonSmall(pokemonplayer->pokemon);
 }
@@ -177,7 +172,7 @@ void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defen
     // 1. Verificar si el movimiento acierta
     int hitChance = rand() % 100;
     if (hitChance >= movement->accuracy) {
-        printf("¡El movimiento falló!\n");
+        printf("El movimiento fallo!\n");
         return;
     }
     
@@ -199,6 +194,6 @@ void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defen
     defensePokemon->pokemonPlayer->curHp -= totalDamage;
     if (defensePokemon->pokemonPlayer->curHp < 0) defensePokemon->pokemonPlayer->curHp = 0;
 
-    printf("¡%s hizo %d de daño! (Efectividad: %.2fx)\n", movement->name, totalDamage, typeEffectiveness);
+    printf("%s hizo %d de danyo! (Efectividad: %.2fx)\n", attackPokemon->pokemonPlayer->nickname, totalDamage, typeEffectiveness);
 
 }
