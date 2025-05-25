@@ -103,7 +103,7 @@ void menuRegister(sqlite3 *db, char* nicknameAdmin)
     genderC[strcspn(genderC, "\n")] = '\0';
 
     bool genderB = 0; // Convertir a boolean
-    if (genderC == "F")
+    if (genderC == "M")
     {
         genderB == 1;
     }
