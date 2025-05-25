@@ -54,5 +54,6 @@
         "pc.h": "c",
         "stdlib.h": "c",
         "ctype.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/**"
 }
