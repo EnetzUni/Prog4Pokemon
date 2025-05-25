@@ -54,7 +54,11 @@
         "pc.h": "c",
         "stdlib.h": "c",
         "ctype.h": "c",
-        "winsock2.h": "c"
+        "winsock2.h": "c",
+        "send_receive_structs.h": "c",
+        "cstring": "cpp",
+        "player.h": "c",
+        "movement_serialization.h": "c"
     },
-    "cmake.sourceDirectory": "${workspaceFolder}/**"
+    "cmake.sourceDirectory": "C:/Users/enetz.q/LocalDocuments/University/Year 2/Programacion 4/Project/Prog4Pokemon/GUI"
 }
