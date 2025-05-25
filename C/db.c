@@ -96,7 +96,7 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
         strcpy(nickname, (char*) sqlite3_column_text(stmt, 2));
         xp = sqlite3_column_int(stmt, 3);
         curHp = sqlite3_column_int(stmt, 4);
-        status = (Status) (sqlite3_column_int(stmt, 5) - 1);
+        status = (Status) (sqlite3_column_int(stmt, 5)) - 1;
         movementlist[0] = sqlite3_column_int(stmt, 6);
         movementlist[1] = sqlite3_column_int(stmt, 7);
         movementlist[2] = sqlite3_column_int(stmt, 8);
@@ -108,7 +108,8 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
     {
         if (&movementlist[i] != NULL)
         {
-            listMovement[sizeCount] = loadMovement(db, movementlist[i]);
+            printf("\n\n\n%i\n\n\n", movementlist[i]);
+            listMovement[sizeCount] = loadMovement(db, movementlist[i - 1]);
             sizeCount++;
         }
         

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "moduleMenus.h"
 #include "db.h"
 
@@ -35,6 +37,7 @@ void readConfig(char* pathDB, char* nicknameAdmin, const char* fichero) {
 int main(void)
 {
     printf("Inicio del programa\n");
+    srand(time(NULL));
 
     // Leer el fichero de configuracion
     char pathDB[256];
