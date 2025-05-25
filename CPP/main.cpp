@@ -1,5 +1,6 @@
 #include "CombateWindow.h"
 #include "MainMenuWindow.h"
+#include "PresentacionWindow.h"
 
 #include <QApplication>
 #include <QLocale>
