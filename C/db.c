@@ -69,7 +69,7 @@ Pokemon* loadPokemon(sqlite3* db, int id) {
 
 PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
     sqlite3_stmt* stmt;
-    const char* sql = "SELECT idPokemon, pokeid, nickname, xp, curHp, move1, move2, move3, move4 FROM PokemonPlayer WHERE pokeid = ?";
+    const char* sql = "SELECT idPokemon, pokeid, nickname, xp, curHp, status, move1, move2, move3, move4 FROM PokemonPlayer WHERE pokeid = ?";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
@@ -96,7 +96,7 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
         strcpy(nickname, (char*) sqlite3_column_text(stmt, 2));
         xp = sqlite3_column_int(stmt, 3);
         curHp = sqlite3_column_int(stmt, 4);
-        status = (Status) (sqlite3_column_int(stmt, 5)) - 1;
+        status = (Status) (sqlite3_column_int(stmt, 5) - 1);
         movementlist[0] = sqlite3_column_int(stmt, 6);
         movementlist[1] = sqlite3_column_int(stmt, 7);
         movementlist[2] = sqlite3_column_int(stmt, 8);
@@ -108,8 +108,7 @@ PokemonPlayer* loadPokemonPlayer(sqlite3* db, int id) {
     {
         if (&movementlist[i] != NULL)
         {
-            printf("\n\n\n%i\n\n\n", movementlist[i]);
-            listMovement[sizeCount] = loadMovement(db, movementlist[i - 1]);
+            listMovement[sizeCount] = loadMovement(db, movementlist[i]);
             sizeCount++;
         }
         

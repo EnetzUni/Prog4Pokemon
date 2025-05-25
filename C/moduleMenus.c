@@ -351,11 +351,12 @@ void combate(sqlite3 *db, Player* player)
     // COMBATE //
     if(pokemonWildBattle->battleSpeed > pokemonPlayerBattle->battleSpeed)
     {
-        while (pokemonWildBattle->pokemonPlayer->curHp != 0 || pokemonPlayerBattle->pokemonPlayer->curHp != 0)
+        while (pokemonWildBattle->pokemonPlayer->curHp != 0 && pokemonPlayerBattle->pokemonPlayer->curHp != 0)
         {
-            Movement* wildMovementSelection = pokemonWildBattle->pokemonPlayer->listMovement[((rand() % pokemonWildBattle->pokemonPlayer->listMovementSize) + 1)];
-            combatAttack(pokemonWildBattle, pokemonPlayerBattle, wildMovementSelection);
-
+            if(pokemonWildBattle->pokemonPlayer->curHp != 0) {
+                Movement* wildMovementSelection = pokemonWildBattle->pokemonPlayer->listMovement[rand() % pokemonWildBattle->pokemonPlayer->listMovementSize];
+                combatAttack(pokemonWildBattle, pokemonPlayerBattle, wildMovementSelection);
+            }
             if(pokemonPlayerBattle->pokemonPlayer->curHp != 0) {
                 for (int i = 0; i < pokemonPlayerBattle->pokemonPlayer->listMovementSize; i++)
                 {
@@ -385,33 +386,34 @@ void combate(sqlite3 *db, Player* player)
             printf("\n%s / PS: %i/%i\n", pokemonPlayer->nickname, pokemonPlayer->curHp, maxPlayerHp);
         }
     } else {
-        while (pokemonWildBattle->pokemonPlayer->curHp != 0 || pokemonPlayerBattle->pokemonPlayer->curHp != 0)
+        while (pokemonWildBattle->pokemonPlayer->curHp != 0 && pokemonPlayerBattle->pokemonPlayer->curHp != 0)
         {
-            for (int i = 0; i < pokemonPlayerBattle->pokemonPlayer->listMovementSize; i++)
-            {
-                printf("----- Movimiento #%d -----\n", i + 1);
-                printMovementSmall(pokemonPlayerBattle->pokemonPlayer->listMovement[i]);
+            if(pokemonPlayerBattle->pokemonPlayer->curHp != 0) {
+                for (int i = 0; i < pokemonPlayerBattle->pokemonPlayer->listMovementSize; i++)
+                {
+                    printf("----- Movimiento #%d -----\n", i + 1);
+                    printMovementSmall(pokemonPlayerBattle->pokemonPlayer->listMovement[i]);
+                }
+
+                char str2[3];
+                int opcion = 1;
+
+                printf("\n- Opcion: ");
+                fgets(str2, sizeof(str2), stdin);
+                fflush(stdin);
+
+                if (isdigit(str2[0])) {
+                    int temp = atoi(str2);
+                    if (temp >= 1 && temp <= pokemonPlayerBattle->pokemonPlayer->listMovementSize) {
+                        opcion = temp;
+                    } 
+                }
             }
-
-            char str2[3];
-            int opcion = 1;
-
-            printf("\n- Opcion: ");
-            fgets(str2, sizeof(str2), stdin);
-            fflush(stdin);
-
-            if (isdigit(str2[0])) {
-                int temp = atoi(str2);
-                if (temp >= 1 && temp <= pokemonPlayerBattle->pokemonPlayer->listMovementSize) {
-                    opcion = temp;
-                } 
-            }
-
             Movement* playerMovementSelection = pokemonPlayerBattle->pokemonPlayer->listMovement[opcion - 1];
             combatAttack(pokemonPlayerBattle, pokemonWildBattle, playerMovementSelection);
 
-            if(pokemonPlayerBattle->pokemonPlayer->curHp != 0) {
-                Movement* wildMovementSelection = pokemonWildBattle->pokemonPlayer->listMovement[((rand() % pokemonWildBattle->pokemonPlayer->listMovementSize) + 1)];
+            if(pokemonWildBattle->pokemonPlayer->curHp != 0) {
+                Movement* wildMovementSelection = pokemonWildBattle->pokemonPlayer->listMovement[rand() % pokemonWildBattle->pokemonPlayer->listMovementSize];
                 combatAttack(pokemonWildBattle, pokemonPlayerBattle, wildMovementSelection);
             }
 
@@ -420,6 +422,8 @@ void combate(sqlite3 *db, Player* player)
         }
 
     }
+
+    imprimirTexto("\nFin del combate!");
 
     return;
 }

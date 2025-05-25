@@ -169,30 +169,51 @@ void printPokemonPlayerBattle(PokemonPlayerBattle* pokemonPlayerBattle) {
 }
 
 int calculateAttackDamage(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement) {
-    int damage = 0;
-    damage = (((2 * attackPokemon->lvl) / 5) + 2);
-    damage = damage * movement->power;
-    if (movement->status == PHYSICAL)
-    {
-        damage = damage * (attackPokemon->battleAttack / defensePokemon->battleDefense);
+    if (!attackPokemon || !defensePokemon || !movement) {
+        fprintf(stderr, "Error: Null pointer passed to calculateAttackDamage\n");
+        return 0;
     }
-    else
-    {
-        damage = damage * (attackPokemon->battleSpattack / defensePokemon->battleSpdefense);
+
+    // STATUS moves do no damage
+    if (movement->status == STATUS) {
+        return 0;
     }
-    damage = (damage / 50) + 2;
-    if (movement->type == attackPokemon->pokemonPlayer->pokemon->type[0] || movement->type == attackPokemon->pokemonPlayer->pokemon->type[1])
-    {
-        damage = damage * 1.5;
+
+    int baseDamage = (((2 * attackPokemon->lvl) / 5) + 2) * movement->power;
+
+    // Avoid division by zero
+    float attackStat, defenseStat;
+    if (movement->status == PHYSICAL) {
+        attackStat = (float)attackPokemon->battleAttack;
+        defenseStat = (float)(defensePokemon->battleDefense == 0 ? 1 : defensePokemon->battleDefense);
+    } else { // SPECIAL
+        attackStat = (float)attackPokemon->battleSpattack;
+        defenseStat = (float)(defensePokemon->battleSpdefense == 0 ? 1 : defensePokemon->battleSpdefense);
     }
-    damage = (damage * (85 + rand() % 16)) / 100;
-    if ((rand() % 24) + 1 == 24)
-    {
-        damage = damage * 2;
-        printf("Critical Hit\n");
+
+    float modifier = attackStat / defenseStat;
+    float damage = (baseDamage * modifier) / 50.0f + 2;
+
+    // STAB (Same-Type Attack Bonus)
+    int type1 = attackPokemon->pokemonPlayer->pokemon->type[0];
+    int type2 = attackPokemon->pokemonPlayer->pokemon->type[1];
+    if (movement->type == type1 || movement->type == type2) {
+        damage *= 1.5f;
     }
-    return damage;
+
+    // Random factor: between 85% and 100%
+    float randModifier = (85 + rand() % 16) / 100.0f;
+    damage *= randModifier;
+
+    // Critical hit: 1/24 chance
+    if ((rand() % 24) == 0) {
+        damage *= 2;
+        printf("Critical Hit!\n");
+    }
+
+    return (int)damage;
 }
+
 
 void combatAttack(PokemonPlayerBattle* attackPokemon, PokemonPlayerBattle* defensePokemon, Movement* movement) {
     int hitChance = rand() % 100;
