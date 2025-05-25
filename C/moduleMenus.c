@@ -424,6 +424,6 @@ void combate(sqlite3 *db, Player* player)
     }
 
     imprimirTexto("\nFin del combate!");
-
+    menuPrincipal(db, player);
     return;
 }
