@@ -3,6 +3,10 @@
 
 #include "db.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void imprimirTexto(char* texto);
 
 void presentation(sqlite3 *db, char* nicknameAdmin);
@@ -19,4 +23,8 @@ void menuPC(sqlite3 *db, Player* player);
 
 void combate(sqlite3 *db, Player* player);
 
+#ifdef __cplusplus
+}
 #endif
+
+#endif // MODULEMENUS_H_

@@ -13,12 +13,20 @@ static const char* const StatusNames[] = {
     [BURN]       = "BURN",
     [FREEZE]     = "FREEZE",
     [PARALYSIS]  = "PARALYSIS",
-    [POISOND]     = "POISOND",
-    [BPOISOND]    = "BPOISOND",
+    [POISOND]    = "POISOND",
+    [BPOISOND]   = "BPOISOND",
     [SLEEP]      = "SLEEP",
     [CONFUSION]  = "CONFUSION"
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 const char* getStatusName(Status);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

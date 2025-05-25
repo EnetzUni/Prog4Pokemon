@@ -1,6 +1,10 @@
 #ifndef CATEGORY_H
 #define CATEGORY_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** 
  * @enum Category
  * @brief Represents the category of the move.
@@ -13,12 +17,16 @@ typedef enum {
     PHYSICAL, SPECIAL, STATUS, CATEGORY_COUNT
 } Category;
 
+const char* getCategoryName(Category);
+
+#ifdef __cplusplus
+}
+#endif
+
 static const char* const CategoryNames[] = {
     [PHYSICAL] = "PHYSICAL",
     [SPECIAL]  = "SPECIAL",
     [STATUS]   = "STATUS"
 };
-
-const char* getCategoryName(Category);
 
 #endif
